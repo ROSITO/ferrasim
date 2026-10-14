@@ -44,3 +44,5 @@ jobs:
         run: python scripts/check_model_schema.py
       - name: Inspect reference model through Rust API
         run: cargo run -p ferrasim-io --example inspect_model --locked -- examples/minimal/model.json
+      - name: Import mesh and check model references
+        run: cargo run -p ferrasim-io --example inspect_mesh --locked -- examples/minimal/model.json

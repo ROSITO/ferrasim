@@ -29,7 +29,12 @@ def main():
     require(len(ids) == len(set(ids)), "Duplicate validation cases")
     require(set(ids) == expected, "MVP validation coverage changed")
     for case in cases:
-        require(case["status"] == "planned", "S00 has no scientific results")
+        require(case["status"] in {"planned", "partial"}, "Unknown validation progress state")
+        if case["status"] == "partial":
+            require(bool(case.get("evidence")) and bool(case.get("remaining")),
+                    "Partial verification must name evidence and remaining work")
+            for evidence in case["evidence"]:
+                require((ROOT / evidence).is_file(), f"Missing verification evidence: {evidence}")
         require(bool(case["reference"]) and bool(case["metric"]), "Missing protocol")
         if "tolerance" in case:
             require(math.isfinite(case["tolerance"]) and case["tolerance"] > 0,
@@ -53,7 +58,7 @@ def main():
             target = link.split("#", 1)[0]
             require((path.parent / target).exists(), f"Broken link in {path}: {link}")
 
-    print(f"Planning checks passed: {len(cases)} planned cases and {len(files)} documents.")
+    print(f"Planning checks passed: {len(cases)} registered cases and {len(files)} documents.")
     print("No FEM computation or scientific qualification was performed.")
 
 

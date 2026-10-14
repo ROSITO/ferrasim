@@ -58,6 +58,7 @@ name = "ferrasim-mesh"
 version = "0.1.0-dev"
 dependencies = [
  "ferrasim-model",
+ "thiserror",
 ]
 
 [[package]]

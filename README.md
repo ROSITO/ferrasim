@@ -6,7 +6,7 @@ FerraSim vise un environnement ouvert permettant de préparer, résoudre, vérif
 
 Le projet commence par un solveur d’éléments finis structurel simple et vérifié, puis étend progressivement les formulations, les interfaces et les physiques. La précision, les bilans physiques et la reproductibilité guident le développement.
 
-> **État actuel : modèle et contrat JSON S01.** Le modèle Rust, sa validation et son chargement JSON sont implémentés. Le workspace et une CLI informative sont compilables ; aucun import de maillage ni calcul FEM n’est encore exécuté. Les fonctionnalités physiques décrites ci-dessous restent des objectifs de développement.
+> **État actuel : import et contrôles de maillage S02.** Le modèle JSON et l’import MSH 2.2 ASCII sont implémentés, avec contrôles de géométrie, groupes et références. Le workspace et une CLI informative sont compilables ; aucun calcul FEM n’est encore exécuté. Les fonctionnalités physiques décrites ci-dessous restent des objectifs de développement.
 
 ## Pourquoi FerraSim ?
 
@@ -108,6 +108,8 @@ La cadence proposée est de deux semaines. Les sprints lointains sont un découp
 - [Rapport S00](docs/sprints/S00.md) — livrables, vérifications et points ouverts.
 - [Contrat JSON 0.1](docs/MODEL-FORMAT.md) — format, règles de validation et limites.
 - [Rapport S01](docs/sprints/S01.md) — modèle, IO et tests de contrat.
+- [Contrat de maillage](docs/MESH-FORMAT.md) — sous-ensemble Gmsh, géométrie et groupes.
+- [Rapport S02](docs/sprints/S02.md) — import, contrôles et limites.
 
 ## Développement
 
@@ -118,9 +120,10 @@ cargo build --workspace --locked
 cargo test --workspace --locked
 cargo run -p ferrasim-cli --locked -- --help
 cargo run -p ferrasim-io --example inspect_model --locked -- examples/minimal/model.json
+cargo run -p ferrasim-io --example inspect_mesh --locked -- examples/minimal/model.json
 ```
 
-La CLI affiche seulement l’aide et la version. `validate` et `solve` ne sont pas encore disponibles ; les commandes de simulation sont prévues en S08. Le programme d’exemple `inspect_model` charge et valide le contrat, sans importer le maillage ni résoudre. Les tests scientifiques arriveront avec les formulations.
+La CLI affiche seulement l’aide et la version. `validate` et `solve` ne sont pas encore disponibles ; les commandes de simulation sont prévues en S08. `inspect_model` valide le JSON ; `inspect_mesh` importe et contrôle le maillage et ses références. Aucun système mécanique n’est encore assemblé ou résolu. Les tests scientifiques FEM arriveront avec les formulations.
 
 ## Contributions et licence
 

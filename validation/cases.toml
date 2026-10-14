@@ -1,5 +1,5 @@
 registry_version = 1
-status = "planned"
+status = "in_progress"
 reference_units = "SI"
 
 [[cases]]
@@ -79,4 +79,6 @@ id = "invalid-models"
 sprint = "S02-S10"
 metric = "explicit rejection or solver failure for each invalid fixture"
 reference = "degenerate mesh, missing IDs, contradictory constraints, reference singular model"
-status = "planned"
+status = "partial"
+evidence = ["crates/io/tests/model_contract.rs", "crates/io/tests/mesh_import.rs", "crates/io/tests/mesh_binding.rs"]
+remaining = "Singular mechanical systems and solver failures require S05/S10."

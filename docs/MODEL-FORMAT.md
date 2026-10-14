@@ -1,6 +1,6 @@
 # Contrat de modèle JSON 0.1
 
-Statut : implémenté au sprint S01 pour description et validation du modèle. Aucun import de maillage ni calcul mécanique n’est encore exécuté.
+Statut : contrat implémenté en S01 ; import et liaison au maillage disponibles en S02 via une API distincte. Aucun calcul mécanique n’est encore exécuté.
 
 Exemple : [model.json](../examples/minimal/model.json). Schéma pour éditeurs et outils : [JSON Schema 2020-12](../schemas/model-0.1.schema.json).
 
@@ -40,7 +40,7 @@ Matériaux et groupes sont identifiés par chaînes non vides, sans espaces exte
 }
 ```
 
-Le catalogue déclare les sélections attendues, pas leurs membres. Une référence à un groupe absent du catalogue est rejetée en S01. S02 vérifiera les noms et membres réels dans le maillage, les groupes vides utilisés et les identifiants nodaux absents. S04 traitera notamment les recouvrements de groupes et affectations au niveau des éléments/degrés de liberté.
+Le catalogue déclare les sélections attendues, pas leurs membres. Une référence à un groupe absent du catalogue est rejetée en S01. S02 vérifie les noms et membres réels, les groupes vides utilisés, les nœuds absents, la couverture matériau des volumes et les prescriptions incompatibles sur groupes chevauchants. S04 construira les affectations et contraintes du système. Voir le [contrat de maillage](MESH-FORMAT.md).
 
 Les identifiants nodaux sont des entiers positifs `u64`, écrits comme entiers dans le JSON ; ils ne sont pas des indices de tableau. Un nœud positif ne peut pas encore être vérifié contre un maillage non importé.
 
@@ -58,7 +58,7 @@ La validation de plages d’entrée n’est pas une garantie de conditionnement,
 
 Une composante absente ou `null` reste libre. Au moins une composante doit être prescrite. Une valeur nulle ou non nulle est valide si elle est finie. Deux prescriptions de même groupe/composante doivent être exactement identiques ; sinon elles sont rejetées. Les prescriptions identiques sont conservées et seront fusionnées lors de construction des contraintes.
 
-Les contradictions entre deux groupes différents partageant des nœuds demandent le maillage et sont donc contrôlées après import, pas présumées absentes à S01. Un modèle sans contraintes peut réussir la validation de contrat mais échouer ensuite pour singularité.
+Les contradictions entre groupes différents partageant des nœuds sont contrôlées par la liaison modèle–maillage S02, pas par le parseur JSON seul. Un modèle sans contraintes peut réussir ces contrôles mais échouer ensuite pour singularité.
 
 ## Charges
 
@@ -88,6 +88,7 @@ Dans le JSON, utiliser des chemins relatifs à séparateurs `/`. Les chemins abs
 - `Simulation::validate()` : vérifie aussi un modèle construit ou modifié directement en Rust.
 - `model_to_json(&Simulation)` : valide avant sérialisation, pour empêcher qu’une valeur non finie devienne silencieusement `null`.
 - `load_model(path)` : retourne modèle, chemin source et chemin de maillage résolu.
+- `load_meshed_model(path)` : importe le maillage et vérifie les références réelles, selon le [contrat S02](MESH-FORMAT.md).
 
 Les erreurs distinguent lecture fichier, JSON, version inconnue et validation sémantique. Les erreurs JSON exposent ligne/colonne ; les problèmes sémantiques sont collectés avec code stable, chemin de champ et message. La réussite de ces fonctions concerne uniquement le contrat du modèle.
 

@@ -4,4 +4,4 @@
 
 Le maillage est une fixture d’un tétraèdre, pas le démonstrateur de poutre et pas une validation de flexion. Le groupe de nœuds `base` est dérivé du triangle physique homonyme. La valeur `max_iterations` et les tolérances sont des paramètres illustratifs, pas des réglages universels.
 
-La CLI ne charge ni ne résout encore ce fichier ; utiliser le programme Rust `inspect_model` décrit dans le contrat. L’import du maillage arrive en S02, et la physique plus tard. Un contrat valide ne garantit pas un maillage valide ou un calcul solvable.
+La CLI ne charge ni ne résout encore ce fichier. `inspect_model` vérifie le JSON seul ; `inspect_mesh` importe le maillage et vérifie les références en S02. Voir le [contrat maillage](../../docs/MESH-FORMAT.md). Aucun calcul FEM n’est exécuté, et ces contrôles ne garantissent pas la solvabilité mécanique.

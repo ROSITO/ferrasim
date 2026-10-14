@@ -1,7 +1,12 @@
 //! Strict versioned JSON loading and portable model-relative mesh paths.
 
+mod gmsh;
+
+pub use gmsh::{MshCode, MshError, parse_msh22, parse_msh22_bytes};
+
 use std::path::{Path, PathBuf};
 
+use ferrasim_mesh::{ModelMeshError, ValidatedMesh};
 use ferrasim_model::{SCHEMA_VERSION, Simulation, ValidationErrors};
 use serde::Deserialize;
 use thiserror::Error;
@@ -93,4 +98,71 @@ pub fn load_model(path: impl AsRef<Path>) -> Result<LoadedSimulation, ModelIoErr
         source_path,
         mesh_path,
     })
+}
+
+/// Filesystem or import failure, retaining the mesh source path.
+#[derive(Debug, Error)]
+pub enum MeshIoError {
+    /// Cannot read the requested mesh.
+    #[error("cannot read mesh {path}: {source}")]
+    Read {
+        /// Requested file.
+        path: PathBuf,
+        /// Filesystem cause.
+        #[source]
+        source: std::io::Error,
+    },
+    /// Invalid or unsupported mesh.
+    #[error("cannot import mesh {path}: {source}")]
+    Import {
+        /// Requested file.
+        path: PathBuf,
+        /// Structured format or geometry failure.
+        #[source]
+        source: MshError,
+    },
+}
+
+/// Read and validate an MSH 2.2 ASCII mesh, detecting binary headers first.
+pub fn load_msh22(path: impl AsRef<Path>) -> Result<ValidatedMesh, MeshIoError> {
+    let path = path.as_ref();
+    let bytes = std::fs::read(path).map_err(|source| MeshIoError::Read {
+        path: path.to_path_buf(),
+        source,
+    })?;
+    parse_msh22_bytes(&bytes).map_err(|source| MeshIoError::Import {
+        path: path.to_path_buf(),
+        source,
+    })
+}
+
+/// Failure of model loading, mesh import or their binding.
+#[derive(Debug, Error)]
+pub enum MeshedModelError {
+    /// Invalid source model.
+    #[error(transparent)]
+    Model(#[from] ModelIoError),
+    /// Invalid source mesh.
+    #[error(transparent)]
+    Mesh(#[from] MeshIoError),
+    /// Model selections are incompatible with the actual mesh.
+    #[error(transparent)]
+    Binding(#[from] ModelMeshError),
+}
+
+/// Validated model and mesh, without an assembled or solved mechanical system.
+#[derive(Debug)]
+pub struct MeshedSimulation {
+    /// Model and resolved source locations.
+    pub model: LoadedSimulation,
+    /// Immutable validated mesh.
+    pub mesh: ValidatedMesh,
+}
+
+/// Load a model, import its mesh and verify all selections and material coverage.
+pub fn load_meshed_model(path: impl AsRef<Path>) -> Result<MeshedSimulation, MeshedModelError> {
+    let model = load_model(path)?;
+    let mesh = load_msh22(&model.mesh_path)?;
+    mesh.validate_model(&model.simulation)?;
+    Ok(MeshedSimulation { model, mesh })
 }

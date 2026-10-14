@@ -1,6 +1,6 @@
 # Protocole de validation scientifique
 
-Le [registre](cases.toml) fixe les cas, métriques et tolérances avant calcul. **Tous les cas sont planifiés ; aucun résultat FEM n’est encore produit.** Le contrôle Python S00 vérifie le registre et les fixtures, pas la précision d’un solveur.
+Le [registre](cases.toml) fixe les cas, métriques et tolérances avant calcul. **Les cas FEM restent planifiés ; aucun résultat mécanique n’est encore produit.** Les entrées invalides sont partiellement vérifiées par les tests S01/S02, avec preuves et travail restant dans le registre. Le contrôle Python vérifie les métadonnées du registre et les fichiers attendus, pas la précision d’un solveur.
 
 Chaque cas devra conserver entrées, référence indépendante, environnement, observable, échelles de normalisation, résultats et état passé/échoué. Les références sont choisies avant examiner les résultats. Les valeurs proches de zéro utilisent une échelle absolue ; les singularités ne sont pas des valeurs de comparaison ponctuelles valides.
 
@@ -33,4 +33,4 @@ La formule est une référence de poutre approchée, pas une solution exacte du 
 - [CalculiX — site du projet](https://www.calculix.de/) : candidat pour la comparaison externe ; installation et version à qualifier en S10.
 - [Conventions FerraSim](../docs/NUMERICAL-CONVENTIONS.md) et [PRD MVP](../docs/PRD.md) : choix, tolérances et règles de remplacement de référence.
 
-La fixture `tet4-positive.msh` et le brouillon JSON sont créés pour FerraSim et distribués sous la licence du dépôt. Les autres données à ajouter doivent porter provenance et droits de redistribution.
+Les fixtures `tet4-positive.msh`, `two-tets-interface.msh` et le modèle JSON sont créés pour FerraSim et distribués sous la licence du dépôt. Les tests S02 vérifient les volumes, aires et incidences de ces géométries de référence. Les autres données à ajouter doivent porter provenance et droits de redistribution.

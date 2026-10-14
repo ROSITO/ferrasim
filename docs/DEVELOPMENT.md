@@ -35,6 +35,7 @@ python3 scripts/check_project.py
 python scripts/check_model_schema.py
 cargo run -p ferrasim-cli --locked -- --help
 cargo run -p ferrasim-io --example inspect_model --locked -- examples/minimal/model.json
+cargo run -p ferrasim-io --example inspect_mesh --locked -- examples/minimal/model.json
 ```
 
 Les commandes de simulation `validate` et `solve` arriveront en S08. Le binaire actuel affiche seulement l’aide ou la version et refuse les autres commandes avec le code 2.
@@ -52,7 +53,7 @@ Sur Windows PowerShell, créer le venv avec `python -m venv .venv` et utiliser d
 | `ferrasim-io` | JSON, import maillage et exports |
 | `ferrasim-cli` | Commandes et orchestration utilisateur |
 
-Les frontières ont été créées en S00. S01 implémente le modèle typé, sa validation, son chargement JSON et un exemple d’inspection. Les autres bibliothèques restent sans physique. Consulter le [contrat JSON](MODEL-FORMAT.md) pour les fonctions disponibles.
+Les frontières ont été créées en S00. S01 implémente le modèle typé et JSON ; S02 ajoute import MSH et contrôles du maillage/liaison. FEM et solveurs restent sans physique implémentée. Voir les contrats [JSON](MODEL-FORMAT.md) et [maillage](MESH-FORMAT.md).
 
 ## Plateformes et preuves
 
