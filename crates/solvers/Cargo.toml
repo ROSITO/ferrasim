@@ -1,0 +1,16 @@
+[package]
+name = "ferrasim-solvers"
+description = "Sparse linear algebra and solvers for FerraSim"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[dependencies]
+ferrasim-model.workspace = true
+nalgebra-sparse.workspace = true
+
+[lints]
+workspace = true

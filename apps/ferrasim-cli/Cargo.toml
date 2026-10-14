@@ -1,0 +1,21 @@
+[package]
+name = "ferrasim-cli"
+description = "Command-line interface for FerraSim"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "ferrasim"
+path = "src/main.rs"
+
+[dependencies]
+ferrasim-model.workspace = true
+ferrasim-fem.workspace = true
+ferrasim-io.workspace = true
+
+[lints]
+workspace = true

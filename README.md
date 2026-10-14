@@ -6,7 +6,7 @@ FerraSim vise un environnement ouvert permettant de préparer, résoudre, vérif
 
 Le projet commence par un solveur d’éléments finis structurel simple et vérifié, puis étend progressivement les formulations, les interfaces et les physiques. La précision, les bilans physiques et la reproductibilité guident le développement.
 
-> **État actuel : cadrage du projet.** Ce dépôt contient les PRD et la roadmap. Le moteur, les interfaces et les solveurs ne sont pas encore implémentés. Les fonctionnalités décrites ci-dessous sont des objectifs de développement.
+> **État actuel : fondations S00.** Le workspace Rust et une CLI informative sont compilables. Les contrats, conventions et protocoles sont préparés ; aucun calcul FEM n’est encore implémenté. Les fonctionnalités physiques décrites ci-dessous restent des objectifs de développement.
 
 ## Pourquoi FerraSim ?
 
@@ -96,15 +96,25 @@ La cadence proposée est de deux semaines. Les sprints lointains sont un découp
 - [Roadmap générale](docs/ROADMAP.md) — organisation, dépendances et portes de qualification.
 - [Sprints du MVP](docs/ROADMAP-MVP.md) — backlog de S00 à S11.
 - [Sprints du produit cible](docs/ROADMAP-PRODUIT.md) — progression de S12 à S99.
+- [Environnement de développement](docs/DEVELOPMENT.md) — installation et commandes de vérification.
+- [Conventions numériques](docs/NUMERICAL-CONVENTIONS.md) — unités, tenseurs, TET4 et bilans.
+- [Validation scientifique](validation/README.md) — cas, références et tolérances planifiées.
+- [Rapport S00](docs/sprints/S00.md) — livrables, vérifications et points ouverts.
 
 ## Développement
 
-Le premier travail prévu est **S00** : choisir la licence et les dépendances, fixer les conventions numériques, préparer le corpus de validation, initialiser le workspace et configurer les vérifications automatiques.
+Les fondations **S00** comprennent le workspace, une version Rust fixée, les dépendances verrouillées, la licence MIT et les vérifications automatiques. Consulter le [guide de développement](docs/DEVELOPMENT.md) pour activer Rustup et installer les prérequis.
 
-Le dépôt ne contient pas encore de programme compilable ni de commande de simulation disponible. Les instructions de build et d’utilisation seront ajoutées avec le workspace et la CLI.
+```sh
+cargo build --workspace --locked
+cargo test --workspace --locked
+cargo run -p ferrasim-cli --locked -- --help
+```
+
+La CLI affiche seulement l’aide et la version. `validate` et `solve` ne sont pas encore disponibles ; les commandes de simulation sont prévues en S08. Le test actuel contrôle le refus d’une simulation non implémentée ; les tests scientifiques arriveront avec les formulations.
 
 ## Contributions et licence
 
-Les propositions peuvent être discutées dans les issues du dépôt. Les règles de contribution seront précisées à S00, notamment pour les références scientifiques, les tests et les changements de modèle.
+Les propositions peuvent être discutées dans les issues du dépôt. Voir les [règles de contribution](CONTRIBUTING.md) pour les vérifications, références scientifiques et revues.
 
-Le projet vise une distribution open source. Le choix de licence est une décision de S00 ; aucune licence open source n’est encore attribuée à ce dépôt.
+FerraSim est distribué sous [licence MIT](LICENSE). Les licences des dépendances restent distinctes ; voir l’[inventaire des dépendances](docs/DEPENDENCIES.md) et la [décision de fondations](docs/decisions/0001-foundations.md).

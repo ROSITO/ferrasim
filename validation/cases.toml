@@ -1,0 +1,82 @@
+registry_version = 1
+status = "planned"
+reference_units = "SI"
+
+[[cases]]
+id = "tet4-symmetry"
+sprint = "S03"
+metric = "frobenius relative symmetry error"
+tolerance = 1e-10
+reference = "K = integral(B^T C B dV), isotropic symmetric C"
+status = "planned"
+
+[[cases]]
+id = "tet4-rigid-modes"
+sprint = "S03"
+metric = "max normalized norm(K r) for 3 translations and 3 rotations"
+tolerance = 1e-10
+reference = "rigid displacement has zero infinitesimal strain"
+status = "planned"
+
+[[cases]]
+id = "affine-patch"
+sprint = "S04"
+metric = "normalized displacement and stress errors"
+tolerance = 1e-8
+reference = "u(x) = A x + b; epsilon = symmetric(A); sigma = C epsilon"
+status = "planned"
+
+[[cases]]
+id = "uniaxial-traction"
+sprint = "S06"
+metric = "relative axial displacement and stress errors"
+tolerance = 1e-6
+reference = "sigma_xx = F/area; epsilon_xx = sigma_xx/E; lateral strains = -nu epsilon_xx"
+status = "planned"
+
+[[cases]]
+id = "prescribed-nonzero"
+sprint = "S04"
+metric = "normalized reduced solution error"
+tolerance = 1e-8
+reference = "independent dense reduction; Kff uf = Ff - Kfc uc"
+status = "planned"
+
+[[cases]]
+id = "surface-traction"
+sprint = "S06"
+metric = "relative resultant error"
+tolerance = 1e-10
+reference = "constant traction t on triangle area A; total force = A t"
+status = "planned"
+
+[[cases]]
+id = "global-equilibrium"
+sprint = "S06"
+metric = "normalized force and moment imbalance"
+tolerance = 1e-6
+reference = "external forces plus reactions balance; explicit force and length scales"
+status = "planned"
+
+[[cases]]
+id = "cantilever-convergence"
+sprint = "S09"
+metric = "relative tip displacement error; >= 3 refinement levels"
+tolerance = 0.05
+reference = "Euler-Bernoulli F L^3/(3 E I), protocol in README; fallback independent converged 3D solid"
+status = "planned"
+
+[[cases]]
+id = "external-solver"
+sprint = "S10"
+metric = "normalized displacement and element stress errors on equivalent model"
+tolerance = 1e-5
+reference = "independent CalculiX calculation proposed; version and model to archive before comparison"
+status = "planned"
+
+[[cases]]
+id = "invalid-models"
+sprint = "S02-S10"
+metric = "explicit rejection or solver failure for each invalid fixture"
+reference = "degenerate mesh, missing IDs, contradictory constraints, reference singular model"
+status = "planned"

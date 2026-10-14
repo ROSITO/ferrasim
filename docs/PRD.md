@@ -279,4 +279,4 @@ CFD, électromagnétisme, optimisation, MPI et GPU restent des axes de recherche
 | Dépendances incompatibles avec la distribution | Blocage de publication | Choix de licence et audit des dépendances au jalon J0 |
 | Généralisation prématurée | Complexité sans bénéfice utilisateur | Extension guidée par les incréments réellement livrés |
 
-Décisions ouvertes avant implémentation : licence, bibliothèque de matrices creuses, stratégie de distribution et machine de benchmark. Les choix de cadrage proposés ici sont JSON, MSH 2.2 ASCII, TET4, CG/Jacobi et VTU/CSV ; ils constituent le point de départ du développement, sous réserve de validation au jalon J0.
+Décisions de S00 : licence MIT et bibliothèque de matrices creuses nalgebra-sparse, voir [ADR 0001](decisions/0001-foundations.md). Stratégie de distribution et machine de benchmark restent à préciser. Les choix de cadrage sont JSON, MSH 2.2 ASCII, TET4, CG/Jacobi et VTU/CSV ; ils constituent le point de départ du développement, avec validation progressive aux jalons concernés.

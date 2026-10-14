@@ -2,7 +2,7 @@
 
 Références : [roadmap générale](ROADMAP.md), [PRD MVP](PRD.md).
 
-Cadence proposée : deux semaines. Statut de tous les sprints : à faire. Le détail constitue un backlog proposé, à confirmer selon les décisions de S00.
+Cadence proposée : deux semaines. S00 lancé le 14 octobre 2026 ; autres sprints à faire. Voir le [rapport S00](sprints/S00.md). Le détail constitue un backlog proposé, à réestimer avec la capacité réelle.
 
 ## S00 — Cadrage d’exécution et initialisation
 

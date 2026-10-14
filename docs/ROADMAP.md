@@ -2,7 +2,7 @@
 
 Version : 1.0 — plan proposé\
 Date : 14 octobre 2026\
-Statut : planification ; aucun sprint commencé
+Statut : planification ; S00 lancé le 14 octobre 2026, voir le [rapport S00](sprints/S00.md)
 
 Références : [PRD MVP](PRD.md), [PRD de vision](PRD-VISION.md).
 
@@ -103,4 +103,4 @@ Le suivi conserve : sprint, objectif, exigences liées, responsable, dépendance
 
 ## 8. Première action exécutable
 
-Le prochain travail est **S00 : cadrage d’exécution et initialisation**. Il doit produire les décisions de licence et de dépendances, les conventions numériques, le corpus de validation, le workspace et la configuration de vérification. La roadmap prépare ce travail ; elle ne l’exécute pas.
+Le travail engagé est **S00 : cadrage d’exécution et initialisation**. Ses livrables et preuves sont suivis dans le [rapport S00](sprints/S00.md). S01 commencera par finaliser le contrat de modèle JSON et ses erreurs ; la revue scientifique indépendante doit être organisée avant la qualification S03.

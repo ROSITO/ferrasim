@@ -1,0 +1,18 @@
+[package]
+name = "ferrasim-fem"
+description = "Finite element formulations for FerraSim"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[dependencies]
+ferrasim-model.workspace = true
+ferrasim-mesh.workspace = true
+ferrasim-solvers.workspace = true
+nalgebra.workspace = true
+
+[lints]
+workspace = true
