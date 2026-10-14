@@ -2,7 +2,7 @@
 
 Références : [roadmap générale](ROADMAP.md), [PRD MVP](PRD.md).
 
-Cadence proposée : deux semaines. S00 lancé le 14 octobre 2026 ; autres sprints à faire. Voir le [rapport S00](sprints/S00.md). Le détail constitue un backlog proposé, à réestimer avec la capacité réelle.
+Cadence proposée : deux semaines. Fondations S00 livrées, revue scientifique indépendante encore ouverte ; S01 lancé le 14 octobre 2026, autres sprints à faire. Voir les rapports [S00](sprints/S00.md) et [S01](sprints/S01.md). Le détail constitue un backlog proposé, à réestimer avec la capacité réelle.
 
 ## S00 — Cadrage d’exécution et initialisation
 

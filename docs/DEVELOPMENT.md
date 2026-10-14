@@ -22,6 +22,9 @@ Sur le Mac de développement initial, Rust Homebrew reste installé. Rustup a é
 ```sh
 git clone https://github.com/ROSITO/ferrasim.git
 cd ferrasim
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements-dev.txt
 cargo fetch --locked
 cargo fmt --all -- --check
 cargo clippy --workspace --all-targets --locked -- -D warnings
@@ -29,10 +32,14 @@ cargo test --workspace --locked
 cargo build --workspace --release --locked
 cargo doc --workspace --no-deps --locked
 python3 scripts/check_project.py
+python scripts/check_model_schema.py
 cargo run -p ferrasim-cli --locked -- --help
+cargo run -p ferrasim-io --example inspect_model --locked -- examples/minimal/model.json
 ```
 
 Les commandes de simulation `validate` et `solve` arriveront en S08. Le binaire actuel affiche seulement l’aide ou la version et refuse les autres commandes avec le code 2.
+
+Sur Windows PowerShell, créer le venv avec `python -m venv .venv` et utiliser directement `.venv\Scripts\python.exe -m pip install -r requirements-dev.txt`, puis `.venv\Scripts\python.exe scripts/check_model_schema.py`. L’activation POSIX ci-dessus ne s’applique pas à PowerShell. Ce venv sert uniquement à vérifier le JSON Schema, pas à une API Python produit.
 
 ## Architecture initiale
 
@@ -45,7 +52,7 @@ Les commandes de simulation `validate` et `solve` arriveront en S08. Le binaire 
 | `ferrasim-io` | JSON, import maillage et exports |
 | `ferrasim-cli` | Commandes et orchestration utilisateur |
 
-Les bibliothèques sont des frontières de package compilables, sans API physique ni modèle implémenté en S00. Les dépendances retenues sont compilées afin de vérifier leur compatibilité avec la toolchain. Leur usage métier commence aux sprints correspondants.
+Les frontières ont été créées en S00. S01 implémente le modèle typé, sa validation, son chargement JSON et un exemple d’inspection. Les autres bibliothèques restent sans physique. Consulter le [contrat JSON](MODEL-FORMAT.md) pour les fonctions disponibles.
 
 ## Plateformes et preuves
 
@@ -53,4 +60,4 @@ Windows, macOS et Linux sont des cibles obligatoires du socle. La CI configure l
 
 Les nouvelles dépendances doivent être compatibles avec les trois OS avant adoption. Utiliser les API portables de chemins/processus ; ajouter les cas de fichiers Unicode, espaces et fins de ligne quand ces fonctions sont implémentées. Une différence de backend spécialisé doit être documentée et ne doit pas rendre l’installation CPU dépendante de WSL, Docker ou d’un service distant.
 
-Compiler et réussir le test d’entrée CLI ne valide aucune formulation FEM. Les cas scientifiques du [registre](../validation/cases.toml) sont encore planifiés.
+Les tests de contrat JSON et d’entrée CLI ne valident aucune formulation FEM. Les cas scientifiques du [registre](../validation/cases.toml) sont encore planifiés.

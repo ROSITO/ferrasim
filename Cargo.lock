@@ -48,7 +48,9 @@ version = "0.1.0-dev"
 dependencies = [
  "ferrasim-mesh",
  "ferrasim-model",
+ "serde",
  "serde_json",
+ "thiserror",
 ]
 
 [[package]]

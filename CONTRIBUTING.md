@@ -13,9 +13,12 @@ cargo test --workspace --locked
 cargo build --workspace --release --locked
 cargo doc --workspace --no-deps --locked
 python3 scripts/check_project.py
+python scripts/check_model_schema.py
 ```
 
 `Cargo.lock` est versionné pour toute la plateforme. Toute mise à jour de dépendance inclut une justification, ses licences et les régressions pertinentes. Les crates ne sont pas publiées sur crates.io à ce stade.
+
+Le contrôle indépendant du JSON Schema utilise un venv avec `requirements-dev.txt` ; voir le [guide de développement](docs/DEVELOPMENT.md). Les dépendances Python de vérification sont distinctes du moteur Rust.
 
 ## Règles scientifiques
 

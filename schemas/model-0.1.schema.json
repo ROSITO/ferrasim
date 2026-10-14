@@ -1,0 +1,385 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/ROSITO/ferrasim/main/schemas/model-0.1.schema.json",
+  "title": "FerraSim model 0.1",
+  "$comment": "Structural validation only. Material IDs, references, assignments and prescription conflicts require Simulation.validate().",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "units": {
+      "oneOf": [
+        {
+          "const": "SI"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "length": {
+              "$ref": "#/$defs/label"
+            },
+            "force": {
+              "$ref": "#/$defs/label"
+            }
+          },
+          "required": [
+            "length",
+            "force"
+          ]
+        }
+      ]
+    },
+    "mesh": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*[\\\\:\\u0000-\\u001f])\\S(?:.*\\S)?$",
+          "not": {
+            "pattern": "/$"
+          }
+        },
+        "groups": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "nodes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/label"
+              },
+              "uniqueItems": true
+            },
+            "surfaces": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/label"
+              },
+              "uniqueItems": true
+            },
+            "volumes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/label"
+              },
+              "uniqueItems": true,
+              "minItems": 1
+            }
+          },
+          "required": [
+            "nodes",
+            "surfaces",
+            "volumes"
+          ]
+        }
+      },
+      "required": [
+        "path",
+        "groups"
+      ]
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/material"
+      },
+      "minItems": 1
+    },
+    "material_assignments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "region": {
+            "$ref": "#/$defs/label"
+          },
+          "material": {
+            "$ref": "#/$defs/label"
+          }
+        },
+        "required": [
+          "region",
+          "material"
+        ]
+      }
+    },
+    "boundary_conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "node_group": {
+            "$ref": "#/$defs/label"
+          },
+          "components": {
+            "$ref": "#/$defs/prescribed"
+          }
+        },
+        "required": [
+          "node_group",
+          "components"
+        ]
+      }
+    },
+    "loads": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "const": "nodal_force"
+              },
+              "node": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 18446744073709551615
+              },
+              "components": {
+                "$ref": "#/$defs/vector"
+              }
+            },
+            "required": [
+              "type",
+              "node",
+              "components"
+            ]
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "const": "surface_traction"
+              },
+              "surface_group": {
+                "$ref": "#/$defs/label"
+              },
+              "components": {
+                "$ref": "#/$defs/vector"
+              }
+            },
+            "required": [
+              "type",
+              "surface_group",
+              "components"
+            ]
+          }
+        ]
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "linear_static_3d"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "solver_settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "const": "cg"
+        },
+        "preconditioner": {
+          "const": "jacobi"
+        },
+        "rtol": {
+          "type": "number",
+          "minimum": 0
+        },
+        "atol": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_iterations": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        }
+      },
+      "required": [
+        "method",
+        "preconditioner",
+        "rtol",
+        "atol",
+        "max_iterations"
+      ],
+      "anyOf": [
+        {
+          "properties": {
+            "rtol": {
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        {
+          "properties": {
+            "atol": {
+              "exclusiveMinimum": 0
+            }
+          }
+        }
+      ]
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "formats": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "vtu",
+              "csv",
+              "json"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "formats"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "units",
+    "mesh",
+    "materials",
+    "material_assignments",
+    "boundary_conditions",
+    "loads",
+    "analysis",
+    "solver_settings",
+    "outputs"
+  ],
+  "$defs": {
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^\\S(?:[^\\u0000-\\u001f]*\\S)?$"
+    },
+    "vector": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "z": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "z"
+      ]
+    },
+    "prescribed": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "y": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "z": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [],
+      "anyOf": [
+        {
+          "required": [
+            "x"
+          ],
+          "properties": {
+            "x": {
+              "type": "number"
+            }
+          }
+        },
+        {
+          "required": [
+            "y"
+          ],
+          "properties": {
+            "y": {
+              "type": "number"
+            }
+          }
+        },
+        {
+          "required": [
+            "z"
+          ],
+          "properties": {
+            "z": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    },
+    "material": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "isotropic_linear_elastic"
+        },
+        "id": {
+          "$ref": "#/$defs/label"
+        },
+        "young": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "poisson": {
+          "type": "number",
+          "exclusiveMinimum": -1,
+          "exclusiveMaximum": 0.5
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "young",
+        "poisson"
+      ]
+    }
+  }
+}

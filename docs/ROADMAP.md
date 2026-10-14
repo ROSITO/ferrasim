@@ -2,7 +2,7 @@
 
 Version : 1.0 — plan proposé\
 Date : 14 octobre 2026\
-Statut : planification ; S00 lancé le 14 octobre 2026, voir le [rapport S00](sprints/S00.md)
+Statut : S00 fondations livrées, revue scientifique indépendante ouverte ; S01 lancé le 14 octobre 2026, voir les [rapports](sprints/S01.md)
 
 Références : [PRD MVP](PRD.md), [PRD de vision](PRD-VISION.md).
 
@@ -104,4 +104,4 @@ Le suivi conserve : sprint, objectif, exigences liées, responsable, dépendance
 
 ## 8. Première action exécutable
 
-Le travail engagé est **S00 : cadrage d’exécution et initialisation**. Ses livrables et preuves sont suivis dans le [rapport S00](sprints/S00.md). S01 commencera par finaliser le contrat de modèle JSON et ses erreurs ; la revue scientifique indépendante doit être organisée avant la qualification S03.
+Le travail engagé est **S01 : modèle et contrats d’entrée**. Voir les [preuves et limites](sprints/S01.md). S02 ajoutera l’import et les contrôles du maillage ; la revue scientifique indépendante de S00 doit être organisée avant la qualification S03.

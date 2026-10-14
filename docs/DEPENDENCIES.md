@@ -1,6 +1,8 @@
-# Inventaire des dépendances S00
+# Inventaire des dépendances
 
 Date : 14 octobre 2026. Source : `cargo metadata --format-version 1 --locked`, graphe des features par défaut.
+
+S01 ajoute l’usage direct de Serde et thiserror dans IO, sans nouvelle version de package Rust.
 
 Licences déclarées par les packages ; inventaire à régénérer lors des changements de `Cargo.lock`. Les expressions observées incluent MIT, Apache-2.0, Unicode-3.0 ainsi que des alternatives Unlicense et Zlib. Retenir l’option MIT ou Apache-2.0 lorsqu’un choix est proposé, et respecter Unicode-3.0 lorsqu’elle est conjointe. La notation historique `MIT/Apache-2.0` nécessite de consulter les fichiers du package pour confirmer le choix. Le texte des licences et notices reste à inclure dans toute distribution concernée. Il ne s’agit pas d’un audit juridique ou de sécurité exhaustif.
 
@@ -41,3 +43,7 @@ Licences déclarées par les packages ; inventaire à régénérer lors des chan
 | unicode-ident | 1.0.27 | (MIT OR Apache-2.0) AND Unicode-3.0 | [package](https://crates.io/crates/unicode-ident/1.0.27) |
 | wide | 1.7.1 | Zlib OR Apache-2.0 OR MIT | [package](https://crates.io/crates/wide/1.7.1) |
 | zmij | 1.0.23 | MIT | [package](https://crates.io/crates/zmij/1.0.23) |
+
+## Vérification JSON Schema — développement seulement
+
+`requirements-dev.txt` fixe les versions pour les contrôles Python. jsonschema 4.26.0 et les packages attrs, jsonschema-specifications, referencing et rpds-py déclarent MIT, vérifié dans leurs métadonnées installées. typing_extensions est requis conditionnellement avant Python 3.13 et fixé à 4.15.0 ; ses métadonnées PyPI déclarent PSF-2.0. Les textes de licences et notices sont à conserver avec toute redistribution concernée. Ces outils ne sont pas embarqués dans le moteur de simulation.

@@ -12,6 +12,8 @@ publish.workspace = true
 ferrasim-model.workspace = true
 ferrasim-mesh.workspace = true
 serde_json.workspace = true
+serde.workspace = true
+thiserror.workspace = true
 
 [lints]
 workspace = true

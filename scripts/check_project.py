@@ -1,4 +1,4 @@
-"""Check S00 planning artifacts; this does not run scientific validations."""
+"""Check planning artifacts; this does not run scientific validations."""
 
 import json
 import math
@@ -35,9 +35,9 @@ def main():
             require(math.isfinite(case["tolerance"]) and case["tolerance"] > 0,
                     "Invalid validation tolerance")
 
-    model_path = ROOT / "examples/model-draft/model.json"
+    model_path = ROOT / "examples/minimal/model.json"
     model = json.loads(model_path.read_text(encoding="utf-8"))
-    require(model["schema_version"] == "0.1-draft", "Example must remain a draft")
+    require(model["schema_version"] == "0.1", "Example schema version must be 0.1")
     require(model["units"] == "SI", "Example reference units must be SI")
     require((model_path.parent / model["mesh"]["path"]).is_file(), "Missing fixture")
 

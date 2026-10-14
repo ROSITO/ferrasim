@@ -46,7 +46,7 @@ L’alternative sprs n’a pas été adoptée ; son audit complet n’a pas ét�
 
 | Décision | Responsable attendu | Échéance de décision | État |
 | --- | --- | --- | --- |
-| Schéma JSON final et erreurs | Mainteneur modèle | Revue d’entrée S01 | Brouillon disponible ; non implémenté |
+| Schéma JSON final et erreurs | Mainteneur modèle | Revue d’entrée S01 | Implémenté en S01, voir [ADR 0002](0002-model-contract.md) |
 | Seuil géométrique relatif de dégénérescence | Référent numérique | Avant validation S02/S03 | Politique définie, valeur à justifier avec fixtures |
 | Avertissement quasi-incompressibilité | Référent matériau | Avant sortie S03 | Intervalle physique fixé ; seuil d’avertissement à documenter |
 | Solveur de comparaison et environnement | Référent validation | Préparation S09, obligatoire avant sortie S10 | CalculiX proposé ; installation et version non qualifiées |

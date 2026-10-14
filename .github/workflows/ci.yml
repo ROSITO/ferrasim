@@ -1,4 +1,4 @@
-name: Rust foundation checks
+name: Rust workspace checks
 
 on:
   push:
@@ -24,6 +24,8 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.11'
+      - name: Install schema-check dependencies
+        run: python -m pip install -r requirements-dev.txt
       - name: Check format
         run: cargo fmt --all -- --check
       - name: Lint
@@ -38,3 +40,7 @@ jobs:
         run: cargo doc --workspace --no-deps --locked
       - name: Check planning fixtures and document links
         run: python scripts/check_project.py
+      - name: Check editor JSON Schema
+        run: python scripts/check_model_schema.py
+      - name: Inspect reference model through Rust API
+        run: cargo run -p ferrasim-io --example inspect_model --locked -- examples/minimal/model.json
