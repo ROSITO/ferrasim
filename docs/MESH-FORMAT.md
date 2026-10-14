@@ -67,3 +67,5 @@ cargo run -p ferrasim-io --example inspect_mesh --locked -- examples/minimal/mod
 Résultat attendu du modèle minimal : quatre nœuds, un tétraèdre, un triangle extérieur, volume 1/6 et aire 1/2 dans les unités de la fixture. Ce cas est un test géométrique, pas le démonstrateur de poutre ni une simulation FEM.
 
 Les fixtures [TET4](../validation/fixtures/tet4-positive.msh) et [interface à deux volumes](../validation/fixtures/two-tets-interface.msh) sont créées pour le dépôt sous sa licence MIT.
+
+Les fixtures texte `.msh` du dépôt utilisent des fins de ligne LF fixées par `.gitattributes`, afin que les mutations de test restent identiques sur tous les systèmes. Un test distinct transforme explicitement une fixture en CRLF et vérifie son import ; le lecteur ne suppose donc pas des fichiers utilisateurs en LF.
