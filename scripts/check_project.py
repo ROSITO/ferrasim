@@ -16,7 +16,7 @@ def require(condition, message):
 
 
 def main():
-    registry = tomllib.loads((ROOT / "validation/cases.toml").read_text())
+    registry = tomllib.loads((ROOT / "validation/cases.toml").read_text(encoding="utf-8"))
     require(registry["registry_version"] == 1, "Unknown validation registry")
     cases = registry["cases"]
     expected = {
@@ -36,7 +36,7 @@ def main():
                     "Invalid validation tolerance")
 
     model_path = ROOT / "examples/model-draft/model.json"
-    model = json.loads(model_path.read_text())
+    model = json.loads(model_path.read_text(encoding="utf-8"))
     require(model["schema_version"] == "0.1-draft", "Example must remain a draft")
     require(model["units"] == "SI", "Example reference units must be SI")
     require((model_path.parent / model["mesh"]["path"]).is_file(), "Missing fixture")
@@ -45,7 +45,7 @@ def main():
     for directory in ["docs", "validation", "examples"]:
         files.extend((ROOT / directory).rglob("*.md"))
     for path in files:
-        text = path.read_text()
+        text = path.read_text(encoding="utf-8")
         require(text.count("```") % 2 == 0, f"Unbalanced code fences: {path}")
         for link in re.findall(r"\]\(([^)]+)\)", text):
             if link.startswith(("https://", "http://", "#")):
