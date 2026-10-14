@@ -442,7 +442,13 @@ CUDA, Metal ou autres backends constituent des choix d’implémentation à qual
 
 ### 23.2 Exécution
 
-Poste Linux/macOS/Windows pour interfaces et usages supportés ; Linux comme première cible HPC ; conteneurs et connecteurs d’ordonnanceurs, avec Slurm comme première intégration proposée. Chaque distribution fournit une matrice explicite de procédures et backends testés.
+**Windows, macOS et Linux sont des plateformes obligatoires du produit**, dès le MVP et dans les incréments suivants. Le socle local — modèle, solveurs CPU natifs, CLI, puis GUI et API Python lorsqu’elles sont livrées — fournit les mêmes capacités fonctionnelles sur les trois systèmes. WSL, Docker ou un serveur distant ne sont pas requis pour ce socle.
+
+Chaque release fournit une matrice de versions/architectures supportées, des instructions d’installation et des builds/tests réussis pour les trois systèmes. Les vérifications scientifiques utilisent les mêmes références et tolérances ; l’identité bit à bit entre architectures n’est pas exigée. Une régression bloquante du socle sur une plateforme bloque la release.
+
+Les dépendances de géométrie, maillage, rendu et packaging Python sont évaluées pour les trois systèmes avant adoption. Un connecteur ou backend spécialisé peut avoir une disponibilité distincte, mais cette limite est affichée avant usage et ne réduit pas la portabilité du socle. Une capacité dépendant exclusivement d’un outil externe disponible sur un seul système ne peut pas être annoncée comme portable sans solution qualifiée sur les autres.
+
+Linux reste la première cible du calcul HPC distribué ; conteneurs et connecteurs d’ordonnanceurs, avec Slurm comme première intégration proposée. Les clients Windows et macOS doivent pouvoir préparer, soumettre et récupérer ces travaux. Les backends GPU/MPI, connecteurs et extensions disposent de leur propre matrice de support ; leurs dépendances optionnelles ne doivent pas empêcher compilation et usage du socle CPU.
 
 Travaux locaux, clusters privés et services cloud choisis par le client partagent un cycle : validation, mise en file, allocation, exécution, sauvegarde, récupération et archivage. Annulation, retry et reprise ne doivent pas dupliquer silencieusement les résultats ou la facturation.
 

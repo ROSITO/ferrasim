@@ -21,6 +21,12 @@ L’objectif est de rendre les études de simulation inspectables, automatisable
 
 La compétitivité sera évaluée sur des parcours concrets, avec des preuves de précision, de robustesse, de productivité et de performance. La couverture annoncée restera liée aux domaines d’emploi effectivement validés.
 
+## Compatibilité Windows, macOS et Linux
+
+Les trois systèmes sont des cibles obligatoires dès le MVP. Le socle CPU, la CLI et la bibliothèque Rust, puis la GUI et l’API Python à leur livraison, doivent fonctionner nativement avec les mêmes fonctionnalités. Aucun WSL, Docker ou serveur distant n’est requis pour le socle local.
+
+Les fondations S00 passent actuellement la CI sur Windows, macOS et Linux. Les fonctionnalités physiques seront validées sur les trois systèmes lors de leur implémentation. Chaque release indiquera les versions et architectures supportées ; les backends GPU/HPC et connecteurs spécialisés auront une matrice de disponibilité explicite.
+
 ## Premier objectif : MVP 0.1
 
 La première version doit exécuter une analyse **statique d’élasticité linéaire en trois dimensions** depuis un fichier de modèle, sans interface graphique.

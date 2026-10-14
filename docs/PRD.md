@@ -187,7 +187,9 @@ Les interfaces seront extensibles là où plusieurs implémentations sont néces
 - Le critère de convergence définit séparément le cas d’un second membre nul, à l’aide d’une tolérance absolue documentée.
 - Un calcul identique doit reproduire ses résultats dans les tolérances publiées. L’identité bit à bit entre architectures n’est pas exigée.
 - Les fichiers de résultats ne sont déclarés complets qu’après succès ; les diagnostics d’échec sont conservés séparément.
-- La CLI est conçue pour Linux, macOS et Windows ; les plateformes effectivement testées sont indiquées dans chaque livraison.
+- Windows, macOS et Linux sont des plateformes obligatoires dès le MVP. La bibliothèque Rust et la CLI doivent fonctionner nativement sur les trois systèmes, avec les mêmes fonctionnalités CPU, formats et critères de validation scientifique. WSL, Docker ou un calcul distant ne sont pas des prérequis du socle local.
+- Chaque livraison publie les versions et architectures supportées et les vérifications effectivement exécutées. La CI doit passer sur les trois systèmes avant livraison ; une régression bloquante sur l’un d’eux bloque la release.
+- Les chemins, fichiers et processus utilisent des API portables ; les chemins comportant espaces et caractères Unicode, les fins de ligne et les différences de casse sont couverts par les tests pertinents au fur et à mesure de leur implémentation.
 - Temps d’assemblage, temps de résolution, nombre de degrés de liberté, nombre de coefficients et estimation mémoire sont rapportés.
 
 Les objectifs de taille et de vitesse seront fixés à partir de mesures sur une machine de référence documentée. Aucun seuil de performance n’est une promesse avant l’existence d’un benchmark reproductible.
@@ -233,7 +235,7 @@ FerraSim 0.1 est livrée lorsque :
 4. Le modèle d’entrée, les sorties, les unités, les hypothèses et les limites numériques sont documentés.
 5. Le rapport distingue clairement succès et échec, avec les diagnostics nécessaires.
 6. Une licence open source a été choisie et sa compatibilité avec les dépendances vérifiée.
-7. Les plateformes testées et les résultats du benchmark initial sont publiés.
+7. Les builds et tests du MVP passent sur Windows, macOS et Linux ; leurs versions/architectures et les résultats du benchmark initial sont publiés.
 
 Livrables : code Rust, CLI, API Rust, modèles d’exemple, maillages de validation, exports de référence, documentation et résultats des vérifications automatisées.
 

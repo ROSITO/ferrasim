@@ -49,6 +49,8 @@ Les bibliothèques sont des frontières de package compilables, sans API physiqu
 
 ## Plateformes et preuves
 
-La CI configure Linux, macOS et Windows et s’exécute sur pushes à `main` et pull requests. Consulter le dernier run pour distinguer plateformes configurées et vérifiées. Le [rapport S00](sprints/S00.md) conserve les résultats locaux et distants effectivement observés.
+Windows, macOS et Linux sont des cibles obligatoires du socle. La CI configure les trois systèmes et s’exécute sur pushes à `main` et pull requests. Consulter le dernier run pour distinguer plateformes configurées et vérifiées. Le [rapport S00](sprints/S00.md) conserve les résultats locaux et distants effectivement observés.
+
+Les nouvelles dépendances doivent être compatibles avec les trois OS avant adoption. Utiliser les API portables de chemins/processus ; ajouter les cas de fichiers Unicode, espaces et fins de ligne quand ces fonctions sont implémentées. Une différence de backend spécialisé doit être documentée et ne doit pas rendre l’installation CPU dépendante de WSL, Docker ou d’un service distant.
 
 Compiler et réussir le test d’entrée CLI ne valide aucune formulation FEM. Les cas scientifiques du [registre](../validation/cases.toml) sont encore planifiés.

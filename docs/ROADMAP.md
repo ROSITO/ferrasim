@@ -79,6 +79,7 @@ Les plateformes partagées doivent intégrer droits, isolation et gestion des se
 5. Aucun défaut connu ne compromet le résultat démontré sans être explicitement bloquant.
 6. Les erreurs, annulations et échecs du parcours sont pris en compte.
 7. Les mesures nécessaires sont conservées : précision, bilans, ressources ou ergonomie selon le sujet.
+8. Les changements du socle passent la CI Windows, macOS et Linux. Les dépendances et fonctions nouvelles sont vérifiées sur les trois systèmes ; les backends spécialisés publient leurs limites propres sans rendre le socle dépendant d’un seul OS.
 
 Une fonctionnalité peut être livrée comme expérimentale sans ouvrir la porte industrielle correspondante. Un critère échoué ne devient pas acceptable par modification rétroactive de sa tolérance.
 
