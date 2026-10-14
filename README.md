@@ -25,7 +25,7 @@ La compétitivité sera évaluée sur des parcours concrets, avec des preuves de
 
 Les trois systèmes sont des cibles obligatoires dès le MVP. Le socle CPU, la CLI et la bibliothèque Rust, puis la GUI et l’API Python à leur livraison, doivent fonctionner nativement avec les mêmes fonctionnalités. Aucun WSL, Docker ou serveur distant n’est requis pour le socle local.
 
-Le socle S01 et ses tests de contrat passent actuellement la CI sur Windows, macOS et Linux. Les fonctionnalités physiques seront validées sur les trois systèmes lors de leur implémentation. Chaque release indiquera les versions et architectures supportées ; les backends GPU/HPC et connecteurs spécialisés auront une matrice de disponibilité explicite.
+Le socle S02, ses tests de contrat, de géométrie et d’import passent actuellement la CI sur Windows, macOS et Linux. Les fonctionnalités physiques seront validées sur les trois systèmes lors de leur implémentation. Chaque release indiquera les versions et architectures supportées ; les backends GPU/HPC et connecteurs spécialisés auront une matrice de disponibilité explicite.
 
 ## Premier objectif : MVP 0.1
 

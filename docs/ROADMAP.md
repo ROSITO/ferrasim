@@ -2,7 +2,7 @@
 
 Version : 1.0 — plan proposé\
 Date : 14 octobre 2026\
-Statut : fondations S00 livrées, revue scientifique indépendante ouverte ; S01 terminé ; S02 lancé le 14 octobre 2026, voir le [rapport](sprints/S02.md)
+Statut : fondations S00 livrées, revue scientifique indépendante ouverte ; S01 et S02 terminés le 14 octobre 2026, voir le [rapport S02](sprints/S02.md) ; S03 à lancer
 
 Références : [PRD MVP](PRD.md), [PRD de vision](PRD-VISION.md).
 
@@ -104,4 +104,4 @@ Le suivi conserve : sprint, objectif, exigences liées, responsable, dépendance
 
 ## 8. Première action exécutable
 
-Le travail engagé est **S02 : maillage et import Gmsh**. Voir les [preuves et limites](sprints/S02.md). S03 introduira l’élasticité isotrope et TET4 ; la revue scientifique indépendante des conventions de S00 et du seuil géométrique reste à organiser avant qualification.
+S02 est terminé pour l’import et les contrôles du maillage. Voir les [preuves et limites](sprints/S02.md). Le prochain travail est **S03 : élasticité isotrope et élément TET4** ; la revue scientifique indépendante des conventions de S00 et du seuil géométrique reste à organiser avant qualification.
