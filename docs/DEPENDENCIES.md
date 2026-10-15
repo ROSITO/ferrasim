@@ -12,6 +12,8 @@ S04 utilise le CSR de nalgebra-sparse déjà présent et ajoute thiserror comme 
 
 S05 ajoute nalgebra en dépendance de test directe de solvers pour la référence LU. Aucun nouveau package externe ni changement de version ; le solveur de production reste creux.
 
+S06 ajoute la crate interne IO comme dépendance de test de FEM pour tester les entrées exécutables, sans dépendance de production inverse et sans nouveau package externe ni changement de version. Le générateur analytique utilise seulement la bibliothèque standard Python.
+
 Licences déclarées par les packages ; inventaire à régénérer lors des changements de `Cargo.lock`. Les expressions observées incluent MIT, Apache-2.0, Unicode-3.0 ainsi que des alternatives Unlicense et Zlib. Retenir l’option MIT ou Apache-2.0 lorsqu’un choix est proposé, et respecter Unicode-3.0 lorsqu’elle est conjointe. La notation historique `MIT/Apache-2.0` nécessite de consulter les fichiers du package pour confirmer le choix. Le texte des licences et notices reste à inclure dans toute distribution concernée. Il ne s’agit pas d’un audit juridique ou de sécurité exhaustif.
 
 | Package | Version résolue | Licence déclarée | Source |

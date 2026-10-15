@@ -22,7 +22,7 @@ Cette première implémentation garde les triplets avant conversion et utilise u
 
 `Some(0)` est un déplacement imposé nul ; `None` est une composante libre. Les groupes sont développés vers les nœuds avant élimination. Les prescriptions identiques qui se recouvrent sont fusionnées ; des valeurs différentes sur le même degré de liberté sont rejetées par comparaison exacte, sans tolérance implicite.
 
-Le vecteur de forces `F` est fourni explicitement dans l’ordre global. **Les charges JSON sont validées mais ne sont pas intégrées par S04** ; leur construction relève de S06. Passer un vecteur nul définit un scénario sans forces externes, pas une interprétation du chargement JSON.
+Le vecteur de forces alternatif `F` peut être fourni explicitement dans l’ordre global. Depuis S06, l’assemblage intègre aussi les charges JSON et `reduce_model_loads` utilise ce vecteur stocké ; voir les [charges et bilans](LOADS-BALANCE.md). Passer un vecteur nul définit un scénario sans forces externes, pas une interprétation du chargement JSON.
 
 Pour les indices libres `f` et prescrits `c` :
 
@@ -54,7 +54,7 @@ Les IDs de nœuds sont volontairement non consécutifs et non ordonnés dans la 
 | Symétrie et six modes rigides globaux | Erreur relative ≤ 10⁻¹⁰ |
 | Énergie, forces et moments du patch sans charges | Écart absolu ≤ 10⁻¹⁰ dans les unités SI de cette fixture |
 
-Les comparaisons normalisées utilisent `norm(q-qref)/max(norm(qref),1)` : l’échelle 1 est exprimée dans l’unité cohérente de la quantité testée. Les derniers contrôles absolus concernent seulement cette fixture ; ils ne constituent pas le protocole de bilans généraux sous chargement prévu en S06. Le contrôle d’énergie compare la somme élémentaire à `0.5*uᵀ*K*u`, en tenant compte des prescriptions non nulles.
+Les comparaisons normalisées utilisent `norm(q-qref)/max(norm(qref),1)` : l’échelle 1 est exprimée dans l’unité cohérente de la quantité testée. Les derniers contrôles absolus concernent seulement cette fixture ; ils ne constituent pas le [protocole des bilans chargés S06](LOADS-BALANCE.md). Le contrôle d’énergie compare la somme élémentaire à `0.5*uᵀ*K*u`, en tenant compte des prescriptions non nulles.
 
 Les autres tests couvrent composantes libres, prescriptions nulles et non nulles, recouvrements cohérents ou contradictoires, forces contraintes, systèmes entièrement prescrits, entrées non finies et débordements. Un test CSR diagonal de 100 000 degrés de liberté vérifie le stockage creux sans constituer un benchmark FEM.
 
@@ -71,4 +71,4 @@ L’exemple affiche les dimensions et les nombres d’entrées stockées, avec u
 
 La formulation globale suit le principe des travaux virtuels et l’assemblage décrits par [A. F. Bower, chapitre 8.1](https://solidmechanics.org/text/Chapter8_1/Chapter8_1.htm). Les conventions de numérotation, seuils et choix CSR sont ceux de FerraSim. Aucun code tiers n’a été copié ; les fixtures sont créées pour le projet sous sa licence MIT.
 
-La référence séparée a le même auteur : elle ne remplace pas la revue scientifique par une personne compétente distincte. Cette revue reste ouverte avant qualification. Les vérifications portent sur de petits systèmes linéaires TET4 ; la convergence CG est vérifiée sur le [corpus S05](SOLVER-CG.md), sans qualification indépendante ; pas de qualification de traction surfacique, poutre, performance industrielle ou comparaison à un solveur externe.
+La référence séparée a le même auteur : elle ne remplace pas la revue scientifique par une personne compétente distincte. Cette revue reste ouverte avant qualification. Les vérifications portent sur de petits systèmes linéaires TET4 ; la convergence CG est vérifiée sur le [corpus S05](SOLVER-CG.md), sans qualification indépendante ; la traction surfacique et les bilans sont vérifiés en [S06](LOADS-BALANCE.md) sans qualification indépendante ; pas de qualification de poutre, performance industrielle ou comparaison externe.

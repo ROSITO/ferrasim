@@ -58,17 +58,19 @@ pub struct PrescribedDof {
     pub value: f64,
 }
 
-/// Global stiffness and model prescriptions; no load is interpreted at S04.
+/// Global stiffness, model prescriptions and consistently integrated model forces.
 #[derive(Debug, Clone)]
 pub struct AssembledSystem {
     dofs: DofMap,
     stiffness: SparseMatrix,
     prescribed: Vec<PrescribedDof>,
     warnings: Vec<(MaterialId, MaterialWarning)>,
+    forces: Vec<f64>,
+    coordinates: Vec<[f64; 3]>,
 }
 impl AssembledSystem {
     /// Assemble all TET4s, requiring exactly one valid material per element.
-    /// Model loads are validated but not integrated; provide the force vector to `reduce`.
+    /// Integrates model forces once; `reduce` still accepts explicit alternative forces.
     /// Nodes not used by any tetrahedron are rejected rather than adding silent null rows.
     pub fn assemble(mesh: &ValidatedMesh, model: &Simulation) -> Result<Self, FemError> {
         mesh.validate_model(model)?;
@@ -134,12 +136,28 @@ impl AssembledSystem {
         }
         // Binding validation already rejects conflicting values. Canonicalize overlaps.
         let prescribed = canonical_prescriptions(dofs.len(), &prescribed)?;
+        let forces = crate::loads::integrate_loads(mesh, model, &dofs)?;
+        let coordinates = dofs
+            .nodes()
+            .iter()
+            .map(|node| mesh.mesh().nodes[node])
+            .collect();
         Ok(Self {
+            forces,
+            coordinates,
             dofs,
             stiffness,
             prescribed,
             warnings,
         })
+    }
+    /// Integrated model forces in internal node-major xyz order.
+    pub fn forces(&self) -> &[f64] {
+        &self.forces
+    }
+    /// Coordinates in the same node order as `dofs().nodes()`.
+    pub fn coordinates(&self) -> &[[f64; 3]] {
+        &self.coordinates
     }
     /// Constitutive advisories with their material identifiers, in sorted order.
     pub fn material_warnings(&self) -> &[(MaterialId, MaterialWarning)] {

@@ -1,6 +1,6 @@
 # Conventions numériques du MVP
 
-Statut : conventions implémentées et vérifiées numériquement en S03–S05 ; revue indépendante encore ouverte avant qualification.
+Statut : conventions implémentées et vérifiées numériquement en S03–S06 ; revue indépendante encore ouverte avant qualification.
 
 ## Unités et repères
 
@@ -33,6 +33,8 @@ Numérotation globale S04 : IDs de nœuds triés, puis x, y, z ; correspondance 
 Ordre local : `[u1x,u1y,u1z,u2x,u2y,u2z,u3x,u3y,u3z,u4x,u4y,u4z]`. Les identifiants de fichiers ne sont pas des indices de tableau ; la correspondance ID/index est explicite. Les contraintes et déformations sont constantes par élément.
 
 ## Charges, prescriptions et réactions
+
+S06 intègre les charges et expose les bilans ; voir le [contrat et protocole](LOADS-BALANCE.md).
 
 Force nodale : N par nœud explicitement identifié. Traction : N/m² ; pour un triangle linéaire de surface et une traction constante, force consistante `A*t/3` à chacun de ses trois nœuds. Aucun partage automatique d’une force totale n’est implicite.
 

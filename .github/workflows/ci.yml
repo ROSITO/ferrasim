@@ -36,6 +36,8 @@ jobs:
         run: python validation/generate_tet4_reference.py --check
       - name: Regenerate exact assembled patch references
         run: python validation/generate_patch_reference.py --check
+      - name: Regenerate analytic load reference and input files
+        run: python validation/generate_load_reference.py --check
       - name: Build release
         run: cargo build --workspace --release --locked
       - name: Build documentation
@@ -60,3 +62,7 @@ jobs:
         run: python scripts/check_solver_failure.py
       - name: Solve explicit unit-force inspection scenario
         run: cargo run -p ferrasim-cli --example inspect_solver --locked -- examples/minimal/model.json
+      - name: Solve actual minimal model loads and assess balances
+        run: cargo run -p ferrasim-cli --example solve_model --locked -- examples/minimal/model.json 1 1
+      - name: Solve analytic uniaxial surface-traction model
+        run: cargo run -p ferrasim-cli --example solve_model --locked -- examples/uniaxial/model.json 10 2

@@ -12,6 +12,7 @@ model = json.loads((ROOT / "examples/minimal/model.json").read_text(encoding="ut
 Draft202012Validator.check_schema(schema)
 validator = Draft202012Validator(schema)
 validator.validate(model)
+validator.validate(json.loads((ROOT / "examples/uniaxial/model.json").read_text(encoding="utf-8")))
 
 for field, value in [("schema_version", "future"), ("unexpected", True)]:
     invalid = copy.deepcopy(model)
@@ -30,4 +31,4 @@ invalid["boundary_conditions"][0]["components"] = {"x": None}
 if validator.is_valid(invalid):
     raise ValueError("Schema accepted a prescription without a numeric component")
 
-print("Editor schema and reference example passed independent structural checks.")
+print("Editor schema and both reference examples passed independent structural checks.")

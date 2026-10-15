@@ -1,4 +1,4 @@
-//! Solve an explicit inspection force scenario, not the model's JSON loads.
+//! Solve an explicit inspection force scenario in place of integrated model forces.
 use ferrasim_fem::AssembledSystem;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let path = std::env::args_os()
@@ -16,7 +16,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let full = reduced.reconstruct(&report.solution)?;
     let reactions = reduced.reactions(&report.solution)?;
     // Output only after all computations succeeded; never write result files here.
-    println!("Inspection: unit force at internal DOF {dof}; JSON loads are not integrated.");
+    println!(
+        "Inspection: unit force at internal DOF {dof}; integrated JSON forces are overridden in this inspection."
+    );
     for (material, warning) in system.material_warnings() {
         println!("Material {material:?}: {warning:?}");
     }

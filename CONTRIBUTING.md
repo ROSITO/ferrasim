@@ -16,6 +16,7 @@ python3 scripts/check_project.py
 python scripts/check_model_schema.py
 python3 validation/generate_tet4_reference.py --check
 python3 validation/generate_patch_reference.py --check
+python3 validation/generate_load_reference.py --check
 cargo run -p ferrasim-solvers --example cg_reference --locked -- spd
 python3 scripts/check_solver_failure.py
 ```

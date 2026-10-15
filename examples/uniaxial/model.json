@@ -1,0 +1,85 @@
+{
+  "analysis": {
+    "type": "linear_static_3d"
+  },
+  "boundary_conditions": [
+    {
+      "components": {
+        "x": 0.0
+      },
+      "node_group": "x0"
+    },
+    {
+      "components": {
+        "y": 0.0
+      },
+      "node_group": "y0"
+    },
+    {
+      "components": {
+        "z": 0.0
+      },
+      "node_group": "z0"
+    }
+  ],
+  "loads": [
+    {
+      "components": {
+        "x": 10.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "surface_group": "x1",
+      "type": "surface_traction"
+    }
+  ],
+  "material_assignments": [
+    {
+      "material": "elastic",
+      "region": "solid"
+    }
+  ],
+  "materials": [
+    {
+      "id": "elastic",
+      "poisson": 0.25,
+      "type": "isotropic_linear_elastic",
+      "young": 1000.0
+    }
+  ],
+  "mesh": {
+    "groups": {
+      "nodes": [
+        "x0",
+        "y0",
+        "z0"
+      ],
+      "surfaces": [
+        "x0",
+        "x1",
+        "y0",
+        "y1",
+        "z0",
+        "z1"
+      ],
+      "volumes": [
+        "solid"
+      ]
+    },
+    "path": "mesh.msh"
+  },
+  "outputs": {
+    "formats": [
+      "json"
+    ]
+  },
+  "schema_version": "0.1",
+  "solver_settings": {
+    "atol": 1e-14,
+    "max_iterations": 1000,
+    "method": "cg",
+    "preconditioner": "jacobi",
+    "rtol": 1e-12
+  },
+  "units": "SI"
+}

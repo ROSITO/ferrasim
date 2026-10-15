@@ -1,4 +1,4 @@
-//! Inspect global stiffness and kinematic elimination; no loads or solve at S04.
+//! Inspect stiffness and elimination with an explicit zero-force scenario.
 use ferrasim_fem::AssembledSystem;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -25,7 +25,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         reduced.rhs().len()
     );
     println!(
-        "Inspection with an explicit zero force vector. JSON loads are not integrated; no linear solve performed."
+        "Inspection uses an explicit zero force vector instead of model forces; no linear solve performed."
     );
     Ok(())
 }

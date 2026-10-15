@@ -1,6 +1,6 @@
 # Protocole de validation scientifique
 
-Le [registre](cases.toml) fixe les cas, métriques et tolérances avant calcul. **S03 vérifie les opérateurs TET4 ; S04 vérifie un patch multiélément et une réduction avec prescriptions non nulles par références denses. S05 vérifie CG/Jacobi sur un corpus creux et les références FEM.** Le champ affine est vérifié localement, sans remplacer le patch test multiélément de S04. Les entrées invalides et échecs sont partiellement couverts par S01–S05. La revue scientifique indépendante est ouverte ; le contrôle Python ne valide que les métadonnées, pas un solveur.
+Le [registre](cases.toml) fixe les cas, métriques et tolérances avant calcul. **S03 vérifie les opérateurs TET4 ; S04 vérifie un patch multiélément et une réduction avec prescriptions non nulles par références denses. S05 vérifie CG/Jacobi sur un corpus creux et les références FEM ; S06 vérifie charges, traction uniaxiale et bilans mécaniques.** Le champ affine est vérifié localement, sans remplacer le patch test multiélément de S04. Les entrées invalides et échecs sont partiellement couverts par S01–S06. La revue scientifique indépendante est ouverte ; le contrôle Python ne valide que les métadonnées, pas un solveur.
 
 Chaque cas devra conserver entrées, référence indépendante, environnement, observable, échelles de normalisation, résultats et état passé/échoué. Les références sont choisies avant examiner les résultats. Les valeurs proches de zéro utilisent une échelle absolue ; les singularités ne sont pas des valeurs de comparaison ponctuelles valides.
 
@@ -46,3 +46,7 @@ Le [générateur global rationnel](generate_patch_reference.py) assemble quatre 
 ## Résolution CG/Jacobi S05
 
 Le [corpus CG](../crates/solvers/tests/cg.rs) utilise une LU dense réservée aux petits tests et une solution construite de taille 2 000. Les références rationnelles FEM S04 sont également résolues par CG. Le [protocole](../docs/SOLVER-CG.md) définit le résidu recalculé, les tolérances et les scénarios d’échec ; le [rapport S05](../docs/sprints/S05.md) consigne les résultats. Le contrôle [des exécutables d’échec](../scripts/check_solver_failure.py) vérifie sortie non nulle et absence de succès/fichiers. La détection universelle des singularités et la qualification scientifique ne sont pas acquises.
+
+## Charges et bilans S06
+
+Le [générateur analytique](generate_load_reference.py) produit les forces consistantes, déplacements, contraintes et énergie attendus d’un [bloc en traction](../examples/uniaxial/README.md), sans résolution numérique. Les [tests S06](../crates/fem/tests/loads.rs) vérifient aussi les chargements mixtes, prescriptions non nulles, origine des moments et résultante nulle avec échelles positives. Voir le [protocole](../docs/LOADS-BALANCE.md) et le [rapport S06](../docs/sprints/S06.md). La revue humaine indépendante reste ouverte.

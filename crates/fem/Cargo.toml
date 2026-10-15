@@ -16,6 +16,7 @@ nalgebra.workspace = true
 thiserror.workspace = true
 
 [dev-dependencies]
+ferrasim-io.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 

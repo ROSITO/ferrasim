@@ -44,7 +44,11 @@ sprint = "S06"
 metric = "relative axial displacement and stress errors"
 tolerance = 1e-6
 reference = "sigma_xx = F/area; epsilon_xx = sigma_xx/E; lateral strains = -nu epsilon_xx"
-status = "planned"
+status = "numerically_verified"
+evidence = ["crates/fem/tests/loads.rs", "validation/generate_load_reference.py", "validation/fixtures/uniaxial-reference.json", "examples/uniaxial/model.json", "docs/LOADS-BALANCE.md"]
+review_status = "pending_independent_review"
+observed_max = 6.17e-16
+observed_environment = "macOS ARM64, Rust 1.96.0, 2026-10-15"
 
 [[cases]]
 id = "prescribed-nonzero"
@@ -64,7 +68,11 @@ sprint = "S06"
 metric = "relative resultant error"
 tolerance = 1e-10
 reference = "constant traction t on triangle area A; total force = A t"
-status = "planned"
+status = "numerically_verified"
+evidence = ["crates/fem/tests/loads.rs", "validation/generate_load_reference.py", "validation/fixtures/uniaxial-reference.json", "examples/uniaxial/model.json", "docs/LOADS-BALANCE.md"]
+review_status = "pending_independent_review"
+observed_max = 1.34e-16
+observed_environment = "macOS ARM64, Rust 1.96.0, 2026-10-15"
 
 [[cases]]
 id = "global-equilibrium"
@@ -72,7 +80,11 @@ sprint = "S06"
 metric = "normalized force and moment imbalance"
 tolerance = 1e-6
 reference = "external forces plus reactions balance; explicit force and length scales"
-status = "planned"
+status = "numerically_verified"
+evidence = ["crates/fem/tests/loads.rs", "validation/generate_load_reference.py", "validation/fixtures/uniaxial-reference.json", "examples/uniaxial/model.json", "docs/LOADS-BALANCE.md"]
+review_status = "pending_independent_review"
+observed_max = 3.80e-14
+observed_environment = "macOS ARM64, Rust 1.96.0, 2026-10-15"
 
 [[cases]]
 id = "cantilever-convergence"
@@ -108,5 +120,5 @@ sprint = "S02-S10"
 metric = "explicit rejection or solver failure for each invalid fixture"
 reference = "degenerate mesh, missing IDs, contradictory constraints, reference singular model"
 status = "partial"
-evidence = ["crates/io/tests/model_contract.rs", "crates/io/tests/mesh_import.rs", "crates/io/tests/mesh_binding.rs", "crates/fem/tests/material.rs", "crates/fem/tests/tet4.rs", "crates/fem/tests/assembly.rs", "crates/solvers/tests/sparse.rs", "crates/solvers/tests/cg.rs", "scripts/check_solver_failure.py"]
+evidence = ["crates/io/tests/model_contract.rs", "crates/io/tests/mesh_import.rs", "crates/io/tests/mesh_binding.rs", "crates/fem/tests/material.rs", "crates/fem/tests/tet4.rs", "crates/fem/tests/assembly.rs", "crates/solvers/tests/sparse.rs", "crates/solvers/tests/cg.rs", "scripts/check_solver_failure.py", "crates/fem/tests/loads.rs"]
 remaining = "Reference singular and iteration-limit failures are checked in S05; external solver failure comparisons remain in S10. Detection of every singular system is not claimed."

@@ -70,7 +70,7 @@ Les contradictions entre groupes différents partageant des nœuds sont contrôl
 {"type":"surface_traction","surface_group":"loaded","components":{"x":0.0,"y":0.0,"z":-1000.0}}
 ```
 
-Les trois composantes sont obligatoires et finies. Une force est appliquée à un seul nœud ; une traction est une force par aire intégrée sur une surface. Aucun partage implicite d’une résultante n’est effectué. Plusieurs enregistrements de charges sont additifs ; ils ne sont pas dédupliqués silencieusement. Leur assemblage est prévu en S06.
+Les trois composantes sont obligatoires et finies. Une force est appliquée à un seul nœud ; une traction est une force par aire intégrée sur une surface. Aucun partage implicite d’une résultante n’est effectué. Plusieurs enregistrements de charges sont additifs ; ils ne sont pas dédupliqués silencieusement. Leur intégration est implémentée en S06 ; voir les [charges et bilans](LOADS-BALANCE.md).
 
 ## Paramètres numériques
 

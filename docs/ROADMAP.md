@@ -2,7 +2,7 @@
 
 Version : 1.0 — plan proposé\
 Date : 14 octobre 2026\
-Statut : S01/S02 terminés ; S03 livré techniquement le 15 octobre 2026, preuves et revue suivies dans le [rapport S03](sprints/S03.md). S04 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S04](sprints/S04.md). S05 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S05](sprints/S05.md). Qualification scientifique indépendante ouverte.
+Statut : S01/S02 terminés ; S03 livré techniquement le 15 octobre 2026, preuves et revue suivies dans le [rapport S03](sprints/S03.md). S04 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S04](sprints/S04.md). S05 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S05](sprints/S05.md). S06 lancé le 15 octobre 2026, voir le [rapport S06](sprints/S06.md). Qualification scientifique indépendante ouverte.
 
 Références : [PRD MVP](PRD.md), [PRD de vision](PRD-VISION.md).
 
@@ -104,4 +104,4 @@ Le suivi conserve : sprint, objectif, exigences liées, responsable, dépendance
 
 ## 8. Première action exécutable
 
-La dernière livraison technique est **S05 : CG/Jacobi et diagnostics**. Voir les [preuves et limites](sprints/S05.md) et la [réestimation avant assemblage](sprints/S03.md). La prochaine étape est S06 : charges et bilans. La revue scientifique indépendante des conventions, du seuil géométrique, de l’élément, de l’assemblage et du solveur reste ouverte avant qualification.
+La dernière livraison technique est **S05 : CG/Jacobi et diagnostics**. Voir les [preuves et limites](sprints/S05.md) et la [réestimation avant assemblage](sprints/S03.md). S06 implémente les charges et bilans, voir le [rapport](sprints/S06.md). La prochaine étape sera S07 : champs et exports. La revue scientifique indépendante des conventions, du seuil géométrique, de l’élément, de l’assemblage et du solveur reste ouverte avant qualification.

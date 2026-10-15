@@ -1,13 +1,15 @@
-//! Small-strain isotropic elasticity and constant-strain TET4 element operators.
+//! Linear TET4 elasticity, sparse assembly, model loads and mechanical balances.
 //!
 //! Sparse assembly and exact elimination are verified on small reference patches.
 //! Numerical verification does not constitute independent scientific qualification.
 
 mod assembly;
+mod loads;
 mod material;
 mod tet4;
 
 pub use assembly::{AssembledSystem, DofMap, PrescribedDof, ReducedSystem};
+pub use loads::{BalanceScales, MechanicalBalance, StaticSolution};
 pub use material::{IsotropicElastic, MaterialWarning, NEAR_INCOMPRESSIBLE_THRESHOLD};
 pub use tet4::{ElementResponse, Tet4Element};
 
@@ -29,6 +31,9 @@ pub type ElementStiffness = SMatrix<f64, 12, 12>;
 /// Failures constructing or evaluating a constitutive law or element.
 #[derive(Debug, Error)]
 pub enum FemError {
+    /// CG failed; no successful static solution is produced.
+    #[error(transparent)]
+    Solver(#[from] ferrasim_solvers::SolveError),
     /// Model or mesh binding does not satisfy the simulation contract.
     #[error(transparent)]
     Binding(#[from] ferrasim_mesh::ModelMeshError),
