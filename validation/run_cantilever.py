@@ -77,10 +77,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--binary',type=Path,default=Path('target/release/ferrasim'+('.exe' if os.name=='nt' else '')))
     parser.add_argument('--output',type=Path,required=True,help='new study directory')
+    parser.add_argument('--protocol',choices=['v1','v2-proposed'],default='v1')
     parser.add_argument('--generate-only',action='store_true',help='generate inputs without invoking Rust or claiming validation')
     parser.add_argument('--diagnostic-rtol',type=float,help='diagnostic only: override protocol rtol, never qualifies S09')
     parser.add_argument('--levels',type=int,nargs='+',default=[2,4,8])
     args = parser.parse_args()
+    primary_rtol=1e-10 if args.protocol=='v1' else 1e-7
+    tight_rtol=1e-12 if args.protocol=='v1' else 1e-8
+    if args.protocol=='v2-proposed' and args.levels!=[2,4,8,12]:
+        parser.error('proposed v2 fixes levels to 2 4 8 12')
     if len(args.levels)<3 or any(m<1 for m in args.levels) or any(b<=a for a,b in zip(args.levels,args.levels[1:])):
         parser.error('require at least three strictly increasing positive levels')
     if args.diagnostic_rtol is not None and (not math.isfinite(args.diagnostic_rtol) or not 0<args.diagnostic_rtol<=1e-8):
@@ -88,12 +93,12 @@ def main():
     root=args.output.resolve(); root.mkdir(parents=True,exist_ok=False)
     if args.generate_only:
         for m in args.levels:
-            generate(root/f'm{m}',m,rtol=args.diagnostic_rtol if args.diagnostic_rtol is not None else 1e-10)
+            generate(root/f'm{m}',m,rtol=args.diagnostic_rtol if args.diagnostic_rtol is not None else primary_rtol)
         print('Inputs generated; no simulation or qualification performed.')
         return
     binary=args.binary.resolve()
     reference=-100/(3*210e9*(.05*.05**3/12))
-    summary=dict(protocol='S09-v1',environment=platform.platform(),machine=platform.machine(),
+    summary=dict(protocol='S09-'+args.protocol,environment=platform.platform(),machine=platform.machine(),
                  driver_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                  python=sys.version, rustc=subprocess.check_output(['rustc','--version'],text=True).strip(),
                  source_revision=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
@@ -101,7 +106,7 @@ def main():
                  qualification='suspended',reference_m=reference,diagnostic_only=args.diagnostic_rtol is not None,runs=[])
     (root/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
     for m in args.levels:
-        nodes,tip=generate(root/f'm{m}',m,rtol=args.diagnostic_rtol if args.diagnostic_rtol is not None else 1e-10)
+        nodes,tip=generate(root/f'm{m}',m,rtol=args.diagnostic_rtol if args.diagnostic_rtol is not None else primary_rtol)
         try:
             elapsed,rss=execute(binary,root/f'm{m}/model.json',root/f'm{m}/results',root/f'm{m}/run.log')
         except RuntimeError:
@@ -133,20 +138,30 @@ def main():
     if any(not math.isfinite(e) for e in errors) or len(errors)<3 or any(b>=a for a,b in zip(errors,errors[1:])) or errors[-1]>.05:
         raise RuntimeError('Convergence gate failed: require >=3 improving levels and final error <=5%')
     m=args.levels[-1]
-    _,tip=generate(root/'tight',m,rtol=1e-12)
+    _,tip=generate(root/'tight',m,rtol=tight_rtol)
     elapsed,rss=execute(binary,root/'tight/model.json',root/'tight/results',root/'tight/run.log')
     r=json.loads((root/'tight/results/report.json').read_text())
     values={n['id']:n['displacement'][2] for n in r['nodes']}
     tight=sum(sum(values[n] for n in tri)/3 for tri in tip)/len(tip)
     variation=abs(tight/summary['runs'][-1]['tip_displacement_m']-1)
-    summary['algebraic_check']=dict(rtol=1e-12,tip_displacement_m=tight,relative_variation=variation,
-                                    solver=r['solver'],elapsed_seconds=elapsed,peak_rss_bytes=rss)
+    primary_values={n['id']:n['displacement'] for n in json.loads((root/f'm{m}/results/report.json').read_text())['nodes']}
+    field_difference=math.hypot(*(v-primary_values[n['id']][i] for n in r['nodes'] for i,v in enumerate(n['displacement'])))
+    field_norm=math.hypot(*(v for u in primary_values.values() for v in u))
+    field_variation=field_difference/field_norm
+    energy_variation=abs(r['balance']['strain_energy']/summary['runs'][-1]['balance']['strain_energy']-1)
+    summary['algebraic_check']=dict(rtol=tight_rtol,relative_field_variation=field_variation,relative_energy_variation=energy_variation,tip_displacement_m=tight,relative_variation=variation,
+                                    solver=r['solver'],balance=r['balance'],elapsed_seconds=elapsed,peak_rss_bytes=rss,
+                                    input_sha256={p:hashlib.sha256((root/'tight'/p).read_bytes()).hexdigest() for p in ['model.json','mesh.msh']})
     (root/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
-    if not math.isfinite(variation) or variation>1e-6:
+    for metric in ['relative_force_error','relative_moment_error','relative_free_residual','relative_energy_error']:
+        if not math.isfinite(r['balance'][metric]) or r['balance'][metric]>1e-6:
+            raise RuntimeError(f'Tight balance failed: {metric}')
+    if any(not math.isfinite(v) or v>1e-6 for v in [variation,field_variation,energy_variation]):
         raise RuntimeError('Algebraic tolerance check failed')
-    summary['qualification']='numerically_verified_pending_independent_review'
+    summary['qualification']=('numerically_verified_pending_independent_review' if args.protocol=='v1'
+                              else 'proposed_protocol_passed_pending_adoption_and_independent_review')
     (root/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
-    print('Convergence gate passed; independent scientific review remains pending.')
+    print(f'Convergence gate passed for {args.protocol}; status: {summary["qualification"]}.')
 
 if __name__=='__main__':
     main()

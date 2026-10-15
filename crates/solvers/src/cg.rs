@@ -83,14 +83,11 @@ fn norm(values: &[f64]) -> Option<f64> {
     value.is_finite().then_some(value)
 }
 fn dot(a: &[f64], b: &[f64]) -> Option<f64> {
-    let mut sum = 0.0;
+    let mut dot = crate::AccurateDot::default();
     for (a, b) in a.iter().zip(b) {
-        sum += a * b;
-        if !sum.is_finite() {
-            return None;
-        }
+        dot.add(*a, *b)?;
     }
-    Some(sum)
+    dot.finish()
 }
 fn residual(matrix: &SparseMatrix, rhs: &[f64], x: &[f64]) -> Option<Vec<f64>> {
     let ax = matrix.multiply(x).ok()?;
@@ -173,6 +170,7 @@ pub fn solve_cg_jacobi(
         });
     }
     let mut x = vec![0.0; matrix.size()];
+    let mut x_correction = vec![0.0; matrix.size()];
     attempt.rhs_norm = norm(rhs);
     if !(settings.rtol.is_finite() && settings.atol.is_finite())
         || settings.rtol < 0.0
@@ -304,10 +302,17 @@ pub fn solve_cg_jacobi(
             ));
         }
         for i in 0..x.len() {
-            x[i] += alpha * p[i];
-            r[i] -= alpha * ap[i];
+            let increment = alpha.mul_add(p[i], -x_correction[i]);
+            let next = x[i] + increment;
+            x_correction[i] = (next - x[i]) - increment;
+            x[i] = next;
+            r[i] = (-alpha).mul_add(ap[i], r[i]);
         }
-        if x.iter().chain(&r).any(|v| !v.is_finite()) {
+        if x.iter()
+            .chain(&r)
+            .chain(&x_correction)
+            .any(|v| !v.is_finite())
+        {
             return Err(attempt.fail(
                 SolveStatus::NumericalBreakdown,
                 SolveFailureReason::Arithmetic,
@@ -352,6 +357,9 @@ pub fn solve_cg_jacobi(
             )
         })? <= threshold;
         if restart {
+            // The fresh residual refers to the rounded public iterate. Discard the
+            // unrepresented increment when restarting from that iterate.
+            x_correction.fill(0.0);
             r = true_r;
         }
         z = precondition(&r).ok_or_else(|| {

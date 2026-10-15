@@ -10,6 +10,34 @@ use nalgebra_sparse::CsrMatrix;
 use std::collections::BTreeMap;
 use thiserror::Error;
 
+/// Compensate both product rounding (FMA) and cancellation in a dot product.
+#[derive(Default)]
+struct AccurateDot {
+    sum: f64,
+    correction: f64,
+}
+impl AccurateDot {
+    fn add(&mut self, a: f64, b: f64) -> Option<()> {
+        let product = a * b;
+        let next = self.sum + product;
+        if !product.is_finite() || !next.is_finite() {
+            return None;
+        }
+        let rounding = if self.sum.abs() >= product.abs() {
+            (self.sum - next) + product
+        } else {
+            (product - next) + self.sum
+        };
+        self.correction += rounding + a.mul_add(b, -product);
+        self.sum = next;
+        self.correction.is_finite().then_some(())
+    }
+    fn finish(self) -> Option<f64> {
+        let value = self.sum + self.correction;
+        value.is_finite().then_some(value)
+    }
+}
+
 /// Invalid dimensions, indices or floating-point arithmetic.
 #[derive(Debug, Error, PartialEq, Eq)]
 #[error("invalid sparse operation: {0}")]
@@ -80,11 +108,15 @@ impl SparseMatrix {
             return Err(SparseError("vector dimension or value"));
         }
         let mut result = vec![0.0; self.size()];
-        for (row, col, value) in self.entries() {
-            result[row] += value * vector[col];
-            if !result[row].is_finite() {
-                return Err(SparseError("matrix-vector product overflow"));
+        for (row, result) in result.iter_mut().enumerate() {
+            let mut dot = AccurateDot::default();
+            for index in self.0.row_offsets()[row]..self.0.row_offsets()[row + 1] {
+                dot.add(self.0.values()[index], vector[self.0.col_indices()[index]])
+                    .ok_or(SparseError("matrix-vector product overflow"))?;
             }
+            *result = dot
+                .finish()
+                .ok_or(SparseError("matrix-vector product overflow"))?;
         }
         Ok(result)
     }

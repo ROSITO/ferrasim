@@ -1,0 +1,170 @@
+{
+  "protocol": "S09-v1",
+  "environment": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "driver_sha256": "96e7681401989bd62d2318f6355c6f61573401cfa64dd8e8f2e16081817d33e2",
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "rustc": "rustc 1.96.0 (ac68faa20 2026-05-25)",
+  "source_revision": "6bea1967832c2fee78271f97633d59f7f05de9f7",
+  "cpu_count": 11,
+  "binary_sha256": "3e47639f5e2077d97e44e888d9cf4e0d44b226be1a573feaa99366faf97fba2d",
+  "qualification": "suspended",
+  "reference_m": -0.0003047619047619047,
+  "diagnostic_only": false,
+  "runs": [
+    {
+      "m": 2,
+      "nodes": 369,
+      "degrees_of_freedom": 1107,
+      "tetrahedra": 960,
+      "tip_displacement_m": -0.0001539558275837862,
+      "relative_error": 0.49483244074070143,
+      "elapsed_seconds": 0.10968600001069717,
+      "peak_rss_bytes": 19283968,
+      "solver": {
+        "iterations": 767,
+        "relative_residual": 8.905686651251938e-11,
+        "residual_norm": 3.360184272777316e-09,
+        "settings": {
+          "atol": 1e-12,
+          "max_iterations": 30000,
+          "method": "cg",
+          "preconditioner": "jacobi",
+          "rtol": 1e-10
+        },
+        "status": "Converged",
+        "threshold": 3.774077140890591e-09
+      },
+      "balance": {
+        "external_force": [
+          0.0,
+          0.0,
+          -100.00000000000003
+        ],
+        "external_moment": [
+          -2.500000000000001,
+          100.00000000000003,
+          0.0
+        ],
+        "force_imbalance": [
+          -7.138964974728879e-09,
+          -1.0610250456011272e-09,
+          4.929148644805537e-09
+        ],
+        "force_scale": 100.0,
+        "length_scale": 1.0,
+        "load_work": 0.015395582758378622,
+        "moment_imbalance": [
+          3.487725663831043e-10,
+          -4.206398784845078e-09,
+          -1.6485230958096508e-09
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "prescription_work": 0.0,
+        "reaction_force": [
+          -7.138964974728879e-09,
+          -1.0610250456011272e-09,
+          100.00000000492918
+        ],
+        "reaction_moment": [
+          2.5000000003487735,
+          -100.00000000420643,
+          -1.6485230958096508e-09
+        ],
+        "relative_energy_error": 1.0460382560140147e-17,
+        "relative_force_error": 8.739971477092291e-11,
+        "relative_free_residual": 3.360184272777316e-11,
+        "relative_moment_error": 4.531342123215311e-11,
+        "relative_prescription_error": 0.0,
+        "strain_energy": 0.007697791379188788
+      },
+      "input_sha256": {
+        "model.json": "c571aa30796aff16029ef153f9a3e7be4c6f420526ae043a7fa949e73152dbcc",
+        "mesh.msh": "eac722ceee390bbee06fc1bd6ca4a34bce2e398836793455512d70d54d787746"
+      }
+    },
+    {
+      "m": 4,
+      "nodes": 2025,
+      "degrees_of_freedom": 6075,
+      "tetrahedra": 7680,
+      "tip_displacement_m": -0.00024138659565737443,
+      "relative_error": 0.20795023299923998,
+      "elapsed_seconds": 1.2655447909928625,
+      "peak_rss_bytes": 91193344,
+      "solver": {
+        "iterations": 1730,
+        "relative_residual": 9.413452730271446e-11,
+        "residual_norm": 2.0615261484243665e-09,
+        "settings": {
+          "atol": 1e-12,
+          "max_iterations": 30000,
+          "method": "cg",
+          "preconditioner": "jacobi",
+          "rtol": 1e-10
+        },
+        "status": "Converged",
+        "threshold": 2.190978754336317e-09
+      },
+      "balance": {
+        "external_force": [
+          0.0,
+          0.0,
+          -100.00000000000001
+        ],
+        "external_moment": [
+          -2.5000000000000004,
+          100.00000000000001,
+          0.0
+        ],
+        "force_imbalance": [
+          2.603854909466463e-09,
+          -6.382151696016081e-09,
+          -5.796557900339394e-08
+        ],
+        "force_scale": 100.0,
+        "length_scale": 1.0,
+        "load_work": 0.024138659565737446,
+        "moment_imbalance": [
+          -7.090159570566357e-10,
+          4.906222272893501e-08,
+          -6.9017875858889965e-09
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "prescription_work": 0.0,
+        "reaction_force": [
+          2.603854909466463e-09,
+          -6.382151696016081e-09,
+          99.99999994203444
+        ],
+        "reaction_moment": [
+          2.4999999992909845,
+          -99.99999995093779,
+          -6.9017875858889965e-09
+        ],
+        "relative_energy_error": 1.9262369477246467e-16,
+        "relative_force_error": 5.837396911174722e-10,
+        "relative_free_residual": 2.0615261484243667e-11,
+        "relative_moment_error": 4.955036906635227e-10,
+        "relative_prescription_error": 0.0,
+        "strain_energy": 0.012069329782878354
+      },
+      "input_sha256": {
+        "model.json": "c571aa30796aff16029ef153f9a3e7be4c6f420526ae043a7fa949e73152dbcc",
+        "mesh.msh": "6ba279d00d9a6df7915d750bfcbe4d1dec65aee0039b6d09d7b96cd4511b6b46"
+      }
+    }
+  ],
+  "failure": {
+    "m": 8,
+    "diagnostic": "simulation failed: CG/Jacobi IterationLimit: IterationBudget after 30000 updates (residual Some(3.1241162527726625e-9), threshold Some(1.173164316138219e-9))\n"
+  }
+}
