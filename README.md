@@ -6,7 +6,7 @@ FerraSim vise un environnement ouvert permettant de préparer, résoudre, vérif
 
 Le projet commence par un solveur d’éléments finis structurel simple et vérifié, puis étend progressivement les formulations, les interfaces et les physiques. La précision, les bilans physiques et la reproductibilité guident le développement.
 
-> **État actuel : physique élémentaire S03.** L’élasticité isotrope et les opérateurs FEM TET4 locaux sont implémentés avec vérifications numériques, en plus du modèle et de l’import MSH. Aucun système global n’est encore assemblé ou résolu. La qualification scientifique indépendante reste ouverte ; les autres capacités restent des objectifs de développement.
+> **État actuel : assemblage S04.** Élasticité isotrope, éléments TET4, matrice creuse globale et élimination des déplacements imposés sont implémentés. Un patch multiélément est vérifié avec une référence dense réservée aux tests. Le solveur de production et l’intégration des charges restent à développer. La qualification scientifique indépendante reste ouverte.
 
 ## Pourquoi FerraSim ?
 
@@ -112,6 +112,8 @@ La cadence proposée est de deux semaines. Les sprints lointains sont un découp
 - [Rapport S02](docs/sprints/S02.md) — import, contrôles et limites.
 - [Formulation TET4](docs/FEM-TET4.md) — matériau, opérateurs et références élémentaires.
 - [Rapport S03](docs/sprints/S03.md) — physique locale et état de la revue.
+- [Assemblage et prescriptions](docs/ASSEMBLY.md) — CSR, réduction, réactions et références.
+- [Rapport S04](docs/sprints/S04.md) — livraison et vérifications globales.
 
 ## Développement
 
@@ -124,9 +126,10 @@ cargo run -p ferrasim-cli --locked -- --help
 cargo run -p ferrasim-io --example inspect_model --locked -- examples/minimal/model.json
 cargo run -p ferrasim-io --example inspect_mesh --locked -- examples/minimal/model.json
 cargo run -p ferrasim-cli --example inspect_element --locked -- examples/minimal/model.json
+cargo run -p ferrasim-cli --example inspect_assembly --locked -- examples/minimal/model.json
 ```
 
-La CLI affiche seulement l’aide et la version. `validate` et `solve` sont prévus en S08. `inspect_model` valide le JSON ; `inspect_mesh` vérifie maillage et références ; `inspect_element` évalue un champ artificiel sur un élément, sans résoudre les charges et contraintes du modèle. Aucun système global n’est encore assemblé ou résolu.
+La CLI affiche seulement l’aide et la version. `validate` et `solve` sont prévus en S08. `inspect_model` valide le JSON ; `inspect_mesh` vérifie maillage et références ; `inspect_element` évalue un champ artificiel sur un élément, sans résoudre les charges et contraintes du modèle. `inspect_assembly` construit la rigidité et sa réduction avec un vecteur de forces explicitement nul, sans intégrer les charges JSON ni résoudre le système.
 
 ## Contributions et licence
 

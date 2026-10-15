@@ -32,9 +32,11 @@ sprint = "S04"
 metric = "normalized displacement and stress errors"
 tolerance = 1e-8
 reference = "u(x) = A x + b; epsilon = symmetric(A); sigma = C epsilon"
-status = "partial"
-evidence = ["crates/fem/tests/tet4.rs"]
-remaining = "Only the local affine field is checked in S03; assembled multi-element patch test requires S04."
+status = "numerically_verified"
+evidence = ["crates/fem/tests/assembly.rs", "validation/generate_patch_reference.py", "validation/fixtures/patch-reference.json", "docs/ASSEMBLY.md"]
+review_status = "pending_independent_review"
+observed_max = 2.48e-15
+observed_environment = "macOS ARM64, Rust 1.96.0, 2026-10-15"
 
 [[cases]]
 id = "uniaxial-traction"
@@ -49,8 +51,12 @@ id = "prescribed-nonzero"
 sprint = "S04"
 metric = "normalized reduced solution error"
 tolerance = 1e-8
-reference = "independent dense reduction; Kff uf = Ff - Kfc uc"
-status = "planned"
+reference = "separate exact rational dense reduction; Kff uf = Ff - Kfc uc"
+status = "numerically_verified"
+evidence = ["crates/fem/tests/assembly.rs", "validation/generate_patch_reference.py", "validation/fixtures/patch-reference.json", "docs/ASSEMBLY.md"]
+review_status = "pending_independent_review"
+observed_max = 7.86e-17
+observed_environment = "macOS ARM64, Rust 1.96.0, 2026-10-15"
 
 [[cases]]
 id = "surface-traction"
@@ -90,5 +96,5 @@ sprint = "S02-S10"
 metric = "explicit rejection or solver failure for each invalid fixture"
 reference = "degenerate mesh, missing IDs, contradictory constraints, reference singular model"
 status = "partial"
-evidence = ["crates/io/tests/model_contract.rs", "crates/io/tests/mesh_import.rs", "crates/io/tests/mesh_binding.rs", "crates/fem/tests/material.rs", "crates/fem/tests/tet4.rs"]
+evidence = ["crates/io/tests/model_contract.rs", "crates/io/tests/mesh_import.rs", "crates/io/tests/mesh_binding.rs", "crates/fem/tests/material.rs", "crates/fem/tests/tet4.rs", "crates/fem/tests/assembly.rs", "crates/solvers/tests/sparse.rs"]
 remaining = "Singular mechanical systems and solver failures require S05/S10."

@@ -1,6 +1,6 @@
 # Conventions numériques du MVP
 
-Statut : conventions implémentées et vérifiées numériquement en S03 ; revue indépendante encore ouverte avant qualification.
+Statut : conventions implémentées et vérifiées numériquement en S03/S04 ; revue indépendante encore ouverte avant qualification.
 
 ## Unités et repères
 
@@ -27,6 +27,8 @@ Von Mises : racine de `0.5*((σxx−σyy)^2 + (σyy−σzz)^2 + (σzz−σxx)^2)
 Tétraèdre de référence : `(0,0,0), (1,0,0), (0,1,0), (0,0,1)` ; fonctions `[1−r−s−t, r, s, t]`. Jacobien à colonnes `x₂−x₁, x₃−x₁, x₄−x₁`. Volume signé `det(J)/6`.
 
 En 0.1, un élément d’orientation négative est rejeté avec son identifiant ; aucune permutation silencieuse. S02 fixe le critère initial `|det(J)| / Lmax³ ≤ 10⁻¹²`, où `Lmax` est la plus grande arête. Les tests vérifient ce critère à plusieurs échelles ; sa revue indépendante reste requise avant qualification S03. Il ne faut pas utiliser une tolérance de volume absolue identique pour toutes les unités et échelles. Voir les [règles de maillage et orientations de frontière](MESH-FORMAT.md).
+
+Numérotation globale S04 : IDs de nœuds triés, puis x, y, z ; correspondance accessible par `DofMap`. Voir le [contrat d’assemblage](ASSEMBLY.md).
 
 Ordre local : `[u1x,u1y,u1z,u2x,u2y,u2z,u3x,u3y,u3z,u4x,u4y,u4z]`. Les identifiants de fichiers ne sont pas des indices de tableau ; la correspondance ID/index est explicite. Les contraintes et déformations sont constantes par élément.
 

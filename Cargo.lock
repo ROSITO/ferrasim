@@ -78,6 +78,7 @@ version = "0.1.0-dev"
 dependencies = [
  "ferrasim-model",
  "nalgebra-sparse",
+ "thiserror",
 ]
 
 [[package]]

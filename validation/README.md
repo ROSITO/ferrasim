@@ -1,6 +1,6 @@
 # Protocole de validation scientifique
 
-Le [registre](cases.toml) fixe les cas, métriques et tolérances avant calcul. **S03 vérifie numériquement la symétrie et les modes rigides TET4 ; les résolutions globales restent planifiées.** Le champ affine est vérifié localement, sans remplacer le patch test multiélément de S04. Les entrées invalides sont partiellement couvertes par S01–S03. La revue scientifique indépendante est ouverte ; le contrôle Python ne valide que les métadonnées, pas un solveur.
+Le [registre](cases.toml) fixe les cas, métriques et tolérances avant calcul. **S03 vérifie les opérateurs TET4 ; S04 vérifie un patch multiélément et une réduction avec prescriptions non nulles par références denses. Le solveur de production reste planifié.** Le champ affine est vérifié localement, sans remplacer le patch test multiélément de S04. Les entrées invalides sont partiellement couvertes par S01–S03. La revue scientifique indépendante est ouverte ; le contrôle Python ne valide que les métadonnées, pas un solveur.
 
 Chaque cas devra conserver entrées, référence indépendante, environnement, observable, échelles de normalisation, résultats et état passé/échoué. Les références sont choisies avant examiner les résultats. Les valeurs proches de zéro utilisent une échelle absolue ; les singularités ne sont pas des valeurs de comparaison ponctuelles valides.
 
@@ -38,3 +38,7 @@ Les fixtures `tet4-positive.msh`, `two-tets-interface.msh` et le modèle JSON so
 ## Référence élémentaire S03
 
 Le [générateur rationnel](generate_tet4_reference.py) produit trois [références denses](fixtures/tet4-reference.json) sans appeler le code Rust ni construire sa matrice B. Les tests comparent les gradients, volumes et 144 coefficients de rigidité, puis contrôlent des réponses et invariances analytiques. Voir la [formulation TET4](../docs/FEM-TET4.md) pour critères, limites et distinction entre référence calculée séparément et revue humaine indépendante.
+
+## Références globales S04
+
+Le [générateur global rationnel](generate_patch_reference.py) assemble quatre TET4, puis élimine les prescriptions en arithmétique exacte. Les [deux références](fixtures/patch-reference.json) couvrent le champ affine homogène et les matériaux hétérogènes avec forces explicites. Les tests Rust vérifient opérateurs, déplacements et réactions par un solveur dense limité aux tests. Le [protocole](../docs/ASSEMBLY.md) fixe métriques, échelles et limites ; le [rapport S04](../docs/sprints/S04.md) conserve les résultats. La revue humaine indépendante reste ouverte.
