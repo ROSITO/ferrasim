@@ -1,6 +1,6 @@
 # ADR 0009 — Orchestration commune et erreurs par étape
 
-Date : 15 octobre 2026. Statut : implémenté et vérifié localement ; CI multiplateforme à consigner, revue scientifique indépendante ouverte.
+Date : 15 octobre 2026. Statut : implémenté et vérifié par CI sur Windows, macOS et Linux, revue scientifique indépendante ouverte.
 
 ## Décision
 
