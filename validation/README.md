@@ -18,7 +18,7 @@ Chaque cas devra conserver entrées, référence indépendante, environnement, o
 | Comparaison externe | Même maillage, matériau, forces et prescriptions ; solveur/version archivés | Déplacements/contraintes élémentaires ≤ 10⁻⁵ |
 | Entrées invalides | Références absentes, groupes vides utilisés, dégénérescence, prescriptions contradictoires et singularité de référence | Rejet ou échec explicite, sans succès de calcul |
 
-## Démonstrateur de poutre proposé
+## Démonstrateur de poutre S09 — acceptation suspendue
 
 Poutre prismatique selon x : longueur 1 m, largeur 0,05 m selon y, hauteur 0,05 m selon z ; `E=210e9 Pa`, `ν=0.3`. Face x=0 encastrée ; résultante `Fz=−100 N` distribuée uniformément sur x=L. Aucune force concentrée sur un coin.
 
@@ -58,3 +58,7 @@ Les [tests FEM](../crates/fem/tests/results.rs) vérifient la récupération et 
 ## Parcours CLI/API S08
 
 Les [tests CLI natifs](../apps/ferrasim-cli/tests/entrypoint.rs), [tests API](../crates/io/tests/workflow.rs) et la [reproduction en répertoire temporaire](../scripts/check_cli_workflow.py) vérifient les commandes, codes d’échec, chemins et sorties, sans déclarer la solvabilité après la seule validation. Voir le [contrat](../docs/CLI-API.md) et le [rapport S08](../docs/sprints/S08.md).
+
+## Étude de poutre S09
+
+Le [protocole v1](CANTILEVER-PROTOCOL.md), le [pilote reproductible](run_cantilever.py) et le [rapport](../docs/sprints/S09.md) conservent l’échec numérique et les séries diagnostiques. Le cas reste **partiel** : le diagnostic avec une tolérance différente ne remplace pas l’acceptation du protocole. Les entrées sont générées sans dépendance Python externe, avec six TET4 par cellule et chargement réparti.

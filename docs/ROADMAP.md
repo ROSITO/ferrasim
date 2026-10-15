@@ -104,4 +104,4 @@ Le suivi conserve : sprint, objectif, exigences liées, responsable, dépendance
 
 ## 8. Première action exécutable
 
-La dernière livraison technique est **S08 : CLI et API Rust de bout en bout**. Voir les [preuves et limites](sprints/S08.md) et la [réestimation avant assemblage](sprints/S03.md). La prochaine étape est S09 : poutre et convergence. La revue scientifique indépendante des conventions, de la géométrie, des formulations, du solveur, des chargements et des résultats reste ouverte avant qualification.
+La dernière livraison technique est **S08 : CLI et API Rust de bout en bout**. Voir les [preuves et limites](sprints/S08.md) et la [réestimation avant assemblage](sprints/S03.md). S09 est engagé : étude de poutre et raffinements reproductibles, mais livraison suspendue après échec CG du protocole ; voir le [rapport S09](sprints/S09.md). La revue scientifique indépendante des conventions, de la géométrie, des formulations, du solveur, des chargements et des résultats reste ouverte avant qualification.

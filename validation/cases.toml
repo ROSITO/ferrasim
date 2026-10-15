@@ -92,7 +92,9 @@ sprint = "S09"
 metric = "relative tip displacement error; >= 3 refinement levels"
 tolerance = 0.05
 reference = "Euler-Bernoulli F L^3/(3 E I), protocol in README; fallback independent converged 3D solid"
-status = "planned"
+status = "partial"
+evidence = ["validation/CANTILEVER-PROTOCOL.md", "validation/run_cantilever.py", "validation/check_cantilever_generator.py", "validation/results/cantilever/protocol-v1.json", "validation/results/cantilever/diagnostic.json", "docs/sprints/S09.md"]
+remaining = "Protocol v1 CG failure at m=4; finest algebraic sensitivity check and full acceptance still required; diagnostic runs do not qualify S09"
 
 [[cases]]
 id = "external-solver"

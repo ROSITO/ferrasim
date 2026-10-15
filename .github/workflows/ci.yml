@@ -80,3 +80,7 @@ jobs:
         run: cargo build -p ferrasim-io --example run_simulation --locked
       - name: Reproduce CLI and API from fresh working directory
         run: python scripts/check_cli_workflow.py
+      - name: Check cantilever geometry and deterministic refinement
+        run: python validation/check_cantilever_generator.py
+      - name: Diagnose cantilever on three meshes (does not qualify S09)
+        run: python validation/run_cantilever.py --output target/s09-ci-diagnostic --diagnostic-rtol 1e-8
