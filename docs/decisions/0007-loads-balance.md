@@ -1,6 +1,6 @@
 # ADR 0007 — Forces consistantes et bilans sur le système original
 
-Date : 15 octobre 2026. Statut : implémenté et vérifié localement ; CI multiplateforme à consigner, revue scientifique indépendante ouverte.
+Date : 15 octobre 2026. Statut : implémenté et vérifié sur Windows, macOS et Linux, revue scientifique indépendante ouverte.
 
 ## Décision
 
