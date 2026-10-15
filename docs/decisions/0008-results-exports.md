@@ -1,6 +1,6 @@
 # ADR 0008 — Champs immuables et exports à manifeste final
 
-Date : 15 octobre 2026. Statut : implémenté et vérifié localement ; CI multiplateforme à consigner, revue scientifique indépendante ouverte.
+Date : 15 octobre 2026. Statut : implémenté et vérifié par CI sur Windows, macOS et Linux ; lecture/rendu VTK natifs contrôlés sur macOS, revue scientifique indépendante ouverte.
 
 ## Décision
 
