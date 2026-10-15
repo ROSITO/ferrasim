@@ -19,7 +19,13 @@ python3 validation/generate_patch_reference.py --check
 python3 validation/generate_load_reference.py --check
 cargo run -p ferrasim-solvers --example cg_reference --locked -- spd
 python3 scripts/check_solver_failure.py
+cargo run -p ferrasim-cli --example export_model --locked -- examples/uniaxial/model.json target/new-results 10 2
+python3 scripts/check_result_exports.py target/new-results
+python3 validation/verify_result_reference.py target/new-results
+python3 scripts/check_export_failure.py
 ```
+
+La destination `target/new-results` doit être absente ; choisir un nouveau nom si elle existe.
 
 `Cargo.lock` est versionné pour toute la plateforme. Toute mise à jour de dépendance inclut une justification, ses licences et les régressions pertinentes. Les crates ne sont pas publiées sur crates.io à ce stade.
 

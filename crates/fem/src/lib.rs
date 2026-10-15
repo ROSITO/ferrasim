@@ -6,11 +6,13 @@
 mod assembly;
 mod loads;
 mod material;
+mod results;
 mod tet4;
 
 pub use assembly::{AssembledSystem, DofMap, PrescribedDof, ReducedSystem};
 pub use loads::{BalanceScales, MechanicalBalance, StaticSolution};
 pub use material::{IsotropicElastic, MaterialWarning, NEAR_INCOMPRESSIBLE_THRESHOLD};
+pub use results::{ElementResult, NodalResult, SimulationResults, solve_static_results, von_mises};
 pub use tet4::{ElementResponse, Tet4Element};
 
 use ferrasim_mesh::{ElementId, MeshErrors};

@@ -8,4 +8,10 @@ cargo run -p ferrasim-cli --example solve_model --locked -- examples/uniaxial/mo
 
 Les arguments déclarent des échelles de 10 N et 2 m, avec moments à l’origine. Solution analytique : u=(0.01x,−0.0025y,−0.0025z), sigma_xx=10 Pa et énergie 0.1 J. Les autres contraintes sont nulles.
 
-[Modèle](model.json), [maillage](mesh.msh) et [référence](../../validation/fixtures/uniaxial-reference.json) sont créés pour FerraSim et régénérés par le [script analytique](../../validation/generate_load_reference.py). Voir le [protocole, critères et limites](../../docs/LOADS-BALANCE.md). La revue scientifique indépendante reste ouverte ; cet exemple ne qualifie pas un domaine industriel. Aucun fichier de résultat n’est encore exporté.
+[Modèle](model.json), [maillage](mesh.msh) et [référence](../../validation/fixtures/uniaxial-reference.json) sont créés pour FerraSim et régénérés par le [script analytique](../../validation/generate_load_reference.py). Voir le [protocole, critères et limites](../../docs/LOADS-BALANCE.md). La revue scientifique indépendante reste ouverte ; cet exemple ne qualifie pas un domaine industriel. Depuis S07, les trois formats sont demandés par le modèle. Pour exporter vers un répertoire neuf :
+
+```sh
+cargo run -p ferrasim-cli --example export_model --locked -- examples/uniaxial/model.json target/new-results 10 2
+```
+
+Voir le [contrat des résultats](../../docs/RESULTS-FORMAT.md), le [manifeste de référence](../../validation/results/uniaxial/manifest.json) et le [rendu VTK](../../validation/results/uniaxial-vtk.png).

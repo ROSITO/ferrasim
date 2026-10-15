@@ -51,7 +51,7 @@ def artifacts():
                  material_assignments=[dict(region="solid",material="elastic")],
                  boundary_conditions=[dict(node_group=name,components={axis:0.0}) for name,axis in [("x0","x"),("y0","y"),("z0","z")]],
                  loads=[dict(type="surface_traction",surface_group="x1",components=dict(x=10.0,y=0.0,z=0.0))],
-                 analysis=dict(type="linear_static_3d"),solver_settings=dict(method="cg",preconditioner="jacobi",rtol=1e-12,atol=1e-14,max_iterations=1000),outputs=dict(formats=["json"]))
+                 analysis=dict(type="linear_static_3d"),solver_settings=dict(method="cg",preconditioner="jacobi",rtol=1e-12,atol=1e-14,max_iterations=1000),outputs=dict(formats=["vtu","csv","json"]))
     def encoded(value): return json.dumps(value,indent=2,sort_keys=True)+"\n"
     return {ROOT/"validation/fixtures/uniaxial-reference.json": encoded(reference),
             ROOT/"examples/uniaxial/model.json": encoded(model),

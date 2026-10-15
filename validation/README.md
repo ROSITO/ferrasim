@@ -50,3 +50,7 @@ Le [corpus CG](../crates/solvers/tests/cg.rs) utilise une LU dense réservée au
 ## Charges et bilans S06
 
 Le [générateur analytique](generate_load_reference.py) produit les forces consistantes, déplacements, contraintes et énergie attendus d’un [bloc en traction](../examples/uniaxial/README.md), sans résolution numérique. Les [tests S06](../crates/fem/tests/loads.rs) vérifient aussi les chargements mixtes, prescriptions non nulles, origine des moments et résultante nulle avec échelles positives. Voir le [protocole](../docs/LOADS-BALANCE.md) et le [rapport S06](../docs/sprints/S06.md). La revue humaine indépendante reste ouverte.
+
+## Champs et exports S07
+
+Les [tests FEM](../crates/fem/tests/results.rs) vérifient la récupération et von Mises ; les [tests IO](../crates/io/tests/results_export.rs) vérifient les données et la publication. Les lecteurs [XML/CSV/JSON](../scripts/check_result_exports.py), [analytique](verify_result_reference.py) et [VTK natif](../scripts/check_vtk_results.py) contrôlent les exports. Voir le [bundle observé](results/uniaxial/manifest.json), le [rendu inspecté](results/uniaxial-vtk.png), le [contrat](../docs/RESULTS-FORMAT.md) et le [rapport S07](../docs/sprints/S07.md). Le contrôle VTK natif a été observé sur macOS, distinct de la CI de formats sur trois OS.

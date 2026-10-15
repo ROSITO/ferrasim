@@ -66,3 +66,11 @@ jobs:
         run: cargo run -p ferrasim-cli --example solve_model --locked -- examples/minimal/model.json 1 1
       - name: Solve analytic uniaxial surface-traction model
         run: cargo run -p ferrasim-cli --example solve_model --locked -- examples/uniaxial/model.json 10 2
+      - name: Export uniaxial result fields
+        run: cargo run -p ferrasim-cli --example export_model --locked -- examples/uniaxial/model.json target/s07-uniaxial 10 2
+      - name: Check VTU CSV JSON and completion consistency
+        run: python scripts/check_result_exports.py target/s07-uniaxial
+      - name: Compare exported fields against analytic uniaxial reference
+        run: python validation/verify_result_reference.py target/s07-uniaxial
+      - name: Check export failures and existing destinations
+        run: python scripts/check_export_failure.py

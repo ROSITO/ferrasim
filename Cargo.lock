@@ -50,6 +50,7 @@ dependencies = [
 name = "ferrasim-io"
 version = "0.1.0-dev"
 dependencies = [
+ "ferrasim-fem",
  "ferrasim-mesh",
  "ferrasim-model",
  "serde",

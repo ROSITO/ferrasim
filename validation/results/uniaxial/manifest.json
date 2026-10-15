@@ -1,0 +1,47 @@
+{
+  "files": [
+    {
+      "bytes": 4943,
+      "path": "results.vtu"
+    },
+    {
+      "bytes": 926,
+      "path": "nodes.csv"
+    },
+    {
+      "bytes": 2231,
+      "path": "elements.csv"
+    },
+    {
+      "bytes": 16261,
+      "path": "report.json"
+    }
+  ],
+  "material_indices": [
+    {
+      "id": "elastic",
+      "index": 0
+    }
+  ],
+  "provenance": {
+    "declared_code_revision": null,
+    "engine": "FerraSim",
+    "engine_version": "0.1.0-dev",
+    "mesh_source": "mesh.msh",
+    "model_source": "examples/uniaxial/model.json"
+  },
+  "result_version": 1,
+  "scientific_qualification": "pending_independent_review",
+  "shear_strain": "engineering gamma=2*epsilon",
+  "status": "complete",
+  "stress_location": "element constant, unsmoothed",
+  "units": "SI",
+  "voigt": [
+    "xx",
+    "yy",
+    "zz",
+    "xy",
+    "yz",
+    "xz"
+  ]
+}

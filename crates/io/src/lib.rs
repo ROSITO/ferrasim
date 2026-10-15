@@ -1,6 +1,11 @@
 //! Strict versioned JSON loading and portable model-relative mesh paths.
 
 mod gmsh;
+mod results;
+pub use results::{
+    ExportedResults, ResultExportError, ResultProvenance, export_results, results_to_elements_csv,
+    results_to_json, results_to_nodes_csv, results_to_vtu,
+};
 
 pub use gmsh::{MshCode, MshError, parse_msh22, parse_msh22_bytes};
 

@@ -23,7 +23,7 @@ def main():
         "tet4-symmetry", "tet4-rigid-modes", "affine-patch",
         "uniaxial-traction", "prescribed-nonzero", "surface-traction",
         "global-equilibrium", "cantilever-convergence", "external-solver",
-        "invalid-models", "cg-reference",
+        "invalid-models", "cg-reference", "result-fields",
     }
     ids = [case["id"] for case in cases]
     require(len(ids) == len(set(ids)), "Duplicate validation cases")

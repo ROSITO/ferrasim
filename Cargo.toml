@@ -24,7 +24,7 @@ ferrasim-fem = { path = "crates/fem" }
 ferrasim-solvers = { path = "crates/solvers" }
 ferrasim-io = { path = "crates/io" }
 serde = { version = "1.0.229", features = ["derive"] }
-serde_json = "1.0.154"
+serde_json = { version = "1.0.154", features = ["float_roundtrip"] }
 thiserror = "2.0.21"
 nalgebra = { version = "0.35.0", default-features = false, features = ["std"] }
 nalgebra-sparse = "0.12.0"

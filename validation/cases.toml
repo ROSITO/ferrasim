@@ -115,6 +115,18 @@ observed_max = 5.11e-13
 observed_environment = "macOS ARM64, Rust 1.96.0, 2026-10-15"
 
 [[cases]]
+id = "result-fields"
+sprint = "S07"
+metric = "maximum normalized nodal/element field error in uniaxial export"
+tolerance = 1e-10
+reference = "analytic uniaxial displacement, engineering strain, stress and von Mises"
+status = "numerically_verified"
+evidence = ["crates/fem/tests/results.rs", "crates/io/tests/results_export.rs", "scripts/check_result_exports.py", "validation/verify_result_reference.py", "validation/results/uniaxial/report.json", "scripts/check_vtk_results.py"]
+review_status = "pending_independent_review"
+observed_max = 8.39e-16
+observed_environment = "macOS ARM64, Rust 1.96.0, VTK 9.7.1, 2026-10-15"
+
+[[cases]]
 id = "invalid-models"
 sprint = "S02-S10"
 metric = "explicit rejection or solver failure for each invalid fixture"

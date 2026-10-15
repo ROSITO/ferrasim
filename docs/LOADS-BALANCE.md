@@ -91,7 +91,7 @@ Le corpus couvre aussi un triangle oblique à traction vectorielle, le retournem
 
 `StaticSolution` est retourné seulement après succès de CG et calcul de tous les diagnostics. Un échec CG est propagé en `FemError::Solver` ; aucune solution statique réussie n’est retournée. Les seuils mécaniques ne sont pas cachés dans l’API : le statut CG concerne son résidu, les valeurs de bilan doivent être évaluées avec les critères déclarés du cas. `balance` accepte également des champs arbitraires pour les diagnostiquer, sans affirmer qu’ils convergent.
 
-La couverture est limitée à la statique linéaire TET4 avec charges mortes nodales et tractions uniformes par groupe. Pas de pression suiveuse, charge volumique, inertie, contact ou interpolation variable de traction. L’exemple résout les charges réelles du JSON mais n’exporte pas encore de résultats ; S07 prépare les champs/exports et S08 la commande CLI complète.
+La couverture est limitée à la statique linéaire TET4 avec charges mortes nodales et tractions uniformes par groupe. Pas de pression suiveuse, charge volumique, inertie, contact ou interpolation variable de traction. L’exemple résout les charges réelles du JSON mais n’exporte pas encore de résultats ; S07 implémente les [champs/exports](RESULTS-FORMAT.md) via `export_model` ; S08 prépare la commande CLI complète.
 
 ```sh
 python3 validation/generate_load_reference.py --check
