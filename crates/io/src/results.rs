@@ -60,9 +60,13 @@ fn array(
     values: impl IntoIterator<Item = String>,
 ) {
     writeln!(out,"<DataArray type=\"{kind}\" Name=\"{name}\" NumberOfComponents=\"{components}\" format=\"ascii\">").unwrap();
+    let mut first = true;
     for value in values {
+        if !first {
+            out.push(' ');
+        }
         out.push_str(&value);
-        out.push(' ');
+        first = false;
     }
     out.push_str("\n</DataArray>\n");
 }
