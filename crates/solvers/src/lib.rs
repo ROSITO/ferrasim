@@ -1,4 +1,10 @@
-//! Checked sparse operators. CG/Jacobi arrives in S05.
+//! Checked CSR operators, CG/Jacobi and explicit convergence/failure reports.
+
+mod cg;
+pub use cg::{
+    CG_SYMMETRY_TOLERANCE, SolveError, SolveFailureReason, SolveReport, SolveStatus,
+    solve_cg_jacobi,
+};
 
 use nalgebra_sparse::CsrMatrix;
 use std::collections::BTreeMap;

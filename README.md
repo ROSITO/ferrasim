@@ -6,7 +6,7 @@ FerraSim vise un environnement ouvert permettant de préparer, résoudre, vérif
 
 Le projet commence par un solveur d’éléments finis structurel simple et vérifié, puis étend progressivement les formulations, les interfaces et les physiques. La précision, les bilans physiques et la reproductibilité guident le développement.
 
-> **État actuel : assemblage S04.** Élasticité isotrope, éléments TET4, matrice creuse globale et élimination des déplacements imposés sont implémentés. Un patch multiélément est vérifié avec une référence dense réservée aux tests. Le solveur de production et l’intégration des charges restent à développer. La qualification scientifique indépendante reste ouverte.
+> **État actuel : résolution CG/Jacobi S05.** Le moteur Rust assemble et résout les systèmes TET4 réduits, avec déplacements imposés, réactions et diagnostics de convergence vérifiés sur des références. L’intégration des charges JSON et les exports restent à développer. La qualification scientifique indépendante reste ouverte.
 
 ## Pourquoi FerraSim ?
 
@@ -114,6 +114,8 @@ La cadence proposée est de deux semaines. Les sprints lointains sont un découp
 - [Rapport S03](docs/sprints/S03.md) — physique locale et état de la revue.
 - [Assemblage et prescriptions](docs/ASSEMBLY.md) — CSR, réduction, réactions et références.
 - [Rapport S04](docs/sprints/S04.md) — livraison et vérifications globales.
+- [Solveur CG/Jacobi](docs/SOLVER-CG.md) — convergence, erreurs et limites.
+- [Rapport S05](docs/sprints/S05.md) — preuves de résolution.
 
 ## Développement
 
@@ -127,9 +129,10 @@ cargo run -p ferrasim-io --example inspect_model --locked -- examples/minimal/mo
 cargo run -p ferrasim-io --example inspect_mesh --locked -- examples/minimal/model.json
 cargo run -p ferrasim-cli --example inspect_element --locked -- examples/minimal/model.json
 cargo run -p ferrasim-cli --example inspect_assembly --locked -- examples/minimal/model.json
+cargo run -p ferrasim-cli --example inspect_solver --locked -- examples/minimal/model.json
 ```
 
-La CLI affiche seulement l’aide et la version. `validate` et `solve` sont prévus en S08. `inspect_model` valide le JSON ; `inspect_mesh` vérifie maillage et références ; `inspect_element` évalue un champ artificiel sur un élément, sans résoudre les charges et contraintes du modèle. `inspect_assembly` construit la rigidité et sa réduction avec un vecteur de forces explicitement nul, sans intégrer les charges JSON ni résoudre le système.
+La CLI affiche seulement l’aide et la version. `validate` et `solve` sont prévus en S08. `inspect_model` valide le JSON ; `inspect_mesh` vérifie maillage et références ; `inspect_element` évalue un champ artificiel sur un élément, sans résoudre les charges et contraintes du modèle. `inspect_assembly` construit la rigidité et sa réduction avec un vecteur de forces explicitement nul, sans intégrer les charges JSON ni résoudre le système. `inspect_solver` résout un scénario de force unitaire explicite ; il ne représente pas le chargement JSON.
 
 ## Contributions et licence
 

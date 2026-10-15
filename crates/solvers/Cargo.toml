@@ -13,5 +13,8 @@ ferrasim-model.workspace = true
 nalgebra-sparse.workspace = true
 thiserror.workspace = true
 
+[dev-dependencies]
+nalgebra.workspace = true
+
 [lints]
 workspace = true

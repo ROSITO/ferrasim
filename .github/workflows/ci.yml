@@ -54,3 +54,9 @@ jobs:
         run: cargo run -p ferrasim-cli --example inspect_element --locked -- examples/minimal/model.json
       - name: Inspect sparse assembly and prescriptions
         run: cargo run -p ferrasim-cli --example inspect_assembly --locked -- examples/minimal/model.json
+      - name: Solve independent SPD reference with CG
+        run: cargo run -p ferrasim-solvers --example cg_reference --locked -- spd
+      - name: Check failed solver examples never announce success or write results
+        run: python scripts/check_solver_failure.py
+      - name: Solve explicit unit-force inspection scenario
+        run: cargo run -p ferrasim-cli --example inspect_solver --locked -- examples/minimal/model.json

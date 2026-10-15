@@ -550,3 +550,54 @@ fn global_symmetry_and_six_rigid_modes_survive_heterogeneous_assembly() {
         assert!(norm(system.stiffness().multiply(&u).unwrap()) / (dense.norm() * norm(u)) < 1e-10);
     }
 }
+
+#[test]
+fn cg_jacobi_reduced_solutions_and_reactions_match_exact_references() {
+    let r = reference();
+    for case in &r.cases {
+        let (mesh, model) = setup(&r, case);
+        let system = AssembledSystem::assemble(&mesh, &model).unwrap();
+        let reduced = reduction(&r, case, &system);
+        let mut options = model.solver_settings.clone();
+        options.rtol = 1e-12;
+        options.atol = 1e-14;
+        let report = reduced.solve(&options).unwrap();
+        let expected = internal_vector(&r, &system, &case.solution);
+        let error = compare(
+            &reduced.reconstruct(&report.solution).unwrap(),
+            &expected,
+            1e-8,
+        );
+        compare(
+            &reduced.residual(&report.solution).unwrap(),
+            &internal_vector(&r, &system, &case.residual),
+            1e-10,
+        );
+        println!(
+            "CG {}: displacement {error:e}, iterations {}, relative residual {:?}",
+            case.name, report.iterations, report.relative_residual
+        );
+        assert!(report.residual_norm <= report.threshold);
+    }
+}
+
+#[test]
+fn cg_handles_fully_prescribed_system_and_rejects_unbalanced_free_body() {
+    let r = reference();
+    let (mesh, model) = setup(&r, &r.cases[0]);
+    let system = AssembledSystem::assemble(&mesh, &model).unwrap();
+    let prescriptions: Vec<_> = (0..15)
+        .map(|dof| PrescribedDof { dof, value: 0.1 })
+        .collect();
+    let all = ReducedSystem::new(system.stiffness(), &[0.0; 15], &prescriptions).unwrap();
+    let report = all.solve(&model.solver_settings).unwrap();
+    assert_eq!(report.iterations, 0);
+    assert!(report.solution.is_empty());
+    assert_eq!(all.reconstruct(&report.solution).unwrap(), vec![0.1; 15]);
+    let mut force = [0.0; 15];
+    for dof in (0..15).step_by(3) {
+        force[dof] = 1.0;
+    }
+    let free = system.reduce(&force).unwrap();
+    assert!(free.solve(&model.solver_settings).is_err());
+}

@@ -1,6 +1,6 @@
 # Assemblage creux et prescriptions — S04
 
-L’API Rust assemble la rigidité élastique TET4, élimine les déplacements imposés et reconstruit déplacements, résidu et réactions après fourniture d’une solution réduite. Elle ne résout pas encore le système en production. Le solveur dense utilisé pour les vérifications existe uniquement dans l’exécutable de tests d’intégration, avec une limite de 96 degrés de liberté.
+L’API Rust assemble la rigidité élastique TET4, élimine les déplacements imposés et reconstruit déplacements, résidu et réactions après fourniture d’une solution réduite. Depuis S05, `ReducedSystem::solve` utilise le [solveur CG/Jacobi](SOLVER-CG.md). Le solveur dense utilisé pour les vérifications existe uniquement dans l’exécutable de tests d’intégration, avec une limite de 96 degrés de liberté.
 
 ## Numérotation et affectations
 
@@ -35,7 +35,7 @@ R[c] = r[c]
 
 `AssembledSystem::reduce(F)` utilise les prescriptions du modèle. `ReducedSystem::new(K, F, prescriptions)` permet une réduction explicite, notamment pour les références de test. Le résultat expose la rigidité réduite, le second membre et la correspondance des indices libres. Les cas sans prescriptions et entièrement prescrits sont définis ; ce dernier retourne un système 0×0 et accepte une solution réduite vide.
 
-`reconstruct` vérifie la dimension et la finitude de la solution fournie. `residual` conserve toutes les composantes : les composantes libres servent à vérifier l’équilibre et les composantes contraintes sont les réactions. `reactions` retourne uniquement ces dernières, avec leurs indices globaux. Ces fonctions ne déclarent pas la convergence : une solution quelconque produit un résidu quelconque. Les diagnostics de singularité et la convergence du solveur arrivent en S05.
+`reconstruct` vérifie la dimension et la finitude de la solution fournie. `residual` conserve toutes les composantes : les composantes libres servent à vérifier l’équilibre et les composantes contraintes sont les réactions. `reactions` retourne uniquement ces dernières, avec leurs indices globaux. Ces fonctions ne déclarent pas la convergence : une solution quelconque produit un résidu quelconque. Les diagnostics et le critère de convergence du solveur sont définis en [S05](SOLVER-CG.md), sans preuve exhaustive de singularité.
 
 ## Références et seuils
 
@@ -71,4 +71,4 @@ L’exemple affiche les dimensions et les nombres d’entrées stockées, avec u
 
 La formulation globale suit le principe des travaux virtuels et l’assemblage décrits par [A. F. Bower, chapitre 8.1](https://solidmechanics.org/text/Chapter8_1/Chapter8_1.htm). Les conventions de numérotation, seuils et choix CSR sont ceux de FerraSim. Aucun code tiers n’a été copié ; les fixtures sont créées pour le projet sous sa licence MIT.
 
-La référence séparée a le même auteur : elle ne remplace pas la revue scientifique par une personne compétente distincte. Cette revue reste ouverte avant qualification. Les vérifications portent sur de petits systèmes linéaires TET4 ; pas de qualification de convergence CG, traction surfacique, poutre, performance industrielle ou comparaison à un solveur externe.
+La référence séparée a le même auteur : elle ne remplace pas la revue scientifique par une personne compétente distincte. Cette revue reste ouverte avant qualification. Les vérifications portent sur de petits systèmes linéaires TET4 ; la convergence CG est vérifiée sur le [corpus S05](SOLVER-CG.md), sans qualification indépendante ; pas de qualification de traction surfacique, poutre, performance industrielle ou comparaison à un solveur externe.

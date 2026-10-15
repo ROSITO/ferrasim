@@ -10,6 +10,8 @@ S03 ajoute thiserror dans FEM et Serde/serde_json comme dépendances de test, sa
 
 S04 utilise le CSR de nalgebra-sparse déjà présent et ajoute thiserror comme dépendance directe de solvers. Aucun nouveau package externe ni changement de version. Le générateur global utilise seulement la bibliothèque standard Python.
 
+S05 ajoute nalgebra en dépendance de test directe de solvers pour la référence LU. Aucun nouveau package externe ni changement de version ; le solveur de production reste creux.
+
 Licences déclarées par les packages ; inventaire à régénérer lors des changements de `Cargo.lock`. Les expressions observées incluent MIT, Apache-2.0, Unicode-3.0 ainsi que des alternatives Unlicense et Zlib. Retenir l’option MIT ou Apache-2.0 lorsqu’un choix est proposé, et respecter Unicode-3.0 lorsqu’elle est conjointe. La notation historique `MIT/Apache-2.0` nécessite de consulter les fichiers du package pour confirmer le choix. Le texte des licences et notices reste à inclure dans toute distribution concernée. Il ne s’agit pas d’un audit juridique ou de sécurité exhaustif.
 
 | Package | Version résolue | Licence déclarée | Source |

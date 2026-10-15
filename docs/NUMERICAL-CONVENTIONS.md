@@ -1,6 +1,6 @@
 # Conventions numériques du MVP
 
-Statut : conventions implémentées et vérifiées numériquement en S03/S04 ; revue indépendante encore ouverte avant qualification.
+Statut : conventions implémentées et vérifiées numériquement en S03–S05 ; revue indépendante encore ouverte avant qualification.
 
 ## Unités et repères
 
@@ -42,7 +42,7 @@ Pour déplacements prescrits `u_c`, résoudre `K_ff u_f = F_f − K_fc u_c`. Ré
 
 ## Résidus et métriques
 
-Pour le système réduit, critère proposé : `||b−Au||₂ ≤ atol + rtol*||b||₂`. Le cas `b=0` ne doit jamais produire un ratio `0/0`. Recalculer le résidu final ; le statut dépend du critère et du nombre maximal d’itérations.
+Pour le système réduit, critère implémenté en S05 : `||b−Au||₂ ≤ atol + rtol*||b||₂`. Voir le [contrat CG/Jacobi](SOLVER-CG.md). Le cas `b=0` ne doit jamais produire un ratio `0/0`. Recalculer le résidu final ; le statut dépend du critère et du nombre maximal d’itérations.
 
 Erreurs de référence : `||q−q_ref|| / max(||q_ref||, q_scale)` avec échelle positive publiée pour les valeurs nulles. Rigidité : norme de Frobenius ; champs : norme L2 ou maximum explicitement nommé. Modes rigides : mesurer `||K*r|| / (||K||*||r||)` pour chaque vecteur non nul.
 

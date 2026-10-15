@@ -55,7 +55,7 @@ reference = "separate exact rational dense reduction; Kff uf = Ff - Kfc uc"
 status = "numerically_verified"
 evidence = ["crates/fem/tests/assembly.rs", "validation/generate_patch_reference.py", "validation/fixtures/patch-reference.json", "docs/ASSEMBLY.md"]
 review_status = "pending_independent_review"
-observed_max = 7.86e-17
+observed_max = 9.62e-17
 observed_environment = "macOS ARM64, Rust 1.96.0, 2026-10-15"
 
 [[cases]]
@@ -91,10 +91,22 @@ reference = "independent CalculiX calculation proposed; version and model to arc
 status = "planned"
 
 [[cases]]
+id = "cg-reference"
+sprint = "S05"
+metric = "normalized solution error against dense LU or constructed exact field"
+tolerance = 1e-10
+reference = "dense LU on SPD sizes 2,5,17,40; exact constructed tridiagonal field size 2000"
+status = "numerically_verified"
+evidence = ["crates/solvers/tests/cg.rs", "crates/fem/tests/assembly.rs", "scripts/check_solver_failure.py", "docs/SOLVER-CG.md"]
+review_status = "pending_independent_review"
+observed_max = 5.11e-13
+observed_environment = "macOS ARM64, Rust 1.96.0, 2026-10-15"
+
+[[cases]]
 id = "invalid-models"
 sprint = "S02-S10"
 metric = "explicit rejection or solver failure for each invalid fixture"
 reference = "degenerate mesh, missing IDs, contradictory constraints, reference singular model"
 status = "partial"
-evidence = ["crates/io/tests/model_contract.rs", "crates/io/tests/mesh_import.rs", "crates/io/tests/mesh_binding.rs", "crates/fem/tests/material.rs", "crates/fem/tests/tet4.rs", "crates/fem/tests/assembly.rs", "crates/solvers/tests/sparse.rs"]
-remaining = "Singular mechanical systems and solver failures require S05/S10."
+evidence = ["crates/io/tests/model_contract.rs", "crates/io/tests/mesh_import.rs", "crates/io/tests/mesh_binding.rs", "crates/fem/tests/material.rs", "crates/fem/tests/tet4.rs", "crates/fem/tests/assembly.rs", "crates/solvers/tests/sparse.rs", "crates/solvers/tests/cg.rs", "scripts/check_solver_failure.py"]
+remaining = "Reference singular and iteration-limit failures are checked in S05; external solver failure comparisons remain in S10. Detection of every singular system is not claimed."

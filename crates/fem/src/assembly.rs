@@ -252,6 +252,14 @@ impl ReducedSystem {
     pub fn free_dofs(&self) -> &[usize] {
         &self.free
     }
+    /// Solve the reduced system using S05 CG/Jacobi and the model's explicit tolerances.
+    /// A successful residual does not certify that the mechanical model is unique.
+    pub fn solve(
+        &self,
+        settings: &ferrasim_model::SolverSettings,
+    ) -> Result<ferrasim_solvers::SolveReport, ferrasim_solvers::SolveError> {
+        ferrasim_solvers::solve_cg_jacobi(&self.stiffness, &self.rhs, settings)
+    }
     /// Reconstruct the full displacement field in original DOF order.
     pub fn reconstruct(&self, free_solution: &[f64]) -> Result<Vec<f64>, FemError> {
         if free_solution.len() != self.free.len() || free_solution.iter().any(|x| !x.is_finite()) {
