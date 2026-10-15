@@ -1,0 +1,392 @@
+{
+  "protocol": "S09-v2-proposed",
+  "environment": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "driver_sha256": "ad55152ea2ad892957d6783be0353d0800fc6a2bef5b215bfee608f201a5c2f7",
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "rustc": "rustc 1.96.0 (ac68faa20 2026-05-25)",
+  "source_revision": "6bea1967832c2fee78271f97633d59f7f05de9f7",
+  "cpu_count": 11,
+  "binary_sha256": "54e850956829e2b78eee679615638106f42301b418d0a09ed93c619aacd95664",
+  "qualification": "proposed_protocol_passed_pending_adoption_and_independent_review",
+  "reference_m": -0.0003047619047619047,
+  "diagnostic_only": false,
+  "runs": [
+    {
+      "m": 2,
+      "nodes": 369,
+      "degrees_of_freedom": 1107,
+      "tetrahedra": 960,
+      "tip_displacement_m": -0.0001539558275848058,
+      "relative_error": 0.49483244073735577,
+      "elapsed_seconds": 0.2902120419894345,
+      "peak_rss_bytes": 19546112,
+      "solver": {
+        "iterations": 626,
+        "relative_residual": 8.296286707554096e-08,
+        "residual_norm": 3.1302529730546822e-06,
+        "settings": {
+          "atol": 1e-12,
+          "max_iterations": 30000,
+          "method": "cg",
+          "preconditioner": "jacobi",
+          "rtol": 1e-07
+        },
+        "status": "Converged",
+        "threshold": 3.7730781408905906e-06
+      },
+      "balance": {
+        "external_force": [
+          0.0,
+          0.0,
+          -100.00000000000003
+        ],
+        "external_moment": [
+          -2.500000000000001,
+          100.00000000000003,
+          0.0
+        ],
+        "force_imbalance": [
+          1.2888730225313338e-06,
+          -9.479626612574066e-07,
+          4.675753473293298e-07
+        ],
+        "force_scale": 100.0,
+        "length_scale": 1.0,
+        "load_work": 0.015395582758480584,
+        "moment_imbalance": [
+          3.623462330182292e-08,
+          7.083144737407565e-09,
+          -4.763583305589236e-08
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "prescription_work": 0.0,
+        "reaction_force": [
+          1.2888730225313338e-06,
+          -9.479626612574066e-07,
+          100.00000046757538
+        ],
+        "reaction_moment": [
+          2.500000036234624,
+          -99.99999999291688,
+          -4.763583305589236e-08
+        ],
+        "relative_energy_error": 1.0091580349147478e-15,
+        "relative_force_error": 1.666869395236899e-08,
+        "relative_free_residual": 3.1302529730546824e-08,
+        "relative_moment_error": 6.026849472257393e-10,
+        "relative_prescription_error": 0.0,
+        "strain_energy": 0.00769779137929075
+      },
+      "input_sha256": {
+        "model.json": "23d6d7e5c71f805b87cf09dd4274df2c9864e56b682f7900e0093e95ee553d30",
+        "mesh.msh": "eac722ceee390bbee06fc1bd6ca4a34bce2e398836793455512d70d54d787746"
+      }
+    },
+    {
+      "m": 4,
+      "nodes": 2025,
+      "degrees_of_freedom": 6075,
+      "tetrahedra": 7680,
+      "tip_displacement_m": -0.00024138659564812662,
+      "relative_error": 0.20795023302958437,
+      "elapsed_seconds": 1.1072178750036983,
+      "peak_rss_bytes": 108216320,
+      "solver": {
+        "iterations": 1445,
+        "relative_residual": 9.643142039346967e-08,
+        "residual_norm": 2.1118276191217243e-06,
+        "settings": {
+          "atol": 1e-12,
+          "max_iterations": 30000,
+          "method": "cg",
+          "preconditioner": "jacobi",
+          "rtol": 1e-07
+        },
+        "status": "Converged",
+        "threshold": 2.189979754336317e-06
+      },
+      "balance": {
+        "external_force": [
+          0.0,
+          0.0,
+          -100.00000000000001
+        ],
+        "external_moment": [
+          -2.5000000000000004,
+          100.00000000000001,
+          0.0
+        ],
+        "force_imbalance": [
+          -5.552422521759581e-08,
+          9.577947821526323e-07,
+          -6.418554079345995e-07
+        ],
+        "force_scale": 100.0,
+        "length_scale": 1.0,
+        "load_work": 0.024138659564812665,
+        "moment_imbalance": [
+          -3.3147261824240104e-08,
+          1.1414684308874712e-07,
+          4.934162411984744e-08
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "prescription_work": 0.0,
+        "reaction_force": [
+          -5.552422521759581e-08,
+          9.577947821526323e-07,
+          99.9999993581446
+        ],
+        "reaction_moment": [
+          2.4999999668527386,
+          -99.99999988585317,
+          4.934162411984744e-08
+        ],
+        "relative_energy_error": 9.055256544598933e-15,
+        "relative_force_error": 1.154310248156757e-08,
+        "relative_free_residual": 2.1118276191217244e-08,
+        "relative_moment_error": 1.28696692359812e-09,
+        "relative_prescription_error": 0.0,
+        "strain_energy": 0.01206932978195357
+      },
+      "input_sha256": {
+        "model.json": "23d6d7e5c71f805b87cf09dd4274df2c9864e56b682f7900e0093e95ee553d30",
+        "mesh.msh": "6ba279d00d9a6df7915d750bfcbe4d1dec65aee0039b6d09d7b96cd4511b6b46"
+      }
+    },
+    {
+      "m": 8,
+      "nodes": 13041,
+      "degrees_of_freedom": 39123,
+      "tetrahedra": 61440,
+      "tip_displacement_m": -0.0002850583762621387,
+      "relative_error": 0.06465220288985707,
+      "elapsed_seconds": 15.947691542009125,
+      "peak_rss_bytes": 403144704,
+      "solver": {
+        "iterations": 3185,
+        "relative_residual": 9.567092756310252e-08,
+        "residual_norm": 1.1214204738131313e-06,
+        "settings": {
+          "atol": 1e-12,
+          "max_iterations": 30000,
+          "method": "cg",
+          "preconditioner": "jacobi",
+          "rtol": 1e-07
+        },
+        "status": "Converged",
+        "threshold": 1.1721653161382188e-06
+      },
+      "balance": {
+        "external_force": [
+          0.0,
+          0.0,
+          -100.00000000000001
+        ],
+        "external_moment": [
+          -2.5,
+          100.00000000000001,
+          0.0
+        ],
+        "force_imbalance": [
+          -2.480553220607362e-06,
+          6.548875433054491e-07,
+          -7.400611821140046e-07
+        ],
+        "force_scale": 100.0,
+        "length_scale": 1.0,
+        "load_work": 0.028505837626213875,
+        "moment_imbalance": [
+          1.4624461641687958e-09,
+          4.3395040449922817e-07,
+          7.294937143242919e-08
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "prescription_work": 0.0,
+        "reaction_force": [
+          -2.480553220607362e-06,
+          6.548875433054491e-07,
+          99.99999925993883
+        ],
+        "reaction_moment": [
+          2.500000001462446,
+          -99.99999956604961,
+          7.294937143242919e-08
+        ],
+        "relative_energy_error": 4.2676279177200625e-15,
+        "relative_force_error": 2.6701521544500386e-08,
+        "relative_free_residual": 1.1214204738131313e-08,
+        "relative_moment_error": 4.400417060986531e-09,
+        "relative_prescription_error": 0.0,
+        "strain_energy": 0.014252918812893556
+      },
+      "input_sha256": {
+        "model.json": "23d6d7e5c71f805b87cf09dd4274df2c9864e56b682f7900e0093e95ee553d30",
+        "mesh.msh": "ca2a7b742681a476694cb8687ca5f105c1961896568ed1ca127ed5e0bc57d0ea"
+      }
+    },
+    {
+      "m": 12,
+      "nodes": 40729,
+      "degrees_of_freedom": 122187,
+      "tetrahedra": 207360,
+      "tip_displacement_m": -0.00029533436583482035,
+      "relative_error": 0.03093411210449548,
+      "elapsed_seconds": 76.50436658400577,
+      "peak_rss_bytes": 1373863936,
+      "solver": {
+        "iterations": 4816,
+        "relative_residual": 9.704146094903683e-08,
+        "residual_norm": 7.75065274022551e-07,
+        "settings": {
+          "atol": 1e-12,
+          "max_iterations": 30000,
+          "method": "cg",
+          "preconditioner": "jacobi",
+          "rtol": 1e-07
+        },
+        "status": "Converged",
+        "threshold": 7.986959768095425e-07
+      },
+      "balance": {
+        "external_force": [
+          0.0,
+          0.0,
+          -99.99999999999999
+        ],
+        "external_moment": [
+          -2.500000000000002,
+          99.99999999999999,
+          0.0
+        ],
+        "force_imbalance": [
+          -7.204986403053226e-07,
+          4.7328505559107725e-09,
+          -7.302950422172216e-07
+        ],
+        "force_scale": 100.0,
+        "length_scale": 1.0,
+        "load_work": 0.02953343658348206,
+        "moment_imbalance": [
+          -1.2294921525324298e-08,
+          2.999829007421795e-07,
+          -2.1922860860001947e-08
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "prescription_work": 0.0,
+        "reaction_force": [
+          -7.204986403053226e-07,
+          4.7328505559107725e-09,
+          99.99999926970494
+        ],
+        "reaction_moment": [
+          2.4999999877050807,
+          -99.99999970001709,
+          -2.1922860860001947e-08
+        ],
+        "relative_energy_error": 8.066186607535997e-15,
+        "relative_force_error": 1.0259003554162834e-08,
+        "relative_free_residual": 7.75065274022551e-09,
+        "relative_moment_error": 3.0103408056446565e-09,
+        "relative_prescription_error": 0.0,
+        "strain_energy": 0.01476671829214434
+      },
+      "input_sha256": {
+        "model.json": "23d6d7e5c71f805b87cf09dd4274df2c9864e56b682f7900e0093e95ee553d30",
+        "mesh.msh": "012e19f9d4d0f1d7001f76b725b351622aae514582b60b86507b22abfe0f7efb"
+      }
+    }
+  ],
+  "algebraic_check": {
+    "rtol": 1e-08,
+    "relative_field_variation": 1.9511086001995395e-11,
+    "relative_energy_variation": 4.8697046395318466e-11,
+    "tip_displacement_m": -0.00029533436582762965,
+    "relative_variation": 2.4347635019239533e-11,
+    "solver": {
+      "iterations": 5217,
+      "relative_residual": 9.651057051938532e-09,
+      "residual_norm": 7.708250788285618e-08,
+      "settings": {
+        "atol": 1e-12,
+        "max_iterations": 30000,
+        "method": "cg",
+        "preconditioner": "jacobi",
+        "rtol": 1e-08
+      },
+      "status": "Converged",
+      "threshold": 7.987049768095426e-08
+    },
+    "balance": {
+      "external_force": [
+        0.0,
+        0.0,
+        -99.99999999999999
+      ],
+      "external_moment": [
+        -2.500000000000002,
+        99.99999999999999,
+        0.0
+      ],
+      "force_imbalance": [
+        2.6128248009626986e-08,
+        -4.8592021073545766e-08,
+        -4.055248012946322e-07
+      ],
+      "force_scale": 100.0,
+      "length_scale": 1.0,
+      "load_work": 0.02953343658276296,
+      "moment_imbalance": [
+        -7.448884620231411e-09,
+        2.967416605770268e-07,
+        -3.947246374202962e-08
+      ],
+      "origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "prescription_work": 0.0,
+      "reaction_force": [
+        2.6128248009626986e-08,
+        -4.8592021073545766e-08,
+        99.99999959447518
+      ],
+      "reaction_moment": [
+        2.4999999925511176,
+        -99.99999970325833,
+        -3.947246374202962e-08
+      ],
+      "relative_energy_error": 8.753067715083773e-16,
+      "relative_force_error": 4.092605946351486e-09,
+      "relative_free_residual": 7.708250788285618e-10,
+      "relative_moment_error": 2.9944811637070405e-09,
+      "relative_prescription_error": 0.0,
+      "strain_energy": 0.014766718291425245
+    },
+    "elapsed_seconds": 86.31006479200732,
+    "peak_rss_bytes": 1331232768,
+    "input_sha256": {
+      "model.json": "0ff5c49f2ab140046e86314c0d915e57277971a10bfef6fe1f80c626e2f7b53f",
+      "mesh.msh": "012e19f9d4d0f1d7001f76b725b351622aae514582b60b86507b22abfe0f7efb"
+    }
+  },
+  "implementation_commit": "01f25bc6b78cd490bdf47c02141a2a7e300454de",
+  "source_note": "Measured from working tree subsequently committed as implementation_commit. source_revision records HEAD before that commit."
+}

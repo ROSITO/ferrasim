@@ -93,8 +93,8 @@ metric = "relative tip displacement error; >= 3 refinement levels"
 tolerance = 0.05
 reference = "Euler-Bernoulli F L^3/(3 E I), protocol in README; fallback independent converged 3D solid"
 status = "partial"
-evidence = ["validation/CANTILEVER-PROTOCOL.md", "validation/run_cantilever.py", "validation/check_cantilever_generator.py", "validation/results/cantilever/protocol-v1.json", "validation/results/cantilever/diagnostic.json", "docs/sprints/S09.md"]
-remaining = "Protocol v1 CG failure at m=4; finest algebraic sensitivity check and full acceptance still required; diagnostic runs do not qualify S09"
+evidence = ["validation/CANTILEVER-PROTOCOL.md", "validation/run_cantilever.py", "validation/check_cantilever_generator.py", "validation/results/cantilever/protocol-v1.json", "validation/results/cantilever/diagnostic.json", "docs/sprints/S09.md", "docs/sprints/S09-RESOLUTION.md", "validation/results/cantilever/corrected-v1.json", "validation/results/cantilever/residual-audit.json", "validation/results/cantilever/v2-proposed.json"]
+remaining = "Compensated CG fixes m=4 but v1 still fails at m=8; proposed v2 passes on Windows/macOS/Linux with full-field/energy sensitivity; explicit adoption and independent scientific review remain open"
 
 [[cases]]
 id = "external-solver"
