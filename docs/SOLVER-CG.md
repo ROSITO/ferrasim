@@ -54,7 +54,7 @@ Les [tests FEM](../crates/fem/tests/assembly.rs) résolvent les deux référence
 
 Le cas singulier de référence est `K=[[1,-1],[-1,1]], b=[1,1]` : diagonale valide, direction initiale dans le noyau, rejet pour courbure nulle. Sont aussi testés courbure négative, corps FEM libre sous résultante non nulle, budget insuffisant, second membre nul, critères absolu/relatif, système vide, forte variation de diagonale, asymétrie, diagonales invalides et débordements/sous-flux numériques. Un critère extrêmement strict contrôle également l’absence de succès fondé sur le seul résidu récursif. Ces exemples d’échec ne prouvent pas la détection de toutes les singularités.
 
-Le [contrôle d’exécutable](../scripts/check_solver_failure.py) lance les scénarios singulier et budget limité dans des répertoires temporaires vides : sortie non nulle, stdout vide, diagnostic attendu et aucun fichier créé. Les exports S07 reprennent ce contrat dans le [contrôle de publication](../scripts/check_export_failure.py). La commande `solve` complète reste à S08.
+Le [contrôle d’exécutable](../scripts/check_solver_failure.py) lance les scénarios singulier et budget limité dans des répertoires temporaires vides : sortie non nulle, stdout vide, diagnostic attendu et aucun fichier créé. Les exports S07 reprennent ce contrat dans le [contrôle de publication](../scripts/check_export_failure.py). La commande `solve` complète et ses codes sont décrits dans le [contrat S08](CLI-API.md).
 
 ## Reproduction
 

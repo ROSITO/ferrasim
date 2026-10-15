@@ -54,3 +54,7 @@ Le [générateur analytique](generate_load_reference.py) produit les forces cons
 ## Champs et exports S07
 
 Les [tests FEM](../crates/fem/tests/results.rs) vérifient la récupération et von Mises ; les [tests IO](../crates/io/tests/results_export.rs) vérifient les données et la publication. Les lecteurs [XML/CSV/JSON](../scripts/check_result_exports.py), [analytique](verify_result_reference.py) et [VTK natif](../scripts/check_vtk_results.py) contrôlent les exports. Voir le [bundle observé](results/uniaxial/manifest.json), le [rendu inspecté](results/uniaxial-vtk.png), le [contrat](../docs/RESULTS-FORMAT.md) et le [rapport S07](../docs/sprints/S07.md). Le contrôle VTK natif a été observé sur macOS, distinct de la CI de formats sur trois OS.
+
+## Parcours CLI/API S08
+
+Les [tests CLI natifs](../apps/ferrasim-cli/tests/entrypoint.rs), [tests API](../crates/io/tests/workflow.rs) et la [reproduction en répertoire temporaire](../scripts/check_cli_workflow.py) vérifient les commandes, codes d’échec, chemins et sorties, sans déclarer la solvabilité après la seule validation. Voir le [contrat](../docs/CLI-API.md) et le [rapport S08](../docs/sprints/S08.md).

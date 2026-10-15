@@ -18,6 +18,8 @@ S07 ajoute la dépendance interne de production IO → FEM pour encoder ses rés
 
 Le contrôle visuel optionnel utilise VTK 9.7.1 dans un venv séparé, métadonnées de licence déclarées BSD. Les versions observées de ses dépendances Python sont archivées dans `validation/vtk-environment.txt` ; elles ne sont pas requises par le moteur ou les exports Rust. Ce relevé sur Python 3.14/macOS décrit l’environnement de preuve, pas un verrou universel pour tous les OS.
 
+S08 réutilise les dépendances existantes : parsing CLI natif et orchestration dans IO, sans nouveau package ni changement du verrou Rust.
+
 Licences déclarées par les packages ; inventaire à régénérer lors des changements de `Cargo.lock`. Les expressions observées incluent MIT, Apache-2.0, Unicode-3.0 ainsi que des alternatives Unlicense et Zlib. Retenir l’option MIT ou Apache-2.0 lorsqu’un choix est proposé, et respecter Unicode-3.0 lorsqu’elle est conjointe. La notation historique `MIT/Apache-2.0` nécessite de consulter les fichiers du package pour confirmer le choix. Le texte des licences et notices reste à inclure dans toute distribution concernée. Il ne s’agit pas d’un audit juridique ou de sécurité exhaustif.
 
 | Package | Version résolue | Licence déclarée | Source |

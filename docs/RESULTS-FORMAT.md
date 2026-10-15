@@ -65,7 +65,7 @@ Le parent doit exister et le répertoire cible doit être absent, même vide. Le
 
 Ce protocole n’est pas un renommage atomique de tout le répertoire : des fichiers intermédiaires peuvent être visibles pendant l’écriture. Les consommateurs doivent exiger le manifeste complet. Sur erreur d’écriture, le code retire les fichiers créés par l’appel puis tente de retirer son répertoire ; si le nettoyage échoue, l’absence de manifeste complet interdit de considérer le répertoire partiel comme réussi. Les répertoires préexistants sont rejetés sans modification. Les écritures concurrentes dans ce répertoire et les garanties de reprise après coupure ne sont pas qualifiées ici.
 
-La commande CLI publique `solve` et sa politique complète de sorties restent S08. L’exemple Rust S07 ne montre un succès qu’après résolution, récupération et publication complètes ; une entrée invalide ou non-convergence ne crée pas de destination.
+La commande CLI publique `solve` et la politique de sorties sont implémentées en [S08](CLI-API.md). L’exemple Rust S07 ne montre un succès qu’après résolution, récupération et publication complètes ; une entrée invalide ou non-convergence ne crée pas de destination.
 
 ## Vérifications et visualisation
 

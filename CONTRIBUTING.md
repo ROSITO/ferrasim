@@ -23,6 +23,9 @@ cargo run -p ferrasim-cli --example export_model --locked -- examples/uniaxial/m
 python3 scripts/check_result_exports.py target/new-results
 python3 validation/verify_result_reference.py target/new-results
 python3 scripts/check_export_failure.py
+cargo build -p ferrasim-cli --locked
+cargo build -p ferrasim-io --example run_simulation --locked
+python3 scripts/check_cli_workflow.py
 ```
 
 La destination `target/new-results` doit être absente ; choisir un nouveau nom si elle existe.

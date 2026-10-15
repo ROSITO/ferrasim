@@ -74,3 +74,9 @@ jobs:
         run: python validation/verify_result_reference.py target/s07-uniaxial
       - name: Check export failures and existing destinations
         run: python scripts/check_export_failure.py
+      - name: Validate model using public CLI
+        run: cargo run -p ferrasim-cli --locked -- validate examples/uniaxial/model.json
+      - name: Build independent end-to-end Rust API example
+        run: cargo build -p ferrasim-io --example run_simulation --locked
+      - name: Reproduce CLI and API from fresh working directory
+        run: python scripts/check_cli_workflow.py

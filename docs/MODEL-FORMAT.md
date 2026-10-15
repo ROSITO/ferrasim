@@ -100,4 +100,4 @@ Le JSON Schema est un outil de validation structurelle. Les références, unicit
 cargo run -p ferrasim-io --example inspect_model --locked -- examples/minimal/model.json
 ```
 
-Ce programme d’exemple inspecte un modèle ; ce n’est pas la commande `ferrasim validate` du parcours MVP, prévue en S08. Aucun calcul FEM n’est lancé.
+Ce programme d’exemple inspecte un modèle ; il est distinct de la commande [`ferrasim validate`](CLI-API.md) implémentée en S08. Aucun calcul FEM n’est lancé.

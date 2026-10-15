@@ -6,7 +6,7 @@ FerraSim vise un environnement ouvert permettant de préparer, résoudre, vérif
 
 Le projet commence par un solveur d’éléments finis structurel simple et vérifié, puis étend progressivement les formulations, les interfaces et les physiques. La précision, les bilans physiques et la reproductibilité guident le développement.
 
-> **État actuel : champs et exports S07.** Le moteur Rust résout les modèles TET4 et produit déplacements, réactions, déformations, contraintes et von Mises. Les exports VTU/CSV/JSON incluent unités, provenance et diagnostics ; le VTU a été ouvert et rendu avec VTK. La commande CLI complète reste à développer ; la qualification scientifique indépendante reste ouverte.
+> **État actuel : parcours CLI/API S08.** Les commandes `validate` et `solve` permettent de charger, contrôler, résoudre et exporter les modèles TET4. L’API Rust exécute le même parcours sans dépendre de la CLI. Les preuves de convergence de maillage et de comparaison externe restent à compléter ; la qualification scientifique indépendante reste ouverte.
 
 ## Pourquoi FerraSim ?
 
@@ -120,6 +120,8 @@ La cadence proposée est de deux semaines. Les sprints lointains sont un découp
 - [Rapport S06](docs/sprints/S06.md) — preuves de traction et d’équilibre.
 - [Champs et exports](docs/RESULTS-FORMAT.md) — formats, unités, localisation et publication.
 - [Rapport S07](docs/sprints/S07.md) — preuves de sérialisation et lecture VTK.
+- [CLI et API Rust](docs/CLI-API.md) — commandes, chemins, codes et sorties.
+- [Rapport S08](docs/sprints/S08.md) — reproduction de bout en bout.
 - [Bloc en traction](examples/uniaxial/README.md) — modèle analytique exécutable.
 
 ## Développement
@@ -139,7 +141,13 @@ cargo run -p ferrasim-cli --example solve_model --locked -- examples/uniaxial/mo
 cargo run -p ferrasim-cli --example export_model --locked -- examples/uniaxial/model.json target/new-results 10 2
 ```
 
-La CLI affiche seulement l’aide et la version. `validate` et `solve` sont prévus en S08. `inspect_model` valide le JSON ; `inspect_mesh` vérifie maillage et références ; `inspect_element` évalue un champ artificiel sur un élément, sans résoudre les charges et contraintes du modèle. `inspect_assembly` construit la rigidité et sa réduction avec un vecteur de forces explicitement nul, en remplaçant les forces du modèle pour ce scénario, sans résoudre le système. `inspect_solver` résout un scénario de force unitaire explicite ; il ne représente pas le chargement JSON. `solve_model` résout les charges JSON et affiche les bilans, avec les échelles force/longueur fournies en arguments. `export_model` exporte les formats demandés dans un répertoire neuf ; choisir une nouvelle destination pour chaque exécution.
+La CLI fournit `validate` et `solve` ; voir le [contrat](docs/CLI-API.md). Une sortie doit être neuve et son parent doit exister. Les exemples techniques restent disponibles pour inspecter chaque couche ; le parcours public recommandé est :
+
+```sh
+cargo run -p ferrasim-cli --locked -- validate examples/uniaxial/model.json
+cargo run -p ferrasim-cli --locked -- solve examples/uniaxial/model.json --output target/new-cli-results
+cargo run -p ferrasim-io --example run_simulation --locked -- examples/uniaxial/model.json target/new-api-results
+```
 
 ## Contributions et licence
 

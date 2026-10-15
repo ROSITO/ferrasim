@@ -51,7 +51,14 @@ python3 validation/verify_result_reference.py target/new-results
 python3 scripts/check_export_failure.py
 ```
 
-Les commandes de simulation `validate` et `solve` arriveront en S08. Le binaire actuel affiche seulement l’aide ou la version et refuse les autres commandes avec le code 2.
+Les commandes `validate` et `solve` sont disponibles depuis S08. Voir le [contrat CLI/API](CLI-API.md) pour les options, les codes de sortie et les destinations neuves.
+
+```sh
+cargo run -p ferrasim-cli --locked -- validate examples/uniaxial/model.json
+cargo run -p ferrasim-cli --locked -- solve examples/uniaxial/model.json --output target/new-cli-results
+cargo run -p ferrasim-io --example run_simulation --locked -- examples/uniaxial/model.json target/new-api-results
+python3 scripts/check_cli_workflow.py
+```
 
 Sur Windows PowerShell, créer le venv avec `python -m venv .venv` et utiliser directement `.venv\Scripts\python.exe -m pip install -r requirements-dev.txt`, puis `.venv\Scripts\python.exe scripts/check_model_schema.py`. L’activation POSIX ci-dessus ne s’applique pas à PowerShell. Ce venv sert uniquement à vérifier le JSON Schema, pas à une API Python produit.
 
@@ -66,7 +73,7 @@ Sur Windows PowerShell, créer le venv avec `python -m venv .venv` et utiliser d
 | `ferrasim-io` | JSON, import maillage et exports |
 | `ferrasim-cli` | Commandes et orchestration utilisateur |
 
-Les frontières ont été créées en S00. S01 implémente le modèle typé et JSON ; S02 ajoute import MSH et contrôles du maillage/liaison ; S03 ajoute l’élasticité isotrope et les opérateurs TET4 locaux. S04 ajoute l’assemblage CSR, les prescriptions et les réactions ; S05 ajoute CG/Jacobi et ses rapports de convergence ; S06 intègre les charges et les bilans ; S07 ajoute champs immuables et exports ; les résolutions denses restent réservées aux tests. Voir les contrats [JSON](MODEL-FORMAT.md), [maillage](MESH-FORMAT.md), [élément](FEM-TET4.md), [assemblage](ASSEMBLY.md), [solveur](SOLVER-CG.md), [charges/bilans](LOADS-BALANCE.md) et [résultats](RESULTS-FORMAT.md).
+Les frontières ont été créées en S00. S01 implémente le modèle typé et JSON ; S02 ajoute import MSH et contrôles du maillage/liaison ; S03 ajoute l’élasticité isotrope et les opérateurs TET4 locaux. S04 ajoute l’assemblage CSR, les prescriptions et les réactions ; S05 ajoute CG/Jacobi et ses rapports de convergence ; S06 intègre les charges et les bilans ; S07 ajoute champs immuables et exports ; S08 expose le parcours CLI/API complet ; les résolutions denses restent réservées aux tests. Voir les contrats [JSON](MODEL-FORMAT.md), [maillage](MESH-FORMAT.md), [élément](FEM-TET4.md), [assemblage](ASSEMBLY.md), [solveur](SOLVER-CG.md), [charges/bilans](LOADS-BALANCE.md) et [résultats](RESULTS-FORMAT.md).
 
 ## Plateformes et preuves
 
