@@ -1,6 +1,8 @@
+> Mise à jour du 15 octobre 2026 : **v2 adoptée, S09 clôturé techniquement**. L'adoption a fait l'objet d'un accord explicite de pilotage. Cette décision de pilotage ne constitue pas une revue scientifique. Le [protocole actif](../../validation/CANTILEVER-PROTOCOL-V2.md) est désormais le choix par défaut ; les sections ci-dessous conservent la chronologie des essais et de la proposition. S10 reste à réaliser.
+
 # S09 — Résolution numérique et protocole proposé
 
-Statut : correction livrée ; v1 toujours non validée, proposition v2 distincte et non adoptée. Revue scientifique indépendante ouverte.
+Statut actuel : correction et v2 livrées techniquement ; v1 historique toujours non validée. Revue scientifique indépendante ouverte.
 
 ## Correction
 
@@ -28,10 +30,10 @@ Le JSON intermédiaire du système réduit est volumineux et reste dans `target/
 
 La [proposition enregistrée avant les nouvelles mesures](../../validation/CANTILEVER-PROTOCOL-V2-PROPOSED.md) conserve la référence, les charges, le seuil de 5 % et les bilans à 10⁻⁶. Elle remplace les tolérances CG v1 ajoutées sans étude préalable par une étude explicite de sensibilité : famille à rtol=10⁻⁷, niveau fin à rtol=10⁻⁸ ; variation de flèche, norme du champ complet et énergie chacune ≤10⁻⁶.
 
-Une sensibilité mesurée n'est pas une borne mathématique certifiée. La v1 reste disponible par défaut ; `--protocol v2-proposed` produit un statut distinct en attente d'adoption, même lorsque tous ses contrôles passent. Aucun résultat v2 ne sera présenté comme une réussite de la v1.
+Une sensibilité mesurée n'est pas une borne mathématique certifiée. Avant adoption, la v1 était disponible par défaut et `--protocol v2-proposed` produisait un statut distinct en attente d'adoption. La v2 est maintenant active par défaut. Aucun résultat v2 ne sera présenté comme une réussite de la v1.
 
 ```sh
-python3 validation/run_cantilever.py --output target/s09-v2-review --protocol v2-proposed --levels 2 4 8 12
+python3 validation/run_cantilever.py --output target/s09-v2-review --protocol v2 --levels 2 4 8 12
 ```
 
 ## Mesures v2 proposées — macOS ARM64
@@ -49,7 +51,7 @@ Nouvelle résolution de m=12 à rtol=10⁻⁸ : 86.31 s et 5217 mises à jour CG
 
 Le seuil physique de 5 % est satisfait au niveau fin, avec une erreur de 3,0934 %. Temps exploratoires : une exécution par niveau, parcours CLI complet, compilation et génération exclues ; les autres activités de la machine peuvent influencer la durée. Aucun engagement de performance. La flèche et les critères restent les mêmes sur chaque maillage ; aucun résultat de contrainte à l'encastrement n'est utilisé pour l'acceptation.
 
-## Décision restant ouverte
+## Décision avant adoption (historique)
 
 La proposition v2 est prête à être examinée. La v1 précisait « aucun assouplissement a posteriori » : elle ne peut être déclarée réussie sur la base de ces nouveaux paramètres. L'adoption explicite de la v2 permettrait une clôture technique selon les critères physiques inchangés et les nouveaux contrôles algébriques publiés. Elle ne constitue pas une revue scientifique indépendante ni une qualification industrielle.
 
@@ -60,3 +62,7 @@ La [CI du correctif `01f25bc6b78cd490bdf47c02141a2a7e300454de`](https://github.c
 L'écart relatif de norme entre résidu compensé et référence Decimal vaut 5,12×10⁻⁹ sur Windows, 5,60×10⁻⁹ sur macOS et 4,35×10⁻⁹ sur Linux, sous le seuil d'audit de 10⁻⁶. Ce seuil contrôle le calcul de norme du système arrondi, pas l'erreur physique. Les vérifications de sensibilité et les bilans v2 passent sur les trois systèmes. Le statut reste « proposition passée, adoption et revue indépendantes en attente ».
 
 Les empreintes des entrées des essais archivés se reproduisent avec le générateur livré, y compris celles du calcul fin resserré. L'empreinte du pilote de la série v2 correspond exactement au fichier commis dans le correctif ; la révision Git relevée au début de mesure et la révision d'implémentation sont distinguées dans les métadonnées.
+
+## Clôture technique
+
+Adoption explicitement autorisée le 15 octobre 2026. Le protocole v2 devient actif ; le cas du registre passe à `numerically_verified`, avec revue indépendante toujours en attente. Les chiffres archivés de la proposition ne sont pas réécrits pour modifier leur statut au moment de la mesure. Le seuil physique de 5 % reste inchangé. S10 est la prochaine étape, sans être lancé par cette adoption.

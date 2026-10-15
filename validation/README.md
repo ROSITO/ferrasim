@@ -18,7 +18,7 @@ Chaque cas devra conserver entrées, référence indépendante, environnement, o
 | Comparaison externe | Même maillage, matériau, forces et prescriptions ; solveur/version archivés | Déplacements/contraintes élémentaires ≤ 10⁻⁵ |
 | Entrées invalides | Références absentes, groupes vides utilisés, dégénérescence, prescriptions contradictoires et singularité de référence | Rejet ou échec explicite, sans succès de calcul |
 
-## Démonstrateur de poutre S09 — acceptation suspendue
+## Démonstrateur de poutre S09 — v2 adoptée
 
 Poutre prismatique selon x : longueur 1 m, largeur 0,05 m selon y, hauteur 0,05 m selon z ; `E=210e9 Pa`, `ν=0.3`. Face x=0 encastrée ; résultante `Fz=−100 N` distribuée uniformément sur x=L. Aucune force concentrée sur un coin.
 
@@ -61,4 +61,8 @@ Les [tests CLI natifs](../apps/ferrasim-cli/tests/entrypoint.rs), [tests API](..
 
 ## Étude de poutre S09
 
-Le [protocole v1](CANTILEVER-PROTOCOL.md), le [pilote reproductible](run_cantilever.py) et le [rapport](../docs/sprints/S09.md) conservent l’échec numérique et les séries diagnostiques. Le cas reste **partiel** : le diagnostic avec une tolérance différente ne remplace pas l’acceptation du protocole. Les entrées sont générées sans dépendance Python externe, avec six TET4 par cellule et chargement réparti.
+Le [protocole v1](CANTILEVER-PROTOCOL.md), le [pilote reproductible](run_cantilever.py) et le [rapport](../docs/sprints/S09.md) conservent l’échec numérique et les séries diagnostiques. Ces archives décrivent l’état initial partiel ; elles ne remplacent pas l’acceptation ultérieure explicite de la v2. Les entrées sont générées sans dépendance Python externe, avec six TET4 par cellule et chargement réparti.
+
+## Adoption S09
+
+Le [protocole v2](CANTILEVER-PROTOCOL-V2.md) est adopté et actif par défaut. Le cas de convergence passe au statut numériquement vérifié, avec erreur finale 3,0934 %, bilans et sensibilité contrôlés. La [résolution](../docs/sprints/S09-RESOLUTION.md) distingue clôture technique, échecs historiques v1 et revue scientifique indépendante encore ouverte. La comparaison externe reste prévue en S10.

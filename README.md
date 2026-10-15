@@ -6,7 +6,7 @@ FerraSim vise un environnement ouvert permettant de préparer, résoudre, vérif
 
 Le projet commence par un solveur d’éléments finis structurel simple et vérifié, puis étend progressivement les formulations, les interfaces et les physiques. La précision, les bilans physiques et la reproductibilité guident le développement.
 
-> **État actuel : CLI/API disponible ; S09 en investigation.** Les commandes `validate` et `solve` permettent de charger, contrôler, résoudre et exporter les modèles TET4. L’API Rust exécute le même parcours sans dépendre de la CLI. Le calcul CG compensé lève le blocage initial de la poutre ; le protocole strict échoue encore au niveau suivant. Une [proposition v2 mesurée](docs/sprints/S09-RESOLUTION.md) est prête à être examinée ; S09 reste suspendu. Les preuves complètes de convergence et de comparaison externe restent à compléter ; la qualification scientifique indépendante reste ouverte.
+> **État actuel : S09 livré techniquement selon le protocole v2 adopté.** La CLI et l’API résolvent les modèles TET4 et exportent leurs résultats. La poutre atteint 3,09 % d’erreur de flèche, avec convergence et sensibilité algébrique vérifiées sur Windows, macOS et Linux. Voir le [rapport S09](docs/sprints/S09-RESOLUTION.md). La comparaison externe S10 et la qualification scientifique indépendante restent à réaliser.
 
 ## Pourquoi FerraSim ?
 

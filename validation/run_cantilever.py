@@ -77,15 +77,17 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--binary',type=Path,default=Path('target/release/ferrasim'+('.exe' if os.name=='nt' else '')))
     parser.add_argument('--output',type=Path,required=True,help='new study directory')
-    parser.add_argument('--protocol',choices=['v1','v2-proposed'],default='v1')
+    parser.add_argument('--protocol',choices=['v1','v2'],default='v2')
     parser.add_argument('--generate-only',action='store_true',help='generate inputs without invoking Rust or claiming validation')
     parser.add_argument('--diagnostic-rtol',type=float,help='diagnostic only: override protocol rtol, never qualifies S09')
-    parser.add_argument('--levels',type=int,nargs='+',default=[2,4,8])
+    parser.add_argument('--levels',type=int,nargs='+')
     args = parser.parse_args()
+    if args.levels is None:
+        args.levels=[2,4,8] if args.protocol=='v1' else [2,4,8,12]
     primary_rtol=1e-10 if args.protocol=='v1' else 1e-7
     tight_rtol=1e-12 if args.protocol=='v1' else 1e-8
-    if args.protocol=='v2-proposed' and args.levels!=[2,4,8,12]:
-        parser.error('proposed v2 fixes levels to 2 4 8 12')
+    if args.protocol=='v2' and args.diagnostic_rtol is None and not args.generate_only and args.levels!=[2,4,8,12]:
+        parser.error('adopted v2 fixes levels to 2 4 8 12')
     if len(args.levels)<3 or any(m<1 for m in args.levels) or any(b<=a for a,b in zip(args.levels,args.levels[1:])):
         parser.error('require at least three strictly increasing positive levels')
     if args.diagnostic_rtol is not None and (not math.isfinite(args.diagnostic_rtol) or not 0<args.diagnostic_rtol<=1e-8):
@@ -158,8 +160,7 @@ def main():
             raise RuntimeError(f'Tight balance failed: {metric}')
     if any(not math.isfinite(v) or v>1e-6 for v in [variation,field_variation,energy_variation]):
         raise RuntimeError('Algebraic tolerance check failed')
-    summary['qualification']=('numerically_verified_pending_independent_review' if args.protocol=='v1'
-                              else 'proposed_protocol_passed_pending_adoption_and_independent_review')
+    summary['qualification']='numerically_verified_pending_independent_review'
     (root/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
     print(f'Convergence gate passed for {args.protocol}; status: {summary["qualification"]}.')
 

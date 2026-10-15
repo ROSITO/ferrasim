@@ -2,7 +2,7 @@
 
 Version : 1.0 — plan proposé\
 Date : 14 octobre 2026\
-Statut : S01/S02 terminés ; S03 livré techniquement le 15 octobre 2026, preuves et revue suivies dans le [rapport S03](sprints/S03.md). S04 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S04](sprints/S04.md). S05 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S05](sprints/S05.md). S06 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S06](sprints/S06.md). S07 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S07](sprints/S07.md). S08 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S08](sprints/S08.md). Qualification scientifique indépendante ouverte.
+Statut : S01/S02 terminés ; S03 livré techniquement le 15 octobre 2026, preuves et revue suivies dans le [rapport S03](sprints/S03.md). S04 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S04](sprints/S04.md). S05 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S05](sprints/S05.md). S06 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S06](sprints/S06.md). S07 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S07](sprints/S07.md). S08 livré techniquement le 15 octobre 2026 sur les trois OS, voir le [rapport S08](sprints/S08.md). S09 livré techniquement selon le [protocole v2](../validation/CANTILEVER-PROTOCOL-V2.md). Qualification scientifique indépendante ouverte.
 
 Références : [PRD MVP](PRD.md), [PRD de vision](PRD-VISION.md).
 
@@ -104,4 +104,4 @@ Le suivi conserve : sprint, objectif, exigences liées, responsable, dépendance
 
 ## 8. Première action exécutable
 
-La dernière livraison technique est **S08 : CLI et API Rust de bout en bout**. Voir les [preuves et limites](sprints/S08.md) et la [réestimation avant assemblage](sprints/S03.md). S09 est engagé : étude de poutre et raffinements reproductibles, mais livraison suspendue après échec CG du protocole ; voir le [rapport S09](sprints/S09.md). La revue scientifique indépendante des conventions, de la géométrie, des formulations, du solveur, des chargements et des résultats reste ouverte avant qualification.
+La dernière livraison technique est **S09 : poutre et convergence selon le protocole v2 adopté**, avec erreur de flèche de 3,09 % et vérifications natives sur les trois OS. Voir le [rapport de résolution](sprints/S09-RESOLUTION.md), les [mesures initiales](sprints/S09.md) et le [protocole actif](../validation/CANTILEVER-PROTOCOL-V2.md). La prochaine étape est S10 : comparaison externe. La revue scientifique indépendante reste ouverte avant qualification.

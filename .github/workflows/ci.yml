@@ -83,11 +83,11 @@ jobs:
       - name: Check cantilever geometry and deterministic refinement
         run: python validation/check_cantilever_generator.py
       - name: Diagnose cantilever on three meshes (does not qualify S09)
-        run: python validation/run_cantilever.py --output target/s09-ci-diagnostic --diagnostic-rtol 1e-8
+        run: python validation/run_cantilever.py --output target/s09-ci-diagnostic --diagnostic-rtol 1e-8 --levels 2 4 8
       - name: Regress strict v1 cantilever m4 after compensated CG
         run: python validation/run_cantilever.py --output target/s09-ci-strict-m4 --diagnostic-rtol 1e-10 --levels 1 2 4
-      - name: Check proposed v2 convergence and algebraic sensitivity (pending adoption)
-        run: python validation/run_cantilever.py --output target/s09-ci-v2 --protocol v2-proposed --levels 2 4 8 12
+      - name: Check adopted default v2 convergence and algebraic sensitivity
+        run: python validation/run_cantilever.py --output target/s09-ci-v2
       - name: Build high-precision residual audit example
         run: cargo build -p ferrasim-cli --example audit_residual --release --locked
       - name: Compare native residual against 100-digit Decimal reference

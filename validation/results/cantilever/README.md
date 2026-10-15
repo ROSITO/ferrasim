@@ -16,3 +16,5 @@ Les rapports volumineux, maillages et journaux sont conservés localement sous `
 - [Proposition v2 mesurée](v2-proposed.json) : quatre niveaux et nouvelle résolution fine avec tolérance resserrée, en attente d'adoption explicite.
 
 Voir le [rapport de résolution](../../../docs/sprints/S09-RESOLUTION.md). Les résultats historiques ci-dessus restent inchangés. Les métriques v2 ne sont pas une réussite du protocole v1.
+
+V2 adoptée le 15 octobre 2026 : voir le [protocole actif](../../CANTILEVER-PROTOCOL-V2.md). Les statuts des fichiers historiques sont conservés tels qu’ils étaient lors des mesures.

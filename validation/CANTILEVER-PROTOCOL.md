@@ -1,3 +1,5 @@
+> Protocole v1 historique, conservé avec ses échecs. Remplacé explicitement par le [protocole v2](CANTILEVER-PROTOCOL-V2.md) le 15 octobre 2026. Pour rejouer la v1 : ajouter `--protocol v1`.
+
 # S09 — Protocole v1, fixé avant mesure
 
 Poutre pleine : L=1 m, b=h=0,05 m, E=210 GPa, ν=0,3. Encastrement complet à x=0 ; traction uniforme globale t_z=−40000 Pa à x=L, résultante −100 N. Autres faces libres.

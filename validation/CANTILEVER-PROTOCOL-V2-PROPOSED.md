@@ -1,3 +1,5 @@
+> Archive de la proposition. Adoptée le 15 octobre 2026 ; voir le [protocole v2 actif](CANTILEVER-PROTOCOL-V2.md). Les formulations ci-dessous décrivent son statut avant adoption.
+
 # S09 — Proposition v2, non adoptée
 
 La v1 demeure le protocole accepté. Cette proposition est enregistrée avant les nouvelles mesures correspondantes ; son succès éventuel ne vaut ni validation de la v1 ni qualification scientifique.
