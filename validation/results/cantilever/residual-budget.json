@@ -1,0 +1,43 @@
+{
+  "environment": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "source_revision": "0036e5a",
+  "m": 4,
+  "rtol": 1e-10,
+  "atol": 1e-12,
+  "mesh_sha256": "6ba279d00d9a6df7915d750bfcbe4d1dec65aee0039b6d09d7b96cd4511b6b46",
+  "runs": [
+    {
+      "max_iterations": 1000,
+      "exit_code": 4,
+      "stdout": "",
+      "stderr": "simulation failed: CG/Jacobi IterationLimit: IterationBudget after 1000 updates (residual Some(30.582404345120192), threshold Some(2.190978754336317e-9))\n",
+      "elapsed_seconds": 1.1578337909886613,
+      "result_directory_created": false
+    },
+    {
+      "max_iterations": 2000,
+      "exit_code": 4,
+      "stdout": "",
+      "stderr": "simulation failed: CG/Jacobi IterationLimit: IterationBudget after 2000 updates (residual Some(3.3791019461929743e-9), threshold Some(2.190978754336317e-9))\n",
+      "elapsed_seconds": 2.168771458003903,
+      "result_directory_created": false
+    },
+    {
+      "max_iterations": 4000,
+      "exit_code": 4,
+      "stdout": "",
+      "stderr": "simulation failed: CG/Jacobi IterationLimit: IterationBudget after 4000 updates (residual Some(3.439888981744414e-9), threshold Some(2.190978754336317e-9))\n",
+      "elapsed_seconds": 4.430264583992539,
+      "result_directory_created": false
+    },
+    {
+      "max_iterations": 8000,
+      "exit_code": 4,
+      "stdout": "",
+      "stderr": "simulation failed: CG/Jacobi IterationLimit: IterationBudget after 8000 updates (residual Some(3.510339910314767e-9), threshold Some(2.190978754336317e-9))\n",
+      "elapsed_seconds": 8.204864332990837,
+      "result_directory_created": false
+    }
+  ],
+  "reproduction": "Generate m=4 with protocol v1; change only solver_settings.max_iterations to each listed budget; run release CLI with force-scale=100 and length-scale=1 in a new result directory."
+}

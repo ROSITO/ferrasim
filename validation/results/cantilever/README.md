@@ -2,6 +2,7 @@
 
 - [Protocole v1](protocol-v1.json) : premier maillage résolu, puis échec CG au niveau m=4 ; aucune sortie de résultats publiée pour le niveau échoué.
 - [Diagnostic](diagnostic.json) : quatre niveaux, rtol=10⁻⁸, erreur de flèche finale 3,0934 %. Ce mode ne valide pas S09.
+- [Sonde du budget CG](residual-budget.json) : échecs à 1000, 2000, 4000 et 8000 itérations, tous les autres paramètres conservés.
 - [Courbe](convergence.png) : données du diagnostic, tracées avec matplotlib 3.11.2 ; [script](../../plot_cantilever.py).
 
 Le binaire Rust n'a pas été modifié depuis la révision enregistrée. Le pilote Python évoluait dans l'arbre de travail : l'empreinte du pilote, lorsqu'elle est présente, identifie son état au début de la mesure ; la révision Git identifie le socle Rust, pas une version commise du pilote. Les empreintes MSH/JSON permettent de contrôler les entrées régénérées avec le pilote livré. Aucun temps n'inclut la compilation ou la génération des entrées. Les mesures sont locales, sans qualification de performance ; les ressources disponibles et les tâches système peuvent les influencer.
