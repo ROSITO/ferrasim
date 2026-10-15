@@ -6,7 +6,7 @@ FerraSim vise un environnement ouvert permettant de préparer, résoudre, vérif
 
 Le projet commence par un solveur d’éléments finis structurel simple et vérifié, puis étend progressivement les formulations, les interfaces et les physiques. La précision, les bilans physiques et la reproductibilité guident le développement.
 
-> **État actuel : import et contrôles de maillage S02.** Le modèle JSON et l’import MSH 2.2 ASCII sont implémentés, avec contrôles de géométrie, groupes et références. Le workspace et une CLI informative sont compilables ; aucun calcul FEM n’est encore exécuté. Les fonctionnalités physiques décrites ci-dessous restent des objectifs de développement.
+> **État actuel : physique élémentaire S03.** L’élasticité isotrope et les opérateurs FEM TET4 locaux sont implémentés avec vérifications numériques, en plus du modèle et de l’import MSH. Aucun système global n’est encore assemblé ou résolu. La qualification scientifique indépendante reste ouverte ; les autres capacités restent des objectifs de développement.
 
 ## Pourquoi FerraSim ?
 
@@ -110,6 +110,8 @@ La cadence proposée est de deux semaines. Les sprints lointains sont un découp
 - [Rapport S01](docs/sprints/S01.md) — modèle, IO et tests de contrat.
 - [Contrat de maillage](docs/MESH-FORMAT.md) — sous-ensemble Gmsh, géométrie et groupes.
 - [Rapport S02](docs/sprints/S02.md) — import, contrôles et limites.
+- [Formulation TET4](docs/FEM-TET4.md) — matériau, opérateurs et références élémentaires.
+- [Rapport S03](docs/sprints/S03.md) — physique locale et état de la revue.
 
 ## Développement
 
@@ -121,9 +123,10 @@ cargo test --workspace --locked
 cargo run -p ferrasim-cli --locked -- --help
 cargo run -p ferrasim-io --example inspect_model --locked -- examples/minimal/model.json
 cargo run -p ferrasim-io --example inspect_mesh --locked -- examples/minimal/model.json
+cargo run -p ferrasim-cli --example inspect_element --locked -- examples/minimal/model.json
 ```
 
-La CLI affiche seulement l’aide et la version. `validate` et `solve` ne sont pas encore disponibles ; les commandes de simulation sont prévues en S08. `inspect_model` valide le JSON ; `inspect_mesh` importe et contrôle le maillage et ses références. Aucun système mécanique n’est encore assemblé ou résolu. Les tests scientifiques FEM arriveront avec les formulations.
+La CLI affiche seulement l’aide et la version. `validate` et `solve` sont prévus en S08. `inspect_model` valide le JSON ; `inspect_mesh` vérifie maillage et références ; `inspect_element` évalue un champ artificiel sur un élément, sans résoudre les charges et contraintes du modèle. Aucun système global n’est encore assemblé ou résolu.
 
 ## Contributions et licence
 

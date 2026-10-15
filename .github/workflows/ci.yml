@@ -32,6 +32,8 @@ jobs:
         run: cargo clippy --workspace --all-targets --locked -- -D warnings
       - name: Test
         run: cargo test --workspace --locked
+      - name: Regenerate independent dense element references
+        run: python validation/generate_tet4_reference.py --check
       - name: Build release
         run: cargo build --workspace --release --locked
       - name: Build documentation
@@ -46,3 +48,5 @@ jobs:
         run: cargo run -p ferrasim-io --example inspect_model --locked -- examples/minimal/model.json
       - name: Import mesh and check model references
         run: cargo run -p ferrasim-io --example inspect_mesh --locked -- examples/minimal/model.json
+      - name: Inspect local element physics
+        run: cargo run -p ferrasim-cli --example inspect_element --locked -- examples/minimal/model.json

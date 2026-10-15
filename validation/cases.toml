@@ -8,7 +8,11 @@ sprint = "S03"
 metric = "frobenius relative symmetry error"
 tolerance = 1e-10
 reference = "K = integral(B^T C B dV), isotropic symmetric C"
-status = "planned"
+status = "numerically_verified"
+evidence = ["crates/fem/tests/tet4.rs", "validation/fixtures/tet4-reference.json", "validation/generate_tet4_reference.py"]
+review_status = "pending_independent_review"
+observed_max = 3.91e-17
+observed_environment = "macOS ARM64, Rust 1.96.0, 2026-10-15"
 
 [[cases]]
 id = "tet4-rigid-modes"
@@ -16,7 +20,11 @@ sprint = "S03"
 metric = "max normalized norm(K r) for 3 translations and 3 rotations"
 tolerance = 1e-10
 reference = "rigid displacement has zero infinitesimal strain"
-status = "planned"
+status = "numerically_verified"
+evidence = ["crates/fem/tests/tet4.rs", "validation/fixtures/tet4-reference.json"]
+review_status = "pending_independent_review"
+observed_max = 7.27e-17
+observed_environment = "macOS ARM64, Rust 1.96.0, 2026-10-15"
 
 [[cases]]
 id = "affine-patch"
@@ -24,7 +32,9 @@ sprint = "S04"
 metric = "normalized displacement and stress errors"
 tolerance = 1e-8
 reference = "u(x) = A x + b; epsilon = symmetric(A); sigma = C epsilon"
-status = "planned"
+status = "partial"
+evidence = ["crates/fem/tests/tet4.rs"]
+remaining = "Only the local affine field is checked in S03; assembled multi-element patch test requires S04."
 
 [[cases]]
 id = "uniaxial-traction"
@@ -80,5 +90,5 @@ sprint = "S02-S10"
 metric = "explicit rejection or solver failure for each invalid fixture"
 reference = "degenerate mesh, missing IDs, contradictory constraints, reference singular model"
 status = "partial"
-evidence = ["crates/io/tests/model_contract.rs", "crates/io/tests/mesh_import.rs", "crates/io/tests/mesh_binding.rs"]
+evidence = ["crates/io/tests/model_contract.rs", "crates/io/tests/mesh_import.rs", "crates/io/tests/mesh_binding.rs", "crates/fem/tests/material.rs", "crates/fem/tests/tet4.rs"]
 remaining = "Singular mechanical systems and solver failures require S05/S10."

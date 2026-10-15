@@ -1,6 +1,6 @@
 # Conventions numériques du MVP
 
-Statut : contrat de travail S00, à relire indépendamment avant qualification S03.
+Statut : conventions implémentées et vérifiées numériquement en S03 ; revue indépendante encore ouverte avant qualification.
 
 ## Unités et repères
 
@@ -18,7 +18,7 @@ Ordre de Voigt commun : `xx, yy, zz, xy, yz, xz`.
 - Matrice isotrope : bloc normal avec `λ + 2μ` sur diagonale et `λ` hors diagonale ; bloc cisaillement diagonal `μ`.
 - `μ = E / (2(1+ν))`, `λ = Eν / ((1+ν)(1−2ν))`.
 
-Valider `E > 0` et `−1 < ν < 0.5`. Le matériau presque incompressible n’est pas garanti avec TET4 ; un avertissement sera spécifié en S03.
+Valider `E > 0` et `−1 < ν < 0.5`, puis la représentabilité des coefficients. S03 fournit un avertissement pour `ν ≥ 0.49` ; le matériau presque incompressible n’est pas qualifié avec TET4. Aucun paramètre n’est corrigé automatiquement. Voir la [formulation](FEM-TET4.md).
 
 Von Mises : racine de `0.5*((σxx−σyy)^2 + (σyy−σzz)^2 + (σzz−σxx)^2) + 3*(τxy^2+τyz^2+τxz^2)`. La formule s’applique à la contrainte par élément non lissée.
 

@@ -33,9 +33,11 @@ cargo build --workspace --release --locked
 cargo doc --workspace --no-deps --locked
 python3 scripts/check_project.py
 python scripts/check_model_schema.py
+python3 validation/generate_tet4_reference.py --check
 cargo run -p ferrasim-cli --locked -- --help
 cargo run -p ferrasim-io --example inspect_model --locked -- examples/minimal/model.json
 cargo run -p ferrasim-io --example inspect_mesh --locked -- examples/minimal/model.json
+cargo run -p ferrasim-cli --example inspect_element --locked -- examples/minimal/model.json
 ```
 
 Les commandes de simulation `validate` et `solve` arriveront en S08. Le binaire actuel affiche seulement l’aide ou la version et refuse les autres commandes avec le code 2.
@@ -53,7 +55,7 @@ Sur Windows PowerShell, créer le venv avec `python -m venv .venv` et utiliser d
 | `ferrasim-io` | JSON, import maillage et exports |
 | `ferrasim-cli` | Commandes et orchestration utilisateur |
 
-Les frontières ont été créées en S00. S01 implémente le modèle typé et JSON ; S02 ajoute import MSH et contrôles du maillage/liaison. FEM et solveurs restent sans physique implémentée. Voir les contrats [JSON](MODEL-FORMAT.md) et [maillage](MESH-FORMAT.md).
+Les frontières ont été créées en S00. S01 implémente le modèle typé et JSON ; S02 ajoute import MSH et contrôles du maillage/liaison ; S03 ajoute l’élasticité isotrope et les opérateurs TET4 locaux. Aucun système global n’est encore résolu. Voir les contrats [JSON](MODEL-FORMAT.md), [maillage](MESH-FORMAT.md) et [élément](FEM-TET4.md).
 
 ## Plateformes et preuves
 
@@ -61,4 +63,4 @@ Windows, macOS et Linux sont des cibles obligatoires du socle. La CI configure l
 
 Les nouvelles dépendances doivent être compatibles avec les trois OS avant adoption. Utiliser les API portables de chemins/processus ; ajouter les cas de fichiers Unicode, espaces et fins de ligne quand ces fonctions sont implémentées. Une différence de backend spécialisé doit être documentée et ne doit pas rendre l’installation CPU dépendante de WSL, Docker ou d’un service distant.
 
-Les tests de contrat JSON et d’entrée CLI ne valident aucune formulation FEM. Les cas scientifiques du [registre](../validation/cases.toml) sont encore planifiés.
+Les tests FEM de S03 vérifient les opérateurs locaux et leurs références denses. Le patch test global et les cas de résolution du [registre](../validation/cases.toml) restent planifiés ; la revue scientifique indépendante est ouverte.

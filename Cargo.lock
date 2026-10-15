@@ -40,6 +40,9 @@ dependencies = [
  "ferrasim-model",
  "ferrasim-solvers",
  "nalgebra",
+ "serde",
+ "serde_json",
+ "thiserror",
 ]
 
 [[package]]

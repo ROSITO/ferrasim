@@ -1,6 +1,6 @@
 # Protocole de validation scientifique
 
-Le [registre](cases.toml) fixe les cas, métriques et tolérances avant calcul. **Les cas FEM restent planifiés ; aucun résultat mécanique n’est encore produit.** Les entrées invalides sont partiellement vérifiées par les tests S01/S02, avec preuves et travail restant dans le registre. Le contrôle Python vérifie les métadonnées du registre et les fichiers attendus, pas la précision d’un solveur.
+Le [registre](cases.toml) fixe les cas, métriques et tolérances avant calcul. **S03 vérifie numériquement la symétrie et les modes rigides TET4 ; les résolutions globales restent planifiées.** Le champ affine est vérifié localement, sans remplacer le patch test multiélément de S04. Les entrées invalides sont partiellement couvertes par S01–S03. La revue scientifique indépendante est ouverte ; le contrôle Python ne valide que les métadonnées, pas un solveur.
 
 Chaque cas devra conserver entrées, référence indépendante, environnement, observable, échelles de normalisation, résultats et état passé/échoué. Les références sont choisies avant examiner les résultats. Les valeurs proches de zéro utilisent une échelle absolue ; les singularités ne sont pas des valeurs de comparaison ponctuelles valides.
 
@@ -34,3 +34,7 @@ La formule est une référence de poutre approchée, pas une solution exacte du 
 - [Conventions FerraSim](../docs/NUMERICAL-CONVENTIONS.md) et [PRD MVP](../docs/PRD.md) : choix, tolérances et règles de remplacement de référence.
 
 Les fixtures `tet4-positive.msh`, `two-tets-interface.msh` et le modèle JSON sont créés pour FerraSim et distribués sous la licence du dépôt. Les tests S02 vérifient les volumes, aires et incidences de ces géométries de référence. Les autres données à ajouter doivent porter provenance et droits de redistribution.
+
+## Référence élémentaire S03
+
+Le [générateur rationnel](generate_tet4_reference.py) produit trois [références denses](fixtures/tet4-reference.json) sans appeler le code Rust ni construire sa matrice B. Les tests comparent les gradients, volumes et 144 coefficients de rigidité, puis contrôlent des réponses et invariances analytiques. Voir la [formulation TET4](../docs/FEM-TET4.md) pour critères, limites et distinction entre référence calculée séparément et revue humaine indépendante.

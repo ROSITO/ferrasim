@@ -29,12 +29,21 @@ def main():
     require(len(ids) == len(set(ids)), "Duplicate validation cases")
     require(set(ids) == expected, "MVP validation coverage changed")
     for case in cases:
-        require(case["status"] in {"planned", "partial"}, "Unknown validation progress state")
-        if case["status"] == "partial":
-            require(bool(case.get("evidence")) and bool(case.get("remaining")),
-                    "Partial verification must name evidence and remaining work")
+        require(case["status"] in {"planned", "partial", "numerically_verified"},
+                "Unknown validation progress state")
+        if case["status"] != "planned":
+            require(bool(case.get("evidence")), "Verification must name evidence")
             for evidence in case["evidence"]:
                 require((ROOT / evidence).is_file(), f"Missing verification evidence: {evidence}")
+        if case["status"] == "partial":
+            require(bool(case.get("remaining")), "Partial verification must name remaining work")
+        if case["status"] == "numerically_verified":
+            require(case.get("review_status") == "pending_independent_review",
+                    "Numerical results must not imply unrecorded independent qualification")
+            measured = case.get("observed_max", math.inf)
+            require(math.isfinite(measured) and 0 <= measured <= case["tolerance"],
+                    "Observed numerical metric exceeds its tolerance")
+            require(bool(case.get("observed_environment")), "Numerical metric needs its environment")
         require(bool(case["reference"]) and bool(case["metric"]), "Missing protocol")
         if "tolerance" in case:
             require(math.isfinite(case["tolerance"]) and case["tolerance"] > 0,
@@ -59,7 +68,7 @@ def main():
             require((path.parent / target).exists(), f"Broken link in {path}: {link}")
 
     print(f"Planning checks passed: {len(cases)} registered cases and {len(files)} documents.")
-    print("No FEM computation or scientific qualification was performed.")
+    print("Metadata checks only; FEM checks run in cargo test. Independent qualification is not asserted.")
 
 
 if __name__ == "__main__":
