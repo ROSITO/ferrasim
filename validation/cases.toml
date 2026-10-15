@@ -49,7 +49,7 @@ status = "planned"
 [[cases]]
 id = "prescribed-nonzero"
 sprint = "S04"
-metric = "normalized reduced solution error"
+metric = "normalized full displacement error after reduced solve"
 tolerance = 1e-8
 reference = "separate exact rational dense reduction; Kff uf = Ff - Kfc uc"
 status = "numerically_verified"

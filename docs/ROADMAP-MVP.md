@@ -2,7 +2,7 @@
 
 Références : [roadmap générale](ROADMAP.md), [PRD MVP](PRD.md).
 
-Cadence proposée : deux semaines. Fondations S00 livrées ; S01/S02 terminés ; S03 livré techniquement le 15 octobre 2026, qualification indépendante ouverte ; S04 lancé le 15 octobre 2026, implémentation vérifiée localement et CI à consigner ; S05 et suivants à faire. Voir les rapports [S00](sprints/S00.md), [S01](sprints/S01.md), [S02](sprints/S02.md), [S03](sprints/S03.md) et [S04](sprints/S04.md). Le détail constitue un backlog proposé, à réestimer avec la capacité réelle.
+Cadence proposée : deux semaines. Fondations S00 livrées ; S01/S02 terminés ; S03 livré techniquement le 15 octobre 2026, qualification indépendante ouverte ; S04 livré techniquement le 15 octobre 2026 sur les trois OS, revue scientifique indépendante ouverte ; S05 et suivants à faire. Voir les rapports [S00](sprints/S00.md), [S01](sprints/S01.md), [S02](sprints/S02.md), [S03](sprints/S03.md) et [S04](sprints/S04.md). Le détail constitue un backlog proposé, à réestimer avec la capacité réelle.
 
 ## S00 — Cadrage d’exécution et initialisation
 

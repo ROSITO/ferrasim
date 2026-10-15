@@ -1,6 +1,6 @@
 # ADR 0005 — Assemblage CSR et élimination des prescriptions
 
-Date : 15 octobre 2026. Statut : implémenté, vérifications numériques locales ; revue scientifique indépendante ouverte.
+Date : 15 octobre 2026. Statut : implémenté, vérifications numériques sur Windows, macOS et Linux ; revue scientifique indépendante ouverte.
 
 ## Décision
 
